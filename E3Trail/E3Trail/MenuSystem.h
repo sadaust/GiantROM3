@@ -14,6 +14,12 @@ private:
 	int selection;
 	std::vector<Button> buttons;
 	bool hold;
+	//mouse stuff
+	float _mX;
+	float _mY;
+	int _height;
+	int _width;
+	spriteStruct cursor;
 
 	// sound stuff
 	soundStruct click;

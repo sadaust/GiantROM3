@@ -25,10 +25,14 @@ Game::~Game() {
 };
 
 void Game::init() {
+	mainMenu.init();
 	//Init input
 	Engine::instance()->bind(W,"SelectionUp");
 	Engine::instance()->bind(S,"SelectionDown");
 	Engine::instance()->bind(SPACE,"Accept");
+	Engine::instance()->bind(mouse_0,"Accept");
+	Engine::instance()->bind(mouse_Xp,mouse_Xn,"MouseX");
+	Engine::instance()->bind(mouse_Yp,mouse_Yn,"MouseY");
 	Engine::instance()->setRepeat(0.2);
 
 	//init menu
@@ -45,7 +49,7 @@ void Game::init() {
 	temp.top = 0.45;
 	temp.bottom = temp.top + 0.1;
 
-	mainMenu.addButton(noFunc,"No one knows what this will do so don't select it",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
+	mainMenu.addButton(noFunc,"Options",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
 	
 	temp.top = 0.8;
 	temp.bottom = temp.top + 0.1;

@@ -17,6 +17,10 @@
 #include "ResourceDefines.h"
 #include "RenVector.h"
 #define MAX_LIGHTS 20
+
+#define FONT "PRISTINA"
+//#define FONTPATH
+
 class Graphics {
 private:
 	//window stuff

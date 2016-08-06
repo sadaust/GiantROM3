@@ -23,6 +23,7 @@ public:
 	void setFunc(void* func);
 	//checks if cords are withing the button
 	void click(float mouseX,float mouseY);
+	bool mouseHover(float mouseX,float mouseY);
 	//click without checking cords
 	void click();
 	void render(bool highlight);

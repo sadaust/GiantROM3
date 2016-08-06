@@ -64,6 +64,13 @@ void Button::click(float mouseX,float mouseY) {
 	}
 }
 
+bool Button::mouseHover(float mouseX,float mouseY) {
+	if(ren.rect.bottom >= mouseY && mouseY >= ren.rect.top && mouseX >= ren.rect.left && mouseX <= ren.rect.right) {
+		return true;
+	}
+	return false;
+}
+
 void Button::click() {
 	function();
 }

@@ -100,7 +100,12 @@ void Graphics::init(HWND hWnd,HINSTANCE hInst, bool bWindowed) {
 		&D3Dpp,					// presentation parameters
 		&m_pD3DDevice)==D3D_OK) {			// returned device pointer
 			// Create a Font Object
-			D3DXCreateFont(m_pD3DDevice,_fontH,_fontW,FW_BOLD,0,false,DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY,DEFAULT_PITCH | FF_DONTCARE, "Times New Roman",&m_pD3DFont);
+			#ifdef FONTPATH
+				AddFontResource(FONTPATH);
+			#endif 
+
+			//AddFontResource("PRISTINA.TTF");
+			D3DXCreateFont(m_pD3DDevice,_fontH,_fontW,FW_BOLD,0,false,DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_DONTCARE, FONT,&m_pD3DFont);
 
 			// Create Sprite Object and Textures
 			D3DXCreateSprite(m_pD3DDevice, &m_pD3DSprite);
@@ -108,8 +113,8 @@ void Graphics::init(HWND hWnd,HINSTANCE hInst, bool bWindowed) {
 			//create line object
 			D3DXCreateLine(m_pD3DDevice, &m_pD3DLine);
 
-			m_pD3DDevice->SetRenderState( D3DRS_ZENABLE, D3DZB_TRUE );
-			m_pD3DDevice->SetRenderState( D3DRS_SPECULARENABLE, TRUE);
+			m_pD3DDevice->SetRenderState(D3DRS_ZENABLE, D3DZB_TRUE);
+			m_pD3DDevice->SetRenderState(D3DRS_SPECULARENABLE, TRUE);
 			m_pD3DDevice->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(60, 60, 60));
 			m_pD3DDevice->SetRenderState(D3DRS_NORMALIZENORMALS, true);
 			m_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
@@ -294,6 +299,9 @@ void Graphics::shutdown() {
 	if(m_pD3DLine != 0) {
 		m_pD3DLine->Release();
 		m_pD3DLine = 0;
+		#ifdef FONTPATH
+			RemoveFontResource(FONTPATH);
+		#endif
 	}
 
 	if(m_pD3DDevice != 0) {

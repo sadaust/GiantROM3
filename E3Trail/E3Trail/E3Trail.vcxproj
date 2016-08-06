@@ -87,6 +87,7 @@
     <ClInclude Include="ResourceDefines.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Trail.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
@@ -99,7 +100,11 @@
     <ClCompile Include="RenVector.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Trail.cpp" />
     <ClCompile Include="winMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="default.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

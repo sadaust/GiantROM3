@@ -89,4 +89,6 @@ public:
 	Graphics* getvFrame() {return &vFrame;}
 	Sound* getsFrame() {return &sFrame;}
 	InputSystem* getInputSys() {return &inputSys;}
+	int getHeight(){return vFrame.getHeight();}
+	int getWidth(){return vFrame.getWidth();}
 };
