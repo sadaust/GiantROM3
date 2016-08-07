@@ -1,26 +1,56 @@
-﻿Build started 8/6/2016 10:23:06 PM.
+﻿Build started 8/7/2016 12:25:42 AM.
      1>Project "E:\Projects\GiantROM3 Game Jam\GiantROM3\E3Trail\E3Trail\E3Trail.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Button.cpp Engine.cpp Graphics.cpp InputSystem.cpp MenuSystem.cpp MessageSystem.cpp RenVector.cpp ResourceManager.cpp Sound.cpp Trail.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp MenuSystem.cpp MessageSystem.cpp RenVector.cpp Sound.cpp Trail.cpp winMain.cpp
          Trail.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\character.h(22): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\character.h(23): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
      1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(9): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(62): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(46): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(66): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(103): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(67): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(108): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(113): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(115): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(117): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(119): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(121): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\trail.cpp(123): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+         MenuSystem.cpp
+         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\menusystem.cpp(41): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\menusystem.cpp(46): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\menusystem.cpp(55): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\menusystem.cpp(77): warning C4018: '>=' : signed/unsigned mismatch
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\menusystem.cpp(92): warning C4018: '>=' : signed/unsigned mismatch
+         Generating Code...
+         Compiling...
+         winMain.cpp
+         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\character.h(23): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+         Game.cpp
+         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\character.h(23): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(37): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(45): warning C4305: '=' : truncation from 'double' to 'float'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(46): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(50): warning C4305: '=' : truncation from 'double' to 'float'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(51): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(55): warning C4305: '=' : truncation from 'double' to 'float'
+     1>e:\projects\giantrom3 game jam\giantrom3\e3trail\e3trail\game.cpp(56): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
          Generating Code...
          Skipping... (no relevant changes detected)
          Sound.cpp
-         ResourceManager.cpp
          RenVector.cpp
          MessageSystem.cpp
-         MenuSystem.cpp
-         InputSystem.cpp
-         Graphics.cpp
-         Engine.cpp
-         Button.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Projects\GiantROM3 Game Jam\GiantROM3\E3Trail\Debug\E3Trail.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Projects\GiantROM3 Game Jam\GiantROM3\E3Trail\Debug\E3Trail.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Projects\GiantROM3 Game Jam\GiantROM3\E3Trail\Debug\E3Trail.lib" /MACHINE:X86 Debug\Button.obj
          Debug\Engine.obj
@@ -39,4 +69,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.44
+Time Elapsed 00:00:04.50

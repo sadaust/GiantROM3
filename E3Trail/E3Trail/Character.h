@@ -12,6 +12,7 @@ public:
 	void init(std::string a_name, std::string resourceName) {
 		hp = 100;
 		resource = 0;
+		resrate = 1;
 		name = a_name;
 		resName = resourceName;
 	}

@@ -18,7 +18,7 @@
 #include "RenVector.h"
 #define MAX_LIGHTS 20
 
-#define FONT "PRISTINA"
+#define FONT "times"
 //#define FONTPATH
 
 class Graphics {

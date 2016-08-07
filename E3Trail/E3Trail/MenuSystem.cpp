@@ -3,6 +3,7 @@
 MenuSystem::MenuSystem() {
 	hold = false;
 	selection = 0;
+	cursor.image = 0;
 }
 
 void MenuSystem::init() {

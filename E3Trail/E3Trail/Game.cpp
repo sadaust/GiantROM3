@@ -33,6 +33,7 @@ void Game::init() {
 	Engine::instance()->bind(mouse_0,"Accept");
 	Engine::instance()->bind(mouse_Xp,mouse_Xn,"MouseX");
 	Engine::instance()->bind(mouse_Yp,mouse_Yn,"MouseY");
+	Engine::instance()->bind(ESC,"Back");
 	Engine::instance()->setRepeat(0.2);
 
 	//init menu

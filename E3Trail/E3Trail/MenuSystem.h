@@ -1,10 +1,10 @@
 /*===========================
 =MenuSystem.h/cpp			=
 =by Tyler van Gastel		=
-=latest update 11/30/2015	=
+=latest update 08/07/2016	=
 =buttons for menus			=
 =============================*/
-//first revision used a cursor changed to selection to solve issues
+
 #pragma once
 #include "Engine.h"
 #include "Button.h"
