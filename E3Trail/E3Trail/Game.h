@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.h"
 #include "MenuSystem.h"
+#include "Trail.h"
 
 #define WINDOW_TITLE "E3 Trail"
 
@@ -10,6 +11,7 @@ private:
 	camera cam;
 	double fps;
 	char buffer[256];
+	Trail trail;
 public:
 	Game();
 	~Game();

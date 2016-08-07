@@ -4,7 +4,7 @@ void noFunc() {
 }
 
 void startMsg() {
-	Engine::instance()->postMessage("Start");
+	Engine::instance()->postMessage("West");
 }
 
 void quitMsg() {
@@ -37,7 +37,7 @@ void Game::init() {
 
 	//init menu
 	frect temp;
-	
+
 	temp.left = 0.25;
 	temp.right = 0.75;
 
@@ -50,7 +50,7 @@ void Game::init() {
 	temp.bottom = temp.top + 0.1;
 
 	mainMenu.addButton(noFunc,"Options",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
-	
+
 	temp.top = 0.8;
 	temp.bottom = temp.top + 0.1;
 
@@ -58,10 +58,15 @@ void Game::init() {
 };
 
 bool Game::update() {
-	mainMenu.update();
-	mainMenu.render();
-	if(Engine::instance()->getMessage("Quit"))
-		return false;
+	if(!trail.update()) {
+		mainMenu.update();
+		mainMenu.render();
+		if(Engine::instance()->getMessage("Quit"))
+			return false;
+		if(Engine::instance()->getMessage("West")) {
+			trail.init(true);
+		}
+	}
 	Engine::instance()->render();
 	Engine::instance()->clearMessages();
 	//keep the game running

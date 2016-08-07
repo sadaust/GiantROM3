@@ -16,7 +16,7 @@ public:
 		resName = resourceName;
 	}
 	int getHP() {return hp;}
-	int resource() {return resource;}
+	int getResource() {return resource;}
 	std::string getResName() {return resName;}
 	std::string getName() {return name;}
 	void resIncer() {resource += resrate*hp;}
