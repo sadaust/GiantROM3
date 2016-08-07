@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Character.h"
 #include "MenuSystem.h"
+#include "Item.h"
 
 
 #define PARTYSIZE 4
