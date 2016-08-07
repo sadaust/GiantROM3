@@ -60,6 +60,9 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp">
@@ -98,9 +101,21 @@
     <ClCompile Include="Trail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="default.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Cursor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="SFMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="NYMap.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

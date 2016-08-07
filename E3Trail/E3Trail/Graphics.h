@@ -1,7 +1,7 @@
 /*===========================
 =Graphics.h/.cpp			=
 =by Tyler van Gastel		=
-=latest update 11/23/2015	=
+=latest update 08/06/2016	=
 =Direct X frame work		=
 =============================*/
 

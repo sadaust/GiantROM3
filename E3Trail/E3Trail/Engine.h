@@ -1,7 +1,7 @@
 /*===================================================
 =Engine.h/.cpp										=
 =by Tyler van Gastel								=
-=latest update 12/1/2015							=
+=latest update 08/05/2015							=
 =Holds graphics, sound, input and resources manager	=
 =====================================================*/
 

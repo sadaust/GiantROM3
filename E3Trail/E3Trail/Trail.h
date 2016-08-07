@@ -7,6 +7,19 @@
 
 #define PARTYSIZE 4
 #define NUMRESORCES 6
+#define MAXLOCEVENT 100
+
+enum eventType {
+	city,
+	abandond,
+	e3
+};
+
+struct locEvent {
+	float dist;
+	eventType type;
+};
+
 
 class Trail {
 private:
@@ -18,9 +31,16 @@ private:
 	float distToGo;
 	double time;
 	int startDist;
+	vector start;
+	vector end;
+	locEvent events[MAXLOCEVENT];
+	int locEventCount;
 	Character party[PARTYSIZE];
 	textStruct partyText[PARTYSIZE][2];
 	textStruct renstats[NUMRESORCES];
+	spriteStruct map;
+	D3DXVECTOR2 pathVec[2];
+	lineStruct path;
 	MenuSystem menu;
 public:
 	Trail();

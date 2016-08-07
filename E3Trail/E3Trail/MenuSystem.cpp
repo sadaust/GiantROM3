@@ -17,7 +17,7 @@ void MenuSystem::init() {
 	_mY = 0;
 	_height = Engine::instance()->getHeight();
 	_width = Engine::instance()->getWidth();
-	cursor.image = (imageAsset*)(Engine::instance()->getResource("default.bmp",D3DXCOLOR(0,0,0,1))->resource);
+	cursor.image = (imageAsset*)(Engine::instance()->getResource("Cursor.png",D3DXCOLOR(0,0,0,255))->resource);
 	cursor.color = D3DXCOLOR(255,255,255,255);
 	cursor.center = D3DXVECTOR3(0,0,0);
 	cursor.rec.top = 0;

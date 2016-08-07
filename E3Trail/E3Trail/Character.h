@@ -3,6 +3,7 @@
 #include "Item.h"
 
 #define NUM_ITEMS 2
+#define NUM_STATUS 1
 
 class Character {
 private:
@@ -14,6 +15,7 @@ private:
 	std::string name;
 	std::string resName;
 	Item items[NUM_ITEMS];
+	spriteStruct statusPic[NUM_STATUS];
 	bool activeitems[NUM_ITEMS];
 public:
 	void init(std::string a_name, std::string resourceName) {

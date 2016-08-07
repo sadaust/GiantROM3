@@ -1,8 +1,15 @@
 #include "Trail.h"
 
+//update rate in seconds
+#define UPDATETIME 0.1f
+
 Trail::Trail() {
 	frect tempRec;
 	running = false;
+	path.color = D3DXCOLOR(0.0f,1,0,1.0f);
+	path.width = 5;
+	path.vecCount = 2;
+	path.vec = pathVec;
 	for (int i = 0; i < PARTYSIZE; ++i) {
 		tempRec.top = 0.75f;
 		tempRec.bottom = 0.8f;
@@ -29,15 +36,43 @@ Trail::Trail() {
 		renstats[i].color = 0xFFFFFFFF;
 		renstats[i].flags = DT_LEFT | DT_BOTTOM;
 	}
+	map.center = D3DXVECTOR3(0,0,0);
+	map.color = 0xFFFFFFFF;
+	map.image = 0;
+	map.rec.left = 0;
+	map.rec.top = 0;
+	locEventCount = 0;
 }
 
 void Trail::init(bool west, Character p1, Character p2, Character p3, Character p4) {
 	menu.init();
 	if (west) {
 		startDist = 400;
-	}
-	else {
+		map.image = (imageAsset*)(Engine::instance()->getResource("SFMap.png",D3DXCOLOR(0,0,0,255))->resource);
+		map.rec.bottom = map.image->texInfo.Height;
+		map.rec.right = map.image->texInfo.Width;
+		start.x = 0 * map.rec.right;
+		start.y = 0 * map.rec.bottom;
+		start.z = 0;
+		end.x = 1.0f * map.rec.right;
+		end.y = 1.0f * map.rec.bottom;
+		end.z = 0;
+		locEventCount = 10;
+	} else {
 		startDist = 2800;
+		map.image = (imageAsset*)(Engine::instance()->getResource("NYMap.png",D3DXCOLOR(0,0,0,255))->resource);
+		map.rec.bottom = map.image->texInfo.Height;
+		map.rec.right = map.image->texInfo.Width;
+		start.x = 1.0f * map.rec.right;
+		start.y = 1.0f * map.rec.bottom;
+		start.z = 0;
+		end.x = 0 * map.rec.right;
+		end.y = 0 * map.rec.bottom;
+		end.z = 0;
+		locEventCount = 50;
+	}
+	if(locEventCount > MAXLOCEVENT) {
+		locEventCount = MAXLOCEVENT;
 	}
 	time = 0;
 	food = 500;
@@ -56,10 +91,34 @@ void Trail::init(bool west) {
 	menu.init();
 	if (west) {
 		startDist = 400;
-	}
-	else {
+		map.image = (imageAsset*)(Engine::instance()->getResource("SFMap.png",D3DXCOLOR(0,0,0,255))->resource);
+		map.rec.bottom = map.image->texInfo.Height;
+		map.rec.right = map.image->texInfo.Width;
+		start.x = 0 * map.rec.right;
+		start.y = 0 * map.rec.bottom;
+		start.z = 0;
+		end.x = 1.0f * map.rec.right;
+		end.y = 1.0f * map.rec.bottom;
+		end.z = 0;
+		locEventCount = 10;
+	} else {
 		startDist = 2800;
+		map.image = (imageAsset*)(Engine::instance()->getResource("NYMap.png",D3DXCOLOR(0,0,0,255))->resource);
+		map.rec.bottom = map.image->texInfo.Height;
+		map.rec.right = map.image->texInfo.Width;
+		start.x = 1.0f * map.rec.right;
+		start.y = 1.0f * map.rec.bottom;
+		start.z = 0;
+		end.x = 0 * map.rec.right;
+		end.y = 0 * map.rec.bottom;
+		end.z = 0;
+		locEventCount = 50;
 	}
+	if(locEventCount > MAXLOCEVENT) {
+		locEventCount = MAXLOCEVENT;
+	}
+	events[locEventCount - 1].type = e3;
+	events[locEventCount - 1].dist = 0;
 	time = 0;
 	food = 500;
 	credits = 5000;
@@ -82,6 +141,7 @@ bool Trail::update() {
 	char buffer[256];
 	renInfo tempRen;
 	D3DXMatrixIdentity(&tempRen.matrix);
+	D3DXMatrixTranslation(&tempRen.matrix,0,0,1);
 	if (running) {
 		//return to main menu
 		if (Engine::instance()->getBind("Back")) {
@@ -90,8 +150,8 @@ bool Trail::update() {
 		}
 		//incrementor logic
 		time += Engine::instance()->dt();
-		if (time >= 6) {
-			time -= 6;
+		if (time >= UPDATETIME) {
+			time -= UPDATETIME;
 			distToGo -= speed;
 			for (int i = 0; i < PARTYSIZE; ++i) {
 				party[i].resIncer();
@@ -128,6 +188,20 @@ bool Trail::update() {
 			tempRen.asset = &renstats[i];
 			Engine::instance()->addRender(tempRen);
 		}
+		//path line
+		pathVec[0].x = start.x;
+		pathVec[0].y = start.y;
+		pathVec[1].x = end.x * (1-(distToGo/(float)startDist));
+		pathVec[1].y = end.y * (1-(distToGo/(float)startDist));
+		tempRen.type = line;
+		tempRen.asset = &path;
+		D3DXMatrixIdentity(&tempRen.matrix);
+		Engine::instance()->addRender(tempRen);
+		//map
+		tempRen.asset = &map;
+		tempRen.type = screenSprite;
+		D3DXMatrixTranslation(&tempRen.matrix,0,0,1);
+		Engine::instance()->addRender(tempRen);
 	}
 	return running;
 }

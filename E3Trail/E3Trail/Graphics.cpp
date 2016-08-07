@@ -247,12 +247,15 @@ void Graphics::render() {
 			for(int i = 0; i < renSize; ++i) {
 				tempInfo = ren.get(i);
 				if(tempInfo->type == text) {
+					m_pD3DSprite->Begin(NULL);
+					m_pD3DSprite->SetTransform(&tempInfo->matrix);
 					tempText = (textStruct*)tempInfo->asset;
 					tempRect.bottom = tempText->rect.bottom * _height;
 					tempRect.top = tempText->rect.top * _height;
 					tempRect.left = tempText->rect.left * _width;
 					tempRect.right = tempText->rect.right * _width;
-					m_pD3DFont->DrawTextA(0,tempText->text.c_str(),-1,&tempRect,tempText->flags,tempText->color);
+					m_pD3DFont->DrawTextA(m_pD3DSprite,tempText->text.c_str(),-1,&tempRect,tempText->flags,tempText->color);
+					m_pD3DSprite->End();
 				}
 			}
 
