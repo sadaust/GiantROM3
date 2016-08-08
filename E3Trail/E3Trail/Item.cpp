@@ -5,7 +5,7 @@
 
 
 Item::Item() {
-	name = "ERROR";
+	name = "Empty (Constructed)";
 	
 }
 
@@ -30,6 +30,12 @@ int Item::numAtt() {
 
 std::string Item::getName() {
 	return name;
+}
+
+
+void Item::Clear() {
+	attributes.clear();
+	name = "Empty (Cleared)";
 }
 
 

@@ -26,6 +26,10 @@ public:
 		resrate = 1;
 		name = a_name;
 		resName = resourceName;
+		for (int i = 0; i < NUM_ITEMS; ++i) {
+			activeitems[i] = false;
+			items[i].Clear();
+		}
 	}
 	int getHP() { return hp; }
 	int getMaxHP() { return maxhp; }
@@ -46,26 +50,26 @@ public:
 	bool getActiveItem(int index) { return activeitems[index]; }
 	std::string getItemName(int index) { return items[index].getName(); }
 
-	void receiveItem(int index, Item a_item) {
+	void receiveItem(int index, Item &a_item) {
 		Attribute tempatt;
 		if (activeitems[index]) {
-			for (int i = 0; i < a_item.numAtt(); ++i) { // Remove the old item if there is one active.
+			for (int i = 0; i < items[index].numAtt(); ++i) { // Remove the old item if there is one active.
 				tempatt = a_item.getAttribute(i);
 				if (tempatt == STRENGTH) {
-					strength -= a_item.getValue(i);
+					strength -= items[index].getValue(i);
 					if (strength < 0)
 						strength = 0;
 				}
 				else if (tempatt == HP) {
-					maxhp -= a_item.getValue(i);
-					hp = -a_item.getValue(i);
+					maxhp -= items[index].getValue(i);
+					hp -= items[index].getValue(i);
 					if (maxhp < 0)
 						maxhp = 0;
 					if (hp < 0)
 						hp = 0;
 				}
 				else if (tempatt == RESRATE) {
-					resrate -= a_item.getValue(i);
+					resrate -= items[index].getValue(i);
 					if (resrate < 0)
 						resrate = 0;
 				}
@@ -84,7 +88,7 @@ public:
 			}
 			else if (tempatt == HP) {
 				maxhp += a_item.getValue(i);
-				hp = +a_item.getValue(i);
+				hp += a_item.getValue(i);
 				if (maxhp < 0)
 					maxhp = 0;
 				if (hp < 0)

@@ -25,6 +25,7 @@ public:
 	Item();
 	~Item();
 	Item(Item &a_item);
+	void Clear();
 	int numAtt();
 	std::string getName();
 	AttributeChange getAttChange(int a_index);

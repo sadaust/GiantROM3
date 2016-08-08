@@ -11,8 +11,8 @@ Trail::Trail() {
 	path.vecCount = 2;
 	path.vec = pathVec;
 	for (int i = 0; i < PARTYSIZE; ++i) {
-		tempRec.top = 0.75f;
-		tempRec.bottom = 0.8f;
+		tempRec.top = 0.65f;
+		tempRec.bottom = 0.85f;
 		tempRec.left = 0.25*i;
 		tempRec.right = tempRec.left + 0.25f;
 		partyText[i][0].rect = tempRec;
@@ -130,10 +130,19 @@ void Trail::init(bool west) {
 	speed = 10;
 	distToGo = startDist;
 	Character temp;
+	Item tempitem;
+	tempitem.setName("Doritos Locos Taco");
+	tempitem.setValue(STRENGTH, 10);
+	tempitem.setValue(HP, 50);
 	temp.init("Dan", "Amiibo");
 	party[0] = temp;
+	party[0].receiveItem(0, tempitem);
+	tempitem.Clear();
+	tempitem.setName("Spaghetti Can");
+	tempitem.setValue(STRENGTH, 25);
 	temp.init("Brad", "Dota hats");
 	party[1] = temp;
+	party[1].receiveItem(0, tempitem);
 	temp.init("Rorie", "Puppies");
 	party[2] = temp;
 	temp.init("Austin", "Gunpla");
@@ -195,7 +204,7 @@ bool Trail::update() {
 		//render the main play screen
 		tempRen.type = text;
 		for (int i = 0; i < PARTYSIZE; ++i) {
-			sprintf(buffer, "%s: %d", party[i].getResName().c_str(), party[i].getResource());
+			sprintf(buffer, "%s: %d\n%s\n%s\nStr: %d", party[i].getResName().c_str(), party[i].getResource(), party[i].getItemName(0).c_str(), party[i].getItemName(1).c_str() , party[i].getStrength());
 			partyText[i][0].text = buffer;
 			tempRen.asset = &partyText[i][0];
 			Engine::instance()->addRender(tempRen);
