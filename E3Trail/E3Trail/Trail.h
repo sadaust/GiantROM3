@@ -28,6 +28,12 @@ private:
 	int credits;
 	int fuel;
 	int speed;
+	//speed when out of fuel
+	int noFuelSpeed;
+	//food per hour per party member alive
+	int foodConsRate;
+	//fuel consumed per mile
+	int fuelCosRate;
 	float distToGo;
 	double time;
 	int startDist;
@@ -46,5 +52,6 @@ public:
 	Trail();
 	void init(bool west, Character p1, Character p2, Character p3 , Character p4);
 	void init(bool west);
+	int aliveCount();
 	bool update();
 };

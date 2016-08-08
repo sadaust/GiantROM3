@@ -42,6 +42,10 @@ Trail::Trail() {
 	map.rec.left = 0;
 	map.rec.top = 0;
 	locEventCount = 0;
+
+	foodConsRate = 1;
+	fuelCosRate = 1;
+	noFuelSpeed = 5;
 }
 
 void Trail::init(bool west, Character p1, Character p2, Character p3, Character p4) {
@@ -137,6 +141,14 @@ void Trail::init(bool west) {
 	running = true;
 }
 
+int Trail::aliveCount() {
+	int count = 0;
+	for(int i = 0; i < PARTYSIZE; ++i) {
+		count += (party[i].getHP() >= 0);
+	}
+	return count;
+};
+
 bool Trail::update() {
 	char buffer[256];
 	renInfo tempRen;
@@ -152,7 +164,28 @@ bool Trail::update() {
 		time += Engine::instance()->dt();
 		if (time >= UPDATETIME) {
 			time -= UPDATETIME;
-			distToGo -= speed;
+
+			if(fuel > 0) {
+				distToGo -= speed;
+				fuel -= speed * fuelCosRate;
+				if(fuel < 0) {
+					fuel = 0;
+				}
+			} else {
+				distToGo -= noFuelSpeed;
+			}
+
+			if(food > 0) {
+				food -= aliveCount()*foodConsRate;
+				if(food <= 0) {
+					food = 0;
+				}
+			} else {
+				for(int i = 0; i < PARTYSIZE; ++i) {
+					party[i].modHp(-5);
+				}
+			}
+
 			for (int i = 0; i < PARTYSIZE; ++i) {
 				party[i].resIncer();
 			}
@@ -167,7 +200,7 @@ bool Trail::update() {
 			tempRen.asset = &partyText[i][0];
 			Engine::instance()->addRender(tempRen);
 			//
-			sprintf(buffer, "%s HP: %d/%d", party[i].getName().c_str(), party[i].getMaxHP(), party[i].getHP());
+			sprintf(buffer, "%s HP: %03d/%03d", party[i].getName().c_str(), party[i].getHP(), party[i].getMaxHP());
 			partyText[i][1].text = buffer;
 			tempRen.asset = &partyText[i][1];
 			Engine::instance()->addRender(tempRen);

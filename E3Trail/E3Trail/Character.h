@@ -34,7 +34,7 @@ public:
 	std::string getResName() { return resName; }
 	std::string getName() { return name; }
 	void resIncer() { resource += resrate*hp; }
-	void modHp(int mod) { hp += mod; }
+	void modHp(int mod) { hp += mod; if(hp<0) {hp = 0;} }
 	void modMaxHp(int mod) { maxhp += mod; }
 	void modStrength(int mod) { strength += mod; }
 	void modResource(int mod) { resource += mod; if (resource<0){ resource = 0; } }
