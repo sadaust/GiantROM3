@@ -4,7 +4,7 @@ void noFunc() {
 }
 
 void startMsg() {
-	Engine::instance()->postMessage("West");
+	Engine::instance()->postMessage("East");
 }
 
 void quitMsg() {
@@ -64,8 +64,8 @@ bool Game::update() {
 		mainMenu.render();
 		if(Engine::instance()->getMessage("Quit"))
 			return false;
-		if(Engine::instance()->getMessage("West")) {
-			trail.init(true);
+		if(Engine::instance()->getMessage("East")) {
+			trail.init(false);
 		}
 	}
 	Engine::instance()->render();

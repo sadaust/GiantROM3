@@ -4,6 +4,8 @@
 
 enum Attribute {
 	STRENGTH,
+	AGILITY,
+	INTELLIGENCE,
 	HP,
 	RESRATE
 };

@@ -10,6 +10,8 @@ private:
 	int hp;
 	int maxhp;
 	int strength;
+	int agility;
+	int intelligence;
 	int resource;
 	float resrate;
 	std::string name;
@@ -22,6 +24,8 @@ public:
 		maxhp = 100;
 		hp = maxhp;
 		strength = 10; // probably change this for balance. Used for minigames and event thresholds
+		agility = 10;
+		intelligence = 10;
 		resource = 0;
 		resrate = 1;
 		name = a_name;
@@ -34,6 +38,8 @@ public:
 	int getHP() { return hp; }
 	int getMaxHP() { return maxhp; }
 	int getStrength() { return strength; }
+	int getAgility() { return agility; }
+	int getIntelligence() { return intelligence; }
 	int getResource() { return resource; }
 	std::string getResName() { return resName; }
 	std::string getName() { return name; }
@@ -41,11 +47,15 @@ public:
 	void modHp(int mod) { hp += mod; if (hp < 0) { hp = 0; } }
 	void modMaxHp(int mod) { maxhp += mod; }
 	void modStrength(int mod) { strength += mod; }
+	void modAgility(int mod) { agility += mod; }
+	void modIntelligence(int mod) { intelligence += mod; }
 	void modResource(int mod) { resource += mod; if (resource < 0){ resource = 0; } }
 	void operator=(Character& in) {
 		hp = in.hp;
 		maxhp = in.maxhp;
 		strength = in.strength;
+		agility = in.agility;
+		intelligence = in.intelligence;
 		resource = in.resource;
 		resrate = in.resrate;
 		name = in.name;
@@ -74,6 +84,16 @@ public:
 					strength -= items[index].getValue(i);
 					if (strength < 0)
 						strength = 0;
+				}
+				else if (tempatt == AGILITY) {
+					agility -= items[index].getValue(i);
+					if (agility < 0)
+						agility = 0;
+				}
+				else if (tempatt == INTELLIGENCE) {
+					intelligence -= items[index].getValue(i);
+					if (intelligence < 0)
+						intelligence = 0;
 				}
 				else if (tempatt == HP) {
 					maxhp -= items[index].getValue(i);
@@ -104,6 +124,16 @@ public:
 					strength += a_item.getValue(i);
 					if (strength < 0)
 						strength = 0;
+				}
+				else if (tempatt == AGILITY) {
+					agility += items[index].getValue(i);
+					if (agility < 0)
+						agility = 0;
+				}
+				else if (tempatt == INTELLIGENCE) {
+					intelligence += items[index].getValue(i);
+					if (intelligence < 0)
+						intelligence = 0;
 				}
 				else if (tempatt == HP) {
 					maxhp += a_item.getValue(i);
