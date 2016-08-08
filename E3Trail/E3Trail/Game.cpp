@@ -3,8 +3,12 @@
 void noFunc() {
 }
 
-void startMsg() {
+void startEast() {
 	Engine::instance()->postMessage("East");
+}
+
+void startWest() {
+	Engine::instance()->postMessage("West");
 }
 
 void quitMsg() {
@@ -42,12 +46,17 @@ void Game::init() {
 	temp.left = 0.25;
 	temp.right = 0.75;
 
-	temp.top = 0.1;
+	temp.top = 0.4;
 	temp.bottom = temp.top + 0.1;
 
-	mainMenu.addButton(startMsg,"Start",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
+	mainMenu.addButton(startWest,"Start: West",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
 
-	temp.top = 0.45;
+	temp.top = 0.5;
+	temp.bottom = temp.top + 0.1;
+
+	mainMenu.addButton(startEast,"Start: East",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
+
+	temp.top = 0.65;
 	temp.bottom = temp.top + 0.1;
 
 	mainMenu.addButton(noFunc,"Options",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
@@ -66,6 +75,8 @@ bool Game::update() {
 			return false;
 		if(Engine::instance()->getMessage("East")) {
 			trail.init(false);
+		} else if(Engine::instance()->getMessage("West")) {
+			trail.init(true);
 		}
 	}
 	Engine::instance()->render();

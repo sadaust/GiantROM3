@@ -77,6 +77,7 @@ Trail::Trail() {
 
 void Trail::init(bool west, Character& p1, Character& p2, Character& p3, Character& p4) {
 	menu.init();
+	pause = false;
 	if (west) {
 		startDist = 400;
 		map.image = (imageAsset*)(Engine::instance()->getResource("SFMap.png",D3DXCOLOR(0,0,0,255))->resource);
@@ -309,8 +310,8 @@ bool Trail::update() {
 			//path line
 			pathVec[0].x = start.x;
 			pathVec[0].y = start.y;
-			pathVec[1].x = end.x * (1-(distToGo/(float)startDist));
-			pathVec[1].y = end.y * (1-(distToGo/(float)startDist));
+			pathVec[1].x = start.x+((end.x-start.x) * (1.0f-(distToGo/(float)startDist)));
+			pathVec[1].y = start.y+((end.y-start.y) * (1.0f-(distToGo/(float)startDist)));
 			tempRen.type = line;
 			tempRen.asset = &path;
 			D3DXMatrixIdentity(&tempRen.matrix);
