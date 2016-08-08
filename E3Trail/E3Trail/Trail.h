@@ -54,4 +54,6 @@ public:
 	void init(bool west);
 	int aliveCount();
 	bool update();
+
+	void swapItems(int c1,int s1,int c2,int s2);
 };

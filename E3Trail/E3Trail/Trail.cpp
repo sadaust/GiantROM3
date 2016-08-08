@@ -46,6 +46,14 @@ Trail::Trail() {
 	foodConsRate = 1;
 	fuelCosRate = 1;
 	noFuelSpeed = 5;
+
+
+	// testing item swapping
+	Engine::instance()->bind(SPACE, "Swap");
+	// end of testing item swapping
+
+
+
 }
 
 void Trail::init(bool west, Character p1, Character p2, Character p3, Character p4) {
@@ -164,6 +172,15 @@ bool Trail::update() {
 	D3DXMatrixIdentity(&tempRen.matrix);
 	D3DXMatrixTranslation(&tempRen.matrix,0,0,1);
 	if (running) {
+		// testing item swapping
+		if (Engine::instance()->getBind("Swap")) {
+			swapItems(0, 0, 1, 0);
+		}
+		// end of testing item swapping
+
+
+
+
 		//return to main menu
 		if (Engine::instance()->getBind("Back")) {
 			running = false;
@@ -247,3 +264,15 @@ bool Trail::update() {
 	}
 	return running;
 }
+
+
+void Trail::swapItems(int c1, int s1, int c2, int s2) {
+	Item temp;
+	temp = party[c1].getItem(s1);
+	party[c1].receiveItem(s1, party[c2].getItem(s2));
+	party[c2].receiveItem(s2, temp);
+}
+
+
+
+

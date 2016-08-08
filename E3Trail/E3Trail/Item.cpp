@@ -5,7 +5,7 @@
 
 
 Item::Item() {
-	name = "Empty (Constructed)";
+	name = "Error";
 	
 }
 
@@ -16,6 +16,7 @@ Item::~Item() {
 
 
 Item::Item(Item &a_item) {
+	Clear();
 	name = a_item.getName();
 	for (int i = 0; i < a_item.numAtt(); ++i) {
 		attributes.push_back(a_item.getAttChange(i));
@@ -35,7 +36,7 @@ std::string Item::getName() {
 
 void Item::Clear() {
 	attributes.clear();
-	name = "Empty (Cleared)";
+	name = "Empty";
 }
 
 
