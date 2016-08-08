@@ -42,7 +42,22 @@ public:
 	void modMaxHp(int mod) { maxhp += mod; }
 	void modStrength(int mod) { strength += mod; }
 	void modResource(int mod) { resource += mod; if (resource < 0){ resource = 0; } }
-
+	void operator=(Character& in) {
+		hp = in.hp;
+		maxhp = in.maxhp;
+		strength = in.strength;
+		resource = in.resource;
+		resrate = in.resrate;
+		name = in.name;
+		resName = in.resName;
+		for(int i = 0; i < NUM_STATUS; ++i) {
+			statusPic[i] = in.statusPic[i];
+		}
+		for(int i = 0; i < NUM_ITEMS; ++i) {
+			items[i] = in.items[i];
+			activeitems[i] = in.activeitems[i];
+		}
+	}
 
 
 	// iTEM STUFF

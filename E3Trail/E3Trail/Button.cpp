@@ -87,6 +87,6 @@ void Button::render(bool bhighlight) {
 	temp.type = text;
 	temp.asset = &ren;
 	D3DXMatrixIdentity(&temp.matrix);
-	D3DXMatrixTranslation(&temp.matrix,0,0,1);
+	D3DXMatrixTranslation(&temp.matrix,0,0,0.9);
 	Engine::instance()->addRender(temp);
 }

@@ -23,6 +23,7 @@ struct locEvent {
 
 class Trail {
 private:
+	bool pause;
 	bool running;
 	int food;
 	int credits;
@@ -44,16 +45,20 @@ private:
 	Character party[PARTYSIZE];
 	textStruct partyText[PARTYSIZE][2];
 	textStruct renstats[NUMRESORCES];
+	textStruct eventText;
+	spriteStruct eventBackground;
+	float mapScaleX, mapScaleY;
 	spriteStruct map;
 	D3DXVECTOR2 pathVec[2];
 	lineStruct path;
 	MenuSystem menu;
 public:
 	Trail();
-	void init(bool west, Character p1, Character p2, Character p3 , Character p4);
+	void init(bool west, Character& p1, Character& p2, Character& p3 , Character& p4);
 	void init(bool west);
 	int aliveCount();
 	bool update();
-
+	void setClickerButtons();
+	void startEndScreen();
 	void swapItems(int c1,int s1,int c2,int s2);
 };
