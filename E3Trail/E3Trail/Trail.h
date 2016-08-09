@@ -57,6 +57,9 @@ private:
 	D3DXVECTOR2 pathVec[2];
 	lineStruct path;
 	MenuSystem menu;
+	//city store stuff
+	int fuelCost;
+	int foodCost;
 public:
 	Trail();
 	void init(bool west, Character& p1, Character& p2, Character& p3 , Character& p4);
@@ -65,5 +68,6 @@ public:
 	bool update();
 	void setClickerButtons();
 	void startEndScreen();
+	void setCity(bool generate);
 	void swapItems(int c1,int s1,int c2,int s2);
 };

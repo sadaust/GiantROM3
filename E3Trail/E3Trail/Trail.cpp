@@ -24,6 +24,14 @@ void closeEvent() {
 	Engine::instance()->postMessage("eventDone");
 }
 
+void buyFuel() {
+	Engine::instance()->postMessage("buyFuel");
+}
+
+void buyFood() {
+	Engine::instance()->postMessage("buyFood");
+}
+
 void Trail::createEvents() {
 	TrailEvent tempevent;
 	tempevent.reset();
@@ -298,6 +306,45 @@ void Trail::setClickerButtons() {
 	menu.addButton(clicker3,buffer,rec,DT_CENTER | DT_VCENTER,bColor,hColor);
 }
 
+void Trail::setCity(bool generate) {
+	int fuelBase = 10;
+	int fuelRange = 41;
+	int foodBase = 10;
+	int foodRange = 21;
+	char buffer[256];
+	frect tempRec;
+	tempRec.left = 0.25f;
+	tempRec.right = 0.75f;
+	if(generate) {
+		fuelCost = fuelBase + (rand()%fuelRange);
+		foodCost = fuelBase + (rand()%fuelRange);
+	}
+	pause = true;
+	menu.clear();
+	
+	tempRec.top = 0.33f;
+	tempRec.bottom = 0.43f;
+	sprintf(buffer,"5 fuel costs: %d",fuelCost);
+	menu.addButton(buyFuel,buffer,tempRec,DT_CENTER|DT_VCENTER,0xFF0000FF,0xFF00FF00);
+
+	tempRec.top = 0.53f;
+	tempRec.bottom = 0.63f;
+	sprintf(buffer,"5 food costs: %d",foodCost);
+	menu.addButton(buyFood,buffer,tempRec,DT_CENTER|DT_VCENTER,0xFF0000FF,0xFF00FF00);
+	
+	tempRec.top = 0.73f;
+	tempRec.bottom = 0.83f;
+	menu.addButton(closeEvent,"Leave town",tempRec,DT_CENTER|DT_VCENTER,0xFF0000FF,0xFF00FF00);
+
+	eventBackground.image = 0;
+	eventText.text = "Welcome to town";
+	eventText.color = 0xFFFFFFFF;
+	eventText.flags = DT_CENTER|DT_VCENTER;
+	tempRec.top = 0;
+	tempRec.bottom = 0.33f;
+	eventText.rect = tempRec;
+}
+
 void Trail::startEndScreen() {
 	frect tempRec;
 	char buffer[256];
@@ -348,7 +395,8 @@ bool Trail::update() {
 		if(!pause){
 			// testing item swapping
 			if (Engine::instance()->getBind("Swap")) {
-				swapItems(0, 0, 1, 0);
+				//swapItems(0, 0, 1, 0);
+				setCity(true);
 			}
 			// end of testing item swapping
 
@@ -454,6 +502,12 @@ bool Trail::update() {
 			if (Engine::instance()->getMessage("eventDone")) {
 				pause = false;
 				setClickerButtons();
+			} else if(Engine::instance()->getMessage("buyFuel")) {
+				credits -= fuelCost;
+				fuel += 5;
+			} else if(Engine::instance()->getMessage("buyFood")) {
+				credits -= foodCost;
+				food += 5;
 			}
 		}
 	}
