@@ -33,7 +33,7 @@ void Game::init() {
 	//Init input
 	Engine::instance()->bind(W,"SelectionUp");
 	Engine::instance()->bind(S,"SelectionDown");
-	Engine::instance()->bind(SPACE,"Accept");
+	//Engine::instance()->bind(SPACE,"Accept");
 	Engine::instance()->bind(mouse_0,"Accept");
 	Engine::instance()->bind(mouse_Xp,mouse_Xn,"MouseX");
 	Engine::instance()->bind(mouse_Yp,mouse_Yn,"MouseY");

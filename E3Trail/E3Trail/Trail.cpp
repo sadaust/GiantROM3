@@ -1,5 +1,6 @@
 #include "Trail.h"
-
+#include <cstring>
+#include <regex>
 //update rate in seconds
 #define UPDATETIME 0.1f
 
@@ -18,8 +19,116 @@ void clicker3() {
 void gotoStartScreen() {
 	Engine::instance()->postMessage("gotoMM");
 }
+void closeEvent() {
+	Engine::instance()->postMessage("eventDone");
+}
+
+void Trail::createEvents() {
+	TrailEvent tempevent;
+	tempevent.reset();
+	//taco bell
+	tempevent.setText("%s found a tacobell and spent %s credits to buy a taco healing them by %s");
+	tempevent.addEventEffect(TEvent::ranParty,0);
+	tempevent.addEventEffect(TEvent::credits, -50);
+	tempevent.addEventEffect(TEvent::Hp,50);
+	eventList.push_back(tempevent);
+
+	tempevent.reset();
+}
+
+void Trail::triggerEvent(int eventId) {
+	int targChar = -1;
+	std::vector<std::string> temp;
+	char buffer[256];
+	for(int i = 0; i < eventList[eventId].numEffect(); ++i) {
+		switch(eventList[eventId].getEffect(i).targ) {
+		case TEvent::ranParty:
+			targChar = rand()%4;
+			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			break;
+		case TEvent::party0:
+			targChar = 0;
+			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			break;
+		case TEvent::party1:
+			targChar = 1;
+			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			break;
+		case TEvent::party2:
+			targChar = 2;
+			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			break;
+		case TEvent::party3:
+			targChar = 3;
+			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			break;
+		case TEvent::Hp:
+			if(targChar>=0)
+				party[targChar].modHp(eventList[eventId].getEffect(i).value);
+			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			break;
+		case TEvent::Res:
+			if(targChar>=0)
+				party[targChar].modResource(eventList[eventId].getEffect(i).value);
+			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			break;
+		case TEvent::randResource:
+			switch(rand()%3) {
+			case 0:
+				credits += eventList[eventId].getEffect(i).value;
+				break;
+			case 1:
+				fuel += eventList[eventId].getEffect(i).value;
+				break;
+			case 2:
+				food += eventList[eventId].getEffect(i).value;
+				break;
+			}
+			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			break;
+		case TEvent::credits:
+			credits += eventList[eventId].getEffect(i).value;
+			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			break;
+		case TEvent::fuel:
+			fuel += eventList[eventId].getEffect(i).value;
+			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			break;
+		case TEvent::food:
+			food += eventList[eventId].getEffect(i).value;
+			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			break;
+		}
+		temp.push_back(buffer);
+	}
+	std::regex matcher;
+	matcher = "%s";
+	std::string z;
+	z = eventList[eventId].getText();
+	for(int i = 0; i < temp.size(); ++i) {
+		z = std::regex_replace(z, matcher, temp[i],std::regex_constants::format_first_only);
+	}
+	frect temprec;
+	temprec.left = 0;
+	temprec.top = 0;
+	temprec.right = 1;
+	temprec.bottom = 1;
+	eventText.text = z;
+	eventText.color = 0xFFFFFFFF;
+	eventText.flags = DT_CENTER|DT_VCENTER;
+	eventText.rect = temprec;
+	eventBackground.image = 0;
+	pause = true;
+	menu.clear();
+	temprec.left = 0.25f;
+	temprec.right = 0.75f;
+	temprec.top = 0.8f;
+	temprec.bottom = 0.9f;
+	menu.addButton(closeEvent,"Back",temprec,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
+}
 
 Trail::Trail() {
+	createEvents();
 	pause = false;
 	mapScaleX = 1;
 	mapScaleY = 1;
@@ -220,14 +329,6 @@ bool Trail::update() {
 	if (running) {
 		menu.update();
 		menu.render();
-		// testing item swapping
-		if (Engine::instance()->getBind("Swap")) {
-			swapItems(0, 0, 1, 0);
-		}
-		// end of testing item swapping
-
-
-
 
 		//return to main menu
 		if (Engine::instance()->getBind("Back")||Engine::instance()->getMessage("gotoMM")) {
@@ -239,6 +340,11 @@ bool Trail::update() {
 			startEndScreen();
 		}
 		if(!pause){
+			// testing item swapping
+			if (Engine::instance()->getBind("Swap")) {
+				triggerEvent(0);
+			}
+			// end of testing item swapping
 			time += Engine::instance()->dt();
 			if(Engine::instance()->getMessage("Incer0")) {
 				party[0].resIncer();
@@ -333,6 +439,10 @@ bool Trail::update() {
 			tempRen.type = text;
 			tempRen.asset = &eventText;
 			Engine::instance()->addRender(tempRen);
+			if(Engine::instance()->getMessage("eventDone")) {
+				pause = false;
+				setClickerButtons();
+			}
 		}
 	}
 	return running;

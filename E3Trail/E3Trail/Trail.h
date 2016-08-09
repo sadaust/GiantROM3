@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "MenuSystem.h"
 #include "Item.h"
+#include "TrailEvent.h"
 
 
 #define PARTYSIZE 4
@@ -23,6 +24,9 @@ struct locEvent {
 
 class Trail {
 private:
+	void createEvents();
+	void triggerEvent(int eventId);
+	std::vector<TrailEvent> eventList;
 	bool pause;
 	bool running;
 	int food;

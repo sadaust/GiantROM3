@@ -90,6 +90,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Trail.h" />
+    <ClInclude Include="TrailEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Trail.cpp" />
+    <ClCompile Include="TrailEvent.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
