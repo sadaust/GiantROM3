@@ -5,7 +5,7 @@
 
 #define NUM_ITEMS 2
 #define NUM_STATUS 6
-#define STATUS_PIC_SCALE .25f
+#define STATUS_PIC_SCALE .025f
 
 class Character {
 private:
