@@ -3,7 +3,7 @@
 #include <regex>
 
 //update rate in seconds
-#define UPDATETIME 0.25f
+#define UPDATETIME 0.05f
 
 void clicker0() {
 	Engine::instance()->postMessage("Incer0");
@@ -437,7 +437,10 @@ bool Trail::update() {
 			D3DXMatrixTranslation(&tempMat,0,0,1);
 			D3DXMatrixMultiply(&tempRen.matrix,&tempRen.matrix,&tempMat);
 			Engine::instance()->addRender(tempRen);
-			party[0].Draw();
+
+			for (int i = 0; i < PARTYSIZE; ++i) {
+				party[i].Draw(i);
+			}
 		} else {
 			tempRen.type = screenSprite;
 			if(eventBackground.image) {

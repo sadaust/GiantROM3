@@ -28,35 +28,114 @@ void Character::init(std::string a_name, std::string resourceName) {
 		statusPic[i].rec.top = 0;
 		statusPic[i].rec.left = 0;
 	}
+	// loading images.
 
-	statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("brad000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
-	statusPic[0].rec.bottom = statusPic[0].image->texInfo.Height;
-	statusPic[0].rec.right = statusPic[0].image->texInfo.Width;
+	if (name == "Brad") {
+		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("brad000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[0].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[0].rec.right = statusPic[0].image->texInfo.Width;
 
-	statusPic[1].image = (imageAsset*)(Engine::instance()->getResource("brad033.png", D3DXCOLOR(0, 0, 0, 255))->resource);
-	statusPic[1].rec.bottom = statusPic[0].image->texInfo.Height;
-	statusPic[1].rec.right = statusPic[0].image->texInfo.Width;
+		statusPic[1].image = (imageAsset*)(Engine::instance()->getResource("brad033.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[1].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[1].rec.right = statusPic[0].image->texInfo.Width;
 
-	statusPic[2].image = (imageAsset*)(Engine::instance()->getResource("brad066.png", D3DXCOLOR(0, 0, 0, 255))->resource);
-	statusPic[2].rec.bottom = statusPic[0].image->texInfo.Height;
-	statusPic[2].rec.right = statusPic[0].image->texInfo.Width;
+		statusPic[2].image = (imageAsset*)(Engine::instance()->getResource("brad066.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[2].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[2].rec.right = statusPic[0].image->texInfo.Width;
 
-	statusPic[3].image = (imageAsset*)(Engine::instance()->getResource("brad100.png", D3DXCOLOR(0, 0, 0, 255))->resource);
-	statusPic[3].rec.bottom = statusPic[0].image->texInfo.Height;
-	statusPic[3].rec.right = statusPic[0].image->texInfo.Width;
+		statusPic[3].image = (imageAsset*)(Engine::instance()->getResource("brad100.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[3].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[3].rec.right = statusPic[0].image->texInfo.Width;
 
-	statusPic[4].image = (imageAsset*)(Engine::instance()->getResource("brad133.png", D3DXCOLOR(0, 0, 0, 255))->resource);
-	statusPic[4].rec.bottom = statusPic[0].image->texInfo.Height;
-	statusPic[4].rec.right = statusPic[0].image->texInfo.Width;
+		statusPic[4].image = (imageAsset*)(Engine::instance()->getResource("brad133.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[4].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[4].rec.right = statusPic[0].image->texInfo.Width;
 
-	statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("bradevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
-	statusPic[5].rec.bottom = statusPic[0].image->texInfo.Height;
-	statusPic[5].rec.right = statusPic[0].image->texInfo.Width;
+		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("bradevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[5].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[5].rec.right = statusPic[0].image->texInfo.Width;
+	}
+	else if (name == "Dan") {
+		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("dan000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[0].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[0].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[1].image = (imageAsset*)(Engine::instance()->getResource("dan033.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[1].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[1].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[2].image = (imageAsset*)(Engine::instance()->getResource("dan066.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[2].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[2].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[3].image = (imageAsset*)(Engine::instance()->getResource("dan100.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[3].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[3].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[4].image = (imageAsset*)(Engine::instance()->getResource("dan133.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[4].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[4].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("danevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[5].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[5].rec.right = statusPic[0].image->texInfo.Width;
+	}
+	else if (name == "Rorie") {
+		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("rorie000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[0].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[0].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[1].image = (imageAsset*)(Engine::instance()->getResource("rorie033.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[1].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[1].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[2].image = (imageAsset*)(Engine::instance()->getResource("rorie066.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[2].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[2].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[3].image = (imageAsset*)(Engine::instance()->getResource("rorie100.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[3].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[3].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[4].image = (imageAsset*)(Engine::instance()->getResource("rorie133.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[4].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[4].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("rorieevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[5].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[5].rec.right = statusPic[0].image->texInfo.Width;
+	}
+	else if (name == "Austin") {
+		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("austin000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[0].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[0].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[1].image = (imageAsset*)(Engine::instance()->getResource("austin033.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[1].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[1].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[2].image = (imageAsset*)(Engine::instance()->getResource("austin066.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[2].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[2].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[3].image = (imageAsset*)(Engine::instance()->getResource("austin100.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[3].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[3].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[4].image = (imageAsset*)(Engine::instance()->getResource("austin133.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[4].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[4].rec.right = statusPic[0].image->texInfo.Width;
+
+		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("austinevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
+		statusPic[5].rec.bottom = statusPic[0].image->texInfo.Height;
+		statusPic[5].rec.right = statusPic[0].image->texInfo.Width;
+	}
+
 
 }
 
 
-void Character::Draw() {
+void Character::Draw(int index) {
 	renInfo tempRen;
 	D3DXMATRIX tempMat;
 	
@@ -64,13 +143,31 @@ void Character::Draw() {
 	D3DXMatrixIdentity(&tempMat);
 	D3DXMatrixTranslation(&tempRen.matrix, 0, 0, 1);
 
+	if (hp <= 0) {
+		tempRen.asset = &statusPic[0];
+	}
+	else if (hp > 0 && hp <= 33) {
+		tempRen.asset = &statusPic[1];
+	}
+	else if (hp > 33 && hp <= 66) {
+		tempRen.asset = &statusPic[2];
+	}
+	else if (hp > 66 && hp <= 100) {
+		tempRen.asset = &statusPic[3];
+	}
+	else if (hp > 100) {
+		tempRen.asset = &statusPic[4];
+	}
+	//TO DO: EVIL TAKING PRECEDENCE OVER DAMAGE
 
-	tempRen.asset = &statusPic[3];
+
+	float x = Engine::instance()->getWidth()*0.08f + (index * Engine::instance()->getWidth()*.25f), y = Engine::instance()->getHeight()*0.83f;
 	tempRen.type = screenSprite;
 	D3DXMatrixScaling(&tempRen.matrix, STATUS_PIC_SCALE, STATUS_PIC_SCALE, 1);
-	D3DXMatrixTranslation(&tempMat, Engine::instance()->getWidth()*0.2f, Engine::instance()->getHeight()*0.7f, 0);
+	D3DXMatrixTranslation(&tempMat, x, y, 0);
 	D3DXMatrixMultiply(&tempRen.matrix, &tempRen.matrix, &tempMat);
 	Engine::instance()->addRender(tempRen);
+
 
 }
 

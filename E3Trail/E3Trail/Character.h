@@ -5,7 +5,7 @@
 
 #define NUM_ITEMS 2
 #define NUM_STATUS 6
-#define STATUS_PIC_SCALE .25f
+#define STATUS_PIC_SCALE .18f
 
 class Character {
 private:
@@ -24,7 +24,7 @@ private:
 	bool activeitems[NUM_ITEMS];
 public:
 	void init(std::string a_name, std::string resourceName);
-	void Draw();
+	void Draw(int index);
 	int getHP();
 	int getMaxHP();
 	int getStrength();
