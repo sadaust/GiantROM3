@@ -1,9 +1,11 @@
 #pragma once
 #include <string>
 #include "Item.h"
+#include "Engine.h"
 
 #define NUM_ITEMS 2
-#define NUM_STATUS 1
+#define NUM_STATUS 6
+#define STATUS_PIC_SCALE .25f
 
 class Character {
 private:
@@ -12,149 +14,43 @@ private:
 	int strength;
 	int agility;
 	int intelligence;
-	int resource;
+	float resource;
 	float resrate;
+	float resclickrate;
 	std::string name;
 	std::string resName;
 	Item items[NUM_ITEMS];
 	spriteStruct statusPic[NUM_STATUS];
 	bool activeitems[NUM_ITEMS];
 public:
-	void init(std::string a_name, std::string resourceName) {
-		maxhp = 100;
-		hp = maxhp;
-		strength = 10; // probably change this for balance. Used for minigames and event thresholds
-		agility = 10;
-		intelligence = 10;
-		resource = 0;
-		resrate = 1;
-		name = a_name;
-		resName = resourceName;
-		for (int i = 0; i < NUM_ITEMS; ++i) {
-			activeitems[i] = false;
-			items[i].Clear();
-		}
-	}
-	int getHP() { return hp; }
-	int getMaxHP() { return maxhp; }
-	int getStrength() { return strength; }
-	int getAgility() { return agility; }
-	int getIntelligence() { return intelligence; }
-	int getResource() { return resource; }
-	std::string getResName() { return resName; }
-	std::string getName() { return name; }
-	void resIncer() { resource += resrate*hp; }
-	void modHp(int mod) { hp += mod; if (hp < 0) { hp = 0; } }
-	void modMaxHp(int mod) { maxhp += mod; }
-	void modStrength(int mod) { strength += mod; }
-	void modAgility(int mod) { agility += mod; }
-	void modIntelligence(int mod) { intelligence += mod; }
-	void modResource(int mod) { resource += mod; if (resource < 0){ resource = 0; } }
-	void operator=(Character& in) {
-		hp = in.hp;
-		maxhp = in.maxhp;
-		strength = in.strength;
-		agility = in.agility;
-		intelligence = in.intelligence;
-		resource = in.resource;
-		resrate = in.resrate;
-		name = in.name;
-		resName = in.resName;
-		for(int i = 0; i < NUM_STATUS; ++i) {
-			statusPic[i] = in.statusPic[i];
-		}
-		for(int i = 0; i < NUM_ITEMS; ++i) {
-			items[i] = in.items[i];
-			activeitems[i] = in.activeitems[i];
-		}
-	}
+	void init(std::string a_name, std::string resourceName);
+	void Draw();
+	int getHP();
+	int getMaxHP();
+	int getStrength();
+	int getAgility();
+	int getIntelligence();
+	int getResource();
+	std::string getResName();
+	std::string getName();
+	void resIncer();
+	void resClick();
+	void modHp(int mod);
+	void modMaxHp(int mod);
+	void modStrength(int mod);
+	void modAgility(int mod);
+	void modIntelligence(int mod);
+	void modResource(int mod);
+	void operator=(Character& in);
 
 
 	// iTEM STUFF
-	Item getItem(int index) { return items[index]; } // don't you dare ask for an item outside of NUM_ITEMS
-	bool getActiveItem(int index) { return activeitems[index]; }
-	std::string getItemName(int index) { return items[index].getName(); }
+	Item getItem(int index); // don't you dare ask for an item outside of NUM_ITEMS
+	bool getActiveItem(int index);
+	std::string getItemName(int index);
 
-	void receiveItem(int index, Item &a_item) {
-		Attribute tempatt;
-		if (activeitems[index]) {
-			for (int i = 0; i < items[index].numAtt(); ++i) { // Remove the old item if there is one active.
-				tempatt = items[index].getAttribute(i);
-				if (tempatt == STRENGTH) {
-					strength -= items[index].getValue(i);
-					if (strength < 0)
-						strength = 0;
-				}
-				else if (tempatt == AGILITY) {
-					agility -= items[index].getValue(i);
-					if (agility < 0)
-						agility = 0;
-				}
-				else if (tempatt == INTELLIGENCE) {
-					intelligence -= items[index].getValue(i);
-					if (intelligence < 0)
-						intelligence = 0;
-				}
-				else if (tempatt == HP) {
-					maxhp -= items[index].getValue(i);
-					hp -= items[index].getValue(i);
-					if (maxhp < 0)
-						maxhp = 0;
-					if (hp < 0)
-						hp = 0;
-				}
-				else if (tempatt == RESRATE) {
-					resrate -= items[index].getValue(i);
-					if (resrate < 0)
-						resrate = 0;
-				}
-			}
-
-		}
-
-
-
-		items[index] = a_item; // change the item.
-
-
-		if (a_item.getName() != "Empty" && a_item.getName() != "Error") {
-			for (int i = 0; i < a_item.numAtt(); ++i) { // Add the new item's stuff to your stats
-				tempatt = a_item.getAttribute(i);
-				if (tempatt == STRENGTH) {
-					strength += a_item.getValue(i);
-					if (strength < 0)
-						strength = 0;
-				}
-				else if (tempatt == AGILITY) {
-					agility += items[index].getValue(i);
-					if (agility < 0)
-						agility = 0;
-				}
-				else if (tempatt == INTELLIGENCE) {
-					intelligence += items[index].getValue(i);
-					if (intelligence < 0)
-						intelligence = 0;
-				}
-				else if (tempatt == HP) {
-					maxhp += a_item.getValue(i);
-					hp += a_item.getValue(i);
-					if (maxhp < 0)
-						maxhp = 0;
-					if (hp < 0)
-						hp = 0;
-				}
-				else if (tempatt == RESRATE) {
-					resrate += a_item.getValue(i);
-					if (resrate < 0)
-						resrate = 0;
-				}
-			}
-			activeitems[index] = true;
-		}
-		else
-			activeitems[index] = false;
-	}
-	// end of receiveItem
+	void receiveItem(int index, Item &a_item);
+	
 
 
 };

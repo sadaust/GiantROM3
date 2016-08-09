@@ -9,6 +9,7 @@
 #define PARTYSIZE 4
 #define NUMRESORCES 6
 #define MAXLOCEVENT 100
+#define SPEEDINCRMULTIPLIER .025 
 
 enum eventType {
 	city,
@@ -31,7 +32,7 @@ private:
 	bool running;
 	int food;
 	int credits;
-	int fuel;
+	float fuel;
 	int speed;
 	//speed when out of fuel
 	int noFuelSpeed;

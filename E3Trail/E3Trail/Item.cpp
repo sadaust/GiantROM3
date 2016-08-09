@@ -45,7 +45,7 @@ AttributeChange Item::getAttChange(int a_index) {
 }
 
 
-int Item::getValue(int a_index) {
+float Item::getValue(int a_index) {
 	return attributes[a_index].value;
 }
 
@@ -76,12 +76,12 @@ void Item::addAttributeChange(AttributeChange a_attchange) {
 }
 
 
-void Item::setValue(int a_index, int a_value) {
+void Item::setValue(int a_index, float a_value) {
 	attributes[a_index].value = a_value;
 }
 
 
-void Item::setValue(Attribute a_att, int a_value) {
+void Item::setValue(Attribute a_att, float a_value) {
 	bool jobsdone = false;
 	for (int i = 0; i < attributes.size() && !jobsdone; ++i) {
 		if (attributes[i].stat == a_att) {
@@ -101,12 +101,12 @@ void Item::setValue(Attribute a_att, int a_value) {
 }
 
 
-void Item::addValue(int a_index, int a_value) {
+void Item::addValue(int a_index, float a_value) {
 	attributes[a_index].value += a_value;
 }
 
 
-void Item::addValue(Attribute a_att, int a_value) {
+void Item::addValue(Attribute a_att, float a_value) {
 	AttributeChange temp;
 	temp.stat = a_att;
 	temp.value = a_value;

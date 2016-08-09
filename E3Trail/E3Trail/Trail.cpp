@@ -1,8 +1,9 @@
 #include "Trail.h"
 #include <cstring>
 #include <regex>
+
 //update rate in seconds
-#define UPDATETIME 0.1f
+#define UPDATETIME 0.25f
 
 void clicker0() {
 	Engine::instance()->postMessage("Incer0");
@@ -28,9 +29,9 @@ void Trail::createEvents() {
 	tempevent.reset();
 	//taco bell
 	tempevent.setText("%s found a tacobell and spent %s credits to buy a taco healing them by %s");
-	tempevent.addEventEffect(TEvent::ranParty,0);
+	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::credits, -50);
-	tempevent.addEventEffect(TEvent::Hp,50);
+	tempevent.addEventEffect(TEvent::Hp, 50);
 	eventList.push_back(tempevent);
 
 	tempevent.reset();
@@ -40,40 +41,40 @@ void Trail::triggerEvent(int eventId) {
 	int targChar = -1;
 	std::vector<std::string> temp;
 	char buffer[256];
-	for(int i = 0; i < eventList[eventId].numEffect(); ++i) {
-		switch(eventList[eventId].getEffect(i).targ) {
+	for (int i = 0; i < eventList[eventId].numEffect(); ++i) {
+		switch (eventList[eventId].getEffect(i).targ) {
 		case TEvent::ranParty:
-			targChar = rand()%4;
-			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			targChar = rand() % 4;
+			sprintf(buffer, "%s", party[targChar].getName().c_str());
 			break;
 		case TEvent::party0:
 			targChar = 0;
-			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			sprintf(buffer, "%s", party[targChar].getName().c_str());
 			break;
 		case TEvent::party1:
 			targChar = 1;
-			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			sprintf(buffer, "%s", party[targChar].getName().c_str());
 			break;
 		case TEvent::party2:
 			targChar = 2;
-			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			sprintf(buffer, "%s", party[targChar].getName().c_str());
 			break;
 		case TEvent::party3:
 			targChar = 3;
-			sprintf(buffer,"%s",party[targChar].getName().c_str());
+			sprintf(buffer, "%s", party[targChar].getName().c_str());
 			break;
 		case TEvent::Hp:
-			if(targChar>=0)
+			if (targChar >= 0)
 				party[targChar].modHp(eventList[eventId].getEffect(i).value);
-			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
 			break;
 		case TEvent::Res:
-			if(targChar>=0)
+			if (targChar >= 0)
 				party[targChar].modResource(eventList[eventId].getEffect(i).value);
-			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
 			break;
 		case TEvent::randResource:
-			switch(rand()%3) {
+			switch (rand() % 3) {
 			case 0:
 				credits += eventList[eventId].getEffect(i).value;
 				break;
@@ -84,19 +85,19 @@ void Trail::triggerEvent(int eventId) {
 				food += eventList[eventId].getEffect(i).value;
 				break;
 			}
-			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
 			break;
 		case TEvent::credits:
 			credits += eventList[eventId].getEffect(i).value;
-			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
 			break;
 		case TEvent::fuel:
 			fuel += eventList[eventId].getEffect(i).value;
-			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
 			break;
 		case TEvent::food:
 			food += eventList[eventId].getEffect(i).value;
-			sprintf(buffer,"%d",abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
 			break;
 		}
 		temp.push_back(buffer);
@@ -105,8 +106,8 @@ void Trail::triggerEvent(int eventId) {
 	matcher = "%s";
 	std::string z;
 	z = eventList[eventId].getText();
-	for(int i = 0; i < temp.size(); ++i) {
-		z = std::regex_replace(z, matcher, temp[i],std::regex_constants::format_first_only);
+	for (int i = 0; i < temp.size(); ++i) {
+		z = std::regex_replace(z, matcher, temp[i], std::regex_constants::format_first_only);
 	}
 	frect temprec;
 	temprec.left = 0;
@@ -115,7 +116,7 @@ void Trail::triggerEvent(int eventId) {
 	temprec.bottom = 1;
 	eventText.text = z;
 	eventText.color = 0xFFFFFFFF;
-	eventText.flags = DT_CENTER|DT_VCENTER;
+	eventText.flags = DT_CENTER | DT_VCENTER;
 	eventText.rect = temprec;
 	eventBackground.image = 0;
 	pause = true;
@@ -124,7 +125,7 @@ void Trail::triggerEvent(int eventId) {
 	temprec.right = 0.75f;
 	temprec.top = 0.8f;
 	temprec.bottom = 0.9f;
-	menu.addButton(closeEvent,"Back",temprec,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
+	menu.addButton(closeEvent, "Back", temprec, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
 }
 
 Trail::Trail() {
@@ -139,15 +140,15 @@ Trail::Trail() {
 	path.vecCount = 2;
 	path.vec = pathVec;
 	for (int i = 0; i < PARTYSIZE; ++i) {
-		tempRec.top = 0.65f;
-		tempRec.bottom = 0.9f;
+		tempRec.top = 0.7f;
+		tempRec.bottom = 0.95f;
 		tempRec.left = 0.25*i;
 		tempRec.right = tempRec.left + 0.25f;
 		partyText[i][0].rect = tempRec;
 		partyText[i][0].color = 0xFFFFFFFF;
 		partyText[i][0].flags = DT_LEFT | DT_TOP;
 		partyText[i][0].text = "ERROR";
-		tempRec.top = 0.9f;
+		tempRec.top = 0.95f;
 		tempRec.bottom = 1.0f;
 		partyText[i][1].rect = tempRec;
 		partyText[i][1].color = 0xFFFFFFFF;
@@ -245,12 +246,13 @@ void Trail::init(bool west) {
 	tempitem.setValue(STRENGTH, 10);
 	tempitem.setValue(AGILITY, 10);
 	tempitem.setValue(INTELLIGENCE, 10);
-	tempitem.setValue(RESRATE, 10);
+	tempitem.setValue(RESRATE, 0.12f);
 	temp[0].init("Dan", "Amiibo");
 	temp[0].receiveItem(0, tempitem);
 	tempitem.Clear();
 	tempitem.setName("Spaghetti Can");
 	tempitem.setValue(HP, 50);
+	tempitem.setValue(RESCLICK, 2);
 	temp[1].init("Brad", "Dota hats");
 	temp[1].receiveItem(0, tempitem);
 	temp[2].init("Rorie", "Puppies");
@@ -271,8 +273,8 @@ void Trail::setClickerButtons() {
 	char buffer[256];
 	DWORD bColor = 0xFF0000FF;
 	DWORD hColor = 0xFF00FF00;
-	rec.bottom = 0.65f;
-	rec.top = 0.60f;
+	rec.bottom = 0.7f;
+	rec.top = 0.65f;
 	menu.clear();
 	//party[0] incer
 	rec.left = 0.0f;
@@ -330,6 +332,10 @@ bool Trail::update() {
 		menu.update();
 		menu.render();
 
+
+
+
+
 		//return to main menu
 		if (Engine::instance()->getBind("Back")||Engine::instance()->getMessage("gotoMM")) {
 			running = false;
@@ -342,35 +348,37 @@ bool Trail::update() {
 		if(!pause){
 			// testing item swapping
 			if (Engine::instance()->getBind("Swap")) {
-				triggerEvent(0);
+				swapItems(0, 0, 1, 0);
 			}
 			// end of testing item swapping
+
+
 			time += Engine::instance()->dt();
 			if(Engine::instance()->getMessage("Incer0")) {
-				party[0].resIncer();
+				party[0].resClick();
 			} else if(Engine::instance()->getMessage("Incer1")) {
-				party[1].resIncer();
+				party[1].resClick();
 			} else if(Engine::instance()->getMessage("Incer2")) {
-				party[2].resIncer();
+				party[2].resClick();
 			} else if(Engine::instance()->getMessage("Incer3")) {
-				party[3].resIncer();
+				party[3].resClick();
 			}
 
 			if (time >= UPDATETIME) {
 				time -= UPDATETIME;
 
 				if(fuel > 0) {
-					distToGo -= speed;
-					fuel -= speed * fuelCosRate;
+					distToGo -= speed * SPEEDINCRMULTIPLIER;
+					fuel -= speed * fuelCosRate * SPEEDINCRMULTIPLIER;
 					if(fuel < 0) {
 						fuel = 0;
 					}
 				} else {
-					distToGo -= noFuelSpeed;
+					distToGo -= noFuelSpeed * SPEEDINCRMULTIPLIER;
 				}
 
 				if(food > 0) {
-					food -= aliveCount()*foodConsRate;
+					food -= aliveCount()*foodConsRate * SPEEDINCRMULTIPLIER;
 					if(food <= 0) {
 						food = 0;
 					}
@@ -429,6 +437,7 @@ bool Trail::update() {
 			D3DXMatrixTranslation(&tempMat,0,0,1);
 			D3DXMatrixMultiply(&tempRen.matrix,&tempRen.matrix,&tempMat);
 			Engine::instance()->addRender(tempRen);
+			party[0].Draw();
 		} else {
 			tempRen.type = screenSprite;
 			if(eventBackground.image) {
@@ -439,7 +448,7 @@ bool Trail::update() {
 			tempRen.type = text;
 			tempRen.asset = &eventText;
 			Engine::instance()->addRender(tempRen);
-			if(Engine::instance()->getMessage("eventDone")) {
+			if (Engine::instance()->getMessage("eventDone")) {
 				pause = false;
 				setClickerButtons();
 			}
