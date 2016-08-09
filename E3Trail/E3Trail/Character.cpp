@@ -22,41 +22,36 @@ void Character::init(std::string a_name, std::string resourceName) {
 		items[i].Clear();
 	}
 
+	for(int i = 0; i < NUM_STATUS; ++i) {
+		statusPic[i].center = D3DXVECTOR3(0, 0, 0);
+		statusPic[i].color = 0xFFFFFFFF;
+		statusPic[i].rec.top = 0;
+		statusPic[i].rec.left = 0;
+	}
+
 	statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("brad000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 	statusPic[0].rec.bottom = statusPic[0].image->texInfo.Height;
 	statusPic[0].rec.right = statusPic[0].image->texInfo.Width;
-	statusPic[0].center = D3DXVECTOR3(0, 0, 0);
-	statusPic[0].color = 0xFFFFFFFF;
 
 	statusPic[1].image = (imageAsset*)(Engine::instance()->getResource("brad033.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 	statusPic[1].rec.bottom = statusPic[0].image->texInfo.Height;
 	statusPic[1].rec.right = statusPic[0].image->texInfo.Width;
-	statusPic[1].center = D3DXVECTOR3(0, 0, 0);
-	statusPic[1].color = 0xFFFFFFFF;
 
 	statusPic[2].image = (imageAsset*)(Engine::instance()->getResource("brad066.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 	statusPic[2].rec.bottom = statusPic[0].image->texInfo.Height;
 	statusPic[2].rec.right = statusPic[0].image->texInfo.Width;
-	statusPic[2].center = D3DXVECTOR3(0, 0, 0);
-	statusPic[2].color = 0xFFFFFFFF;
 
 	statusPic[3].image = (imageAsset*)(Engine::instance()->getResource("brad100.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 	statusPic[3].rec.bottom = statusPic[0].image->texInfo.Height;
 	statusPic[3].rec.right = statusPic[0].image->texInfo.Width;
-	statusPic[3].center = D3DXVECTOR3(0, 0, 0);
-	statusPic[3].color = 0xFFFFFFFF;
 
 	statusPic[4].image = (imageAsset*)(Engine::instance()->getResource("brad133.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 	statusPic[4].rec.bottom = statusPic[0].image->texInfo.Height;
 	statusPic[4].rec.right = statusPic[0].image->texInfo.Width;
-	statusPic[4].center = D3DXVECTOR3(0, 0, 0);
-	statusPic[4].color = 0xFFFFFFFF;
 
 	statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("bradevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 	statusPic[5].rec.bottom = statusPic[0].image->texInfo.Height;
 	statusPic[5].rec.right = statusPic[0].image->texInfo.Width;
-	statusPic[5].center = D3DXVECTOR3(0, 0, 0);
-	statusPic[5].color = 0xFFFFFFFF;
 
 }
 
