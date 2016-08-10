@@ -24,6 +24,7 @@ private:
 	std::string name;
 	//std::string description; // maybe later
 	std::vector <AttributeChange> attributes;
+	int cost;
 public:
 	Item();
 	~Item();
@@ -40,6 +41,9 @@ public:
 	void setValue(Attribute a_att, float a_value);
 	void addValue(int a_index, float a_value);
 	void addValue(Attribute a_att, float a_value);
+
+	int getCost();
+	void setCost(int a_cost);
 
 
 

@@ -1,94 +1,94 @@
-﻿Build started 8/8/2016 8:39:44 PM.
+﻿Build started 8/10/2016 6:21:00 AM.
      1>Project "C:\Users\Josh\Documents\GiantROM3\E3Trail\E3Trail\E3Trail.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Character.cpp Game.cpp Trail.cpp winMain.cpp
-         Character.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(109): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(215): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(220): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(225): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(230): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(231): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(260): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(265): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(270): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(275): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\character.cpp(276): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-         Generating Code...
-         Compiling...
-         winMain.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Trail.cpp
          Trail.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(48): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(52): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(56): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(60): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(64): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(69): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(74): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(88): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(92): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(96): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(100): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(109): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(145): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(196): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(197): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(211): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(212): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(232): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(282): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(104): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(287): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(108): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(292): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(113): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(297): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(118): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(303): warning C4101: 'buffer' : unreferenced local variable
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(371): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(372): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(377): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(381): warning C4244: '-=' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(398): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(403): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(136): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(408): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(140): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(144): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(153): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(201): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(261): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(262): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(277): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(278): warning C4244: '=' : conversion from 'LONG' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(298): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(339): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(344): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(349): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(354): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(363): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(378): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(386): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(394): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(402): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(410): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(412): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(414): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(416): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
      1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(418): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-         Game.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(49): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(50): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(55): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(59): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(60): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(64): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\game.cpp(65): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-         Generating Code...
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(426): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(434): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(443): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(463): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(468): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(494): warning C4101: 'buffer' : unreferenced local variable
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(515): warning C4101: 'buffer' : unreferenced local variable
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(588): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(589): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(595): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(599): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(867): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(874): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(882): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(888): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(890): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(892): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(894): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(896): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+     1>c:\users\josh\documents\giantrom3\e3trail\e3trail\trail.cpp(898): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Josh\Documents\GiantROM3\E3Trail\Debug\E3Trail.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Josh\Documents\GiantROM3\E3Trail\Debug\E3Trail.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Josh\Documents\GiantROM3\E3Trail\Debug\E3Trail.lib" /MACHINE:X86 Debug\Button.obj
          Debug\Character.obj
@@ -110,4 +110,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.29
+Time Elapsed 00:00:01.46

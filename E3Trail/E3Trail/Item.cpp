@@ -6,7 +6,7 @@
 
 Item::Item() {
 	name = "Error";
-	
+	cost = 0;
 }
 
 
@@ -21,6 +21,7 @@ Item::Item(Item &a_item) {
 	for (int i = 0; i < a_item.numAtt(); ++i) {
 		attributes.push_back(a_item.getAttChange(i));
 	}
+	cost = a_item.getCost();
 }
 
 
@@ -112,5 +113,17 @@ void Item::addValue(Attribute a_att, float a_value) {
 	temp.value = a_value;
 	addAttributeChange(temp);
 }
+
+
+int Item::getCost() {
+	return cost;
+}
+
+
+void Item::setCost(int a_cost) {
+	cost = a_cost;
+}
+
+
 
 

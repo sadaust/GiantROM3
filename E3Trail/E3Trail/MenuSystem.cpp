@@ -118,3 +118,9 @@ void MenuSystem::addButton(void (*func)(),const char* label,frect rect,DWORD fla
 	temp.setButton(func,label,rect,flags,color,hcolor);
 	buttons.push_back(temp);
 }
+
+
+//ew
+void MenuSystem::ChangeColorJanky(int index, D3DCOLOR color, D3DCOLOR hcolor) {
+	buttons[index].changecolor(color, hcolor);
+}

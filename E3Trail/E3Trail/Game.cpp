@@ -79,6 +79,7 @@ bool Game::update() {
 			trail.init(true);
 		}
 	}
+	trail.render();
 	Engine::instance()->render();
 	Engine::instance()->clearMessages();
 	//keep the game running

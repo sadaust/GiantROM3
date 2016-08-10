@@ -10,10 +10,19 @@
 #define NUMRESORCES 6
 #define MAXLOCEVENT 100
 #define SPEEDINCRMULTIPLIER .025 
+#define ITEMTARGETNOTCHOSEN -1
+#define BASEFUELCOST 10
+#define RANGEFUELCOST 41
+#define BASEFOODCOST 10
+#define RANGEFOODCOST 21
+#define NUMSHOPITEMS 4
+
+
+
 
 enum eventType {
 	city,
-	abandond,
+	abandoned,
 	e3
 };
 
@@ -23,23 +32,45 @@ struct locEvent {
 };
 
 
+enum TrailState {
+	charselect,
+	vehicleselect,
+	pause,
+	trail,
+	eventscreen,
+	itemswapscreen,
+	cityscreen,
+	shopscreen,
+	epilogue
+
+};
+
+
 class Trail {
 private:
+	TrailState tstate;
+	int targetitems[2][2];
+	DWORD bColor;
+	DWORD hColor;
+	DWORD cColor;
+	std::string cityname;
+	Item shopitems[NUMSHOPITEMS];
+
 	void createEvents();
 	void triggerEvent(int eventId);
 	std::vector<TrailEvent> eventList;
 	bool pause;
 	bool running;
-	int food;
+	float food;
 	int credits;
 	float fuel;
 	int speed;
 	//speed when out of fuel
 	int noFuelSpeed;
 	//food per hour per party member alive
-	int foodConsRate;
+	float foodConsRate;
 	//fuel consumed per mile
-	int fuelCosRate;
+	float fuelCosRate;
 	float distToGo;
 	double time;
 	int startDist;
@@ -48,9 +79,10 @@ private:
 	locEvent events[MAXLOCEVENT];
 	int locEventCount;
 	Character party[PARTYSIZE];
-	textStruct partyText[PARTYSIZE][2];
+	textStruct partyText[PARTYSIZE][3];
 	textStruct renstats[NUMRESORCES];
 	textStruct eventText;
+	textStruct cityText;
 	spriteStruct eventBackground;
 	float mapScaleX, mapScaleY;
 	spriteStruct map;
@@ -66,8 +98,11 @@ public:
 	void init(bool west);
 	int aliveCount();
 	bool update();
-	void setClickerButtons();
+	void render();
+	void setTrailButtons();
+	void setItemButtons();
 	void startEndScreen();
-	void setCity(bool generate);
+	void setCityButtons(bool generate);
+	void setShopButtons();
 	void swapItems(int c1,int s1,int c2,int s2);
 };

@@ -90,3 +90,10 @@ void Button::render(bool bhighlight) {
 	D3DXMatrixTranslation(&temp.matrix,0,0,0.9);
 	Engine::instance()->addRender(temp);
 }
+
+
+// Jersh added this
+void Button::changecolor(D3DCOLOR color, D3DCOLOR hcolor) {
+	normal = color;
+	highlight = hcolor;
+}

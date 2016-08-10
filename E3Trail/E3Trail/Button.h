@@ -27,4 +27,10 @@ public:
 	//click without checking cords
 	void click();
 	void render(bool highlight);
+
+
+
+	// added by jersh
+	// change color
+	void changecolor(D3DCOLOR color, D3DCOLOR hcolor);
 };
