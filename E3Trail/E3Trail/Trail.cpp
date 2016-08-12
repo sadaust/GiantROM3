@@ -49,6 +49,22 @@ void itemcancel() {
 	Engine::instance()->postMessage("ItemCancel");
 }
 // Item swap buttons end
+// Shop buttons start
+void shop0() {
+	Engine::instance()->postMessage("Shop0");
+}
+void shop1() {
+	Engine::instance()->postMessage("Shop1");
+}
+void shop2() {
+	Engine::instance()->postMessage("Shop2");
+}
+void shop3() {
+	Engine::instance()->postMessage("Shop3");
+}
+// Shop buttons end
+
+
 void gotoStartScreen() {
 	Engine::instance()->postMessage("gotoMM");
 }
@@ -246,7 +262,37 @@ Trail::Trail() {
 	Engine::instance()->bind(SPACE, "Enter City");
 	// end of testing item swapping
 
+	// setting up shop item text rects
+	tempRec.top = 0.15f;
+	tempRec.bottom = 0.6f;
+	tempRec.left = 0.0f;
+	tempRec.right = tempRec.left + 0.2f;
+	partyText[0][3].rect = tempRec;
+	partyText[0][3].color = 0xFFFFFFFF;
+	partyText[0][3].flags = DT_CENTER | DT_BOTTOM;
+	partyText[0][3].text = "ERROR";
 
+	tempRec.left = 0.2f;
+	tempRec.right = tempRec.left + 0.2f;
+	partyText[1][3].rect = tempRec;
+	partyText[1][3].color = 0xFFFFFFFF;
+	partyText[1][3].flags = DT_CENTER | DT_BOTTOM;
+	partyText[1][3].text = "ERROR";
+
+	tempRec.left = 0.4f;
+	tempRec.right = tempRec.left + 0.2f;
+	partyText[2][3].rect = tempRec;
+	partyText[2][3].color = 0xFFFFFFFF;
+	partyText[2][3].flags = DT_CENTER | DT_BOTTOM;
+	partyText[2][3].text = "ERROR";
+
+	tempRec.left = 0.6f;
+	tempRec.right = tempRec.left + 0.2f;
+	partyText[3][3].rect = tempRec;
+	partyText[3][3].color = 0xFFFFFFFF;
+	partyText[3][3].flags = DT_CENTER | DT_BOTTOM;
+	partyText[3][3].text = "ERROR";
+	// end of item text rects
 
 }
 
@@ -303,7 +349,10 @@ void Trail::init(bool west, Character& p1, Character& p2, Character& p3, Charact
 	running = true;
 
 	setTrailButtons();
-
+	setItems();
+	for (int i = 0; i < NUMSHOPITEMS; ++i) {
+		shopitems[i].Clear();
+	}
 
 	tstate = trail;
 }
@@ -489,22 +538,122 @@ void Trail::setCityButtons(bool generate) {
 	tstate = cityscreen;
 }
 
-void Trail::setShopButtons() {
+void Trail::setShopButtons(bool generate) {
+	if (generate) {
+
+		for (int i = 0; i < NUMSHOPITEMS; ++i) {
+			shopitems[i].Clear();
+			shopitems[i] = itemList[rand() % itemList.size()];
+		}
+
+
+	}
+
 
 	char buffer[256];
-	frect tempRec;
-	tempRec.left = 0.0f;
-	tempRec.right = 0.25f;
-
-	pause = true;
+	frect rec;
 	menu.clear();
 
-	tempRec.top = 0.05f;
-	tempRec.bottom = 0.1f;
-	menu.addButton(buyItems, "Leave Shop", tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
 
 
 
+	rec.left = 0.0f;
+	rec.right = rec.left + 0.2f;
+	rec.top = 0.2f;
+	rec.bottom = 0.3f;
+	sprintf(buffer, "%s", shopitems[0].getName().c_str());
+	menu.addButton(shop0, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+
+
+	rec.left = 0.2f;
+	rec.right = rec.left + 0.2f;
+	sprintf(buffer, "%s", shopitems[1].getName().c_str());
+	menu.addButton(shop1, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+
+
+	rec.left = 0.4f;
+	rec.right = rec.left + 0.2f;
+	sprintf(buffer, "%s", shopitems[2].getName().c_str());
+	menu.addButton(shop2, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+
+
+	rec.left = 0.6f;
+	rec.right = rec.left + 0.2f;
+	sprintf(buffer, "%s", shopitems[3].getName().c_str());
+	menu.addButton(shop3, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+
+
+	rec.bottom = 0.78f;
+	rec.top = 0.74f;
+	//char 0 item 0
+	rec.left = 0.0f;
+	rec.right = 0.25f;
+	sprintf(buffer, "%s", party[0].getItemName(0).c_str());
+	menu.addButton(item0, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.83f;
+	rec.top = 0.78f;
+	//char 0 item 1
+	rec.left = 0.0f;
+	rec.right = 0.25f;
+	sprintf(buffer, "%s", party[0].getItemName(1).c_str());
+	menu.addButton(item1, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.78f;
+	rec.top = 0.74f;
+	//char 1 item 0
+	rec.left = 0.25f;
+	rec.right = 0.5f;
+	sprintf(buffer, "%s", party[1].getItemName(0).c_str());
+	menu.addButton(item2, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.83f;
+	rec.top = 0.78f;
+	//char 1 item 1
+	rec.left = 0.25f;
+	rec.right = 0.5f;
+	sprintf(buffer, "%s", party[1].getItemName(1).c_str());
+	menu.addButton(item3, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.78f;
+	rec.top = 0.74f;
+	//char 2 item 0
+	rec.left = 0.5f;
+	rec.right = 0.75f;
+	sprintf(buffer, "%s", party[2].getItemName(0).c_str());
+	menu.addButton(item4, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.83f;
+	rec.top = 0.78f;
+	//char 2 item 1
+	rec.left = 0.5f;
+	rec.right = 0.75f;
+	sprintf(buffer, "%s", party[2].getItemName(1).c_str());
+	menu.addButton(item5, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.78f;
+	rec.top = 0.74f;
+	//char 3 item 0
+	rec.left = 0.75f;
+	rec.right = 1.0f;
+	sprintf(buffer, "%s", party[3].getItemName(0).c_str());
+	menu.addButton(item6, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+
+	rec.bottom = 0.83f;
+	rec.top = 0.78f;
+	//char 3 item 1
+	rec.left = 0.75f;
+	rec.right = 1.0f;
+	sprintf(buffer, "%s", party[3].getItemName(1).c_str());
+	menu.addButton(item7, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
+	
+
+
+	rec.left = 0.0f;
+	rec.right = 0.25f;
+	rec.top = 0.05f;
+	rec.bottom = 0.1f;
+	menu.addButton(buyItems, "Leave Shop", rec, DT_CENTER | DT_VCENTER, bColor, hColor);
 
 
 	tstate = shopscreen;
@@ -839,10 +988,81 @@ bool Trail::update() {
 				credits -= foodCost;
 				food += 5;
 			}
-			else if (Engine::instance()->getBind("buyItems")) {
-				setShopButtons();
+			else if (Engine::instance()->getMessage("buyItems")) {
+				setShopButtons(true);
 
 			}
+		}
+		else if (tstate == shopscreen) {
+			if (Engine::instance()->getMessage("buyItems")) {
+				setCityButtons(false);
+				targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+				targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+				targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+				targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+			}
+			else if (Engine::instance()->getMessage("Shop0")) {
+				if (targetitems[0][0] == 0) { // If you're already targeting shop0
+					// untarget it
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					menu.ChangeColorJanky(0, bColor, hColor);
+				}
+				else {
+					targetitems[0][0] = 0;
+					resetColors();
+					menu.ChangeColorJanky(0, cColor, hColor);
+				}
+			}
+			else if (Engine::instance()->getMessage("Shop1")) {
+				if (targetitems[0][0] == 1) { // If you're already targeting shop1
+					// untarget it
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					menu.ChangeColorJanky(1, bColor, hColor);
+				}
+				else {
+					targetitems[0][0] = 1;
+					resetColors();
+					menu.ChangeColorJanky(1, cColor, hColor);
+				}
+			}
+			else if (Engine::instance()->getMessage("Shop2")) {
+				if (targetitems[0][0] == 2) { // If you're already targeting shop2
+					// untarget it
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					menu.ChangeColorJanky(2, bColor, hColor);
+				}
+				else {
+					targetitems[0][0] = 2;
+					resetColors();
+					menu.ChangeColorJanky(2, cColor, hColor);
+				}
+			}
+			else if (Engine::instance()->getMessage("Shop3")) {
+				if (targetitems[0][0] == 3) { // If you're already targeting shop3
+					// untarget it
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					menu.ChangeColorJanky(3, bColor, hColor);
+				}
+				else {
+					targetitems[0][0] = 3;
+					resetColors();
+					menu.ChangeColorJanky(3, cColor, hColor);
+				}
+			}
+			if (targetitems[0][0] >= 0) {
+				if (Engine::instance()->getMessage("Item0")) {
+					resetColors();
+					// finish this later
+					// "Not enough credits"
+					// resource -> credits selling
+					// actual transactions
+					// gg
+				}
+			}
+
+
+
+
 		}
 	}
 	return running;
@@ -858,11 +1078,11 @@ void Trail::render() {
 	D3DXMatrixTranslation(&tempRen.matrix, 0, 0, 1);
 	if (running) {
 
-		if (tstate == trail || tstate == itemswapscreen || tstate == cityscreen) {
+		if (tstate == trail || tstate == itemswapscreen || tstate == cityscreen || tstate == shopscreen) {
 			//render the main play screen
 			tempRen.type = text;
 
-			if (tstate != itemswapscreen) { // item names not drawn during item swap screen since buttons replace it
+			if (tstate != itemswapscreen && tstate != shopscreen) { // item names not drawn during item swap screen since buttons replace it
 				for (int i = 0; i < PARTYSIZE; ++i) {
 					sprintf(buffer, "\n%s\n%s", party[i].getItemName(0).c_str(), party[i].getItemName(1).c_str());
 					partyText[i][2].text = buffer;
@@ -875,10 +1095,7 @@ void Trail::render() {
 				partyText[i][0].text = buffer;
 				tempRen.asset = &partyText[i][0];
 				Engine::instance()->addRender(tempRen);
-			}
 
-
-			for (int i = 0; i < PARTYSIZE; ++i) {
 				sprintf(buffer, "%s HP: %03d/%03d", party[i].getName().c_str(), party[i].getHP(), party[i].getMaxHP());
 				partyText[i][1].text = buffer;
 				tempRen.asset = &partyText[i][1];
@@ -902,7 +1119,7 @@ void Trail::render() {
 				Engine::instance()->addRender(tempRen);
 			}
 
-			if (tstate != cityscreen) { // map not drawn during the city screen
+			if (tstate != cityscreen && tstate != shopscreen) { // map not drawn during the city screen
 				//path line
 				pathVec[0].x = start.x;
 				pathVec[0].y = start.y;
@@ -920,6 +1137,16 @@ void Trail::render() {
 				D3DXMatrixMultiply(&tempRen.matrix, &tempRen.matrix, &tempMat);
 				Engine::instance()->addRender(tempRen);
 			}
+
+			if (tstate == shopscreen) {
+				for (int i = 0; i < NUMSHOPITEMS; ++i) {
+					sprintf(buffer, "Str: %.0f\nAgi: %.0f\nInt: %.0f\nHP: %.0f\n%s prod.: %.0f\n%s / click: %.0f", shopitems[i].getValue(STRENGTH), shopitems[i].getValue(AGILITY), shopitems[i].getValue(INTELLIGENCE), shopitems[i].getValue(HP), party[i].getResName().c_str(), shopitems[i].getValue(RESRATE), party[i].getResName().c_str(), shopitems[i].getValue(RESCLICK));
+					partyText[i][3].text = buffer;
+					tempRen.asset = &partyText[i][3];
+					Engine::instance()->addRender(tempRen);
+				}
+			}
+
 			for (int i = 0; i < PARTYSIZE; ++i) {
 				party[i].Draw(i);
 			}
@@ -939,6 +1166,28 @@ void Trail::render() {
 }
 
 
+void Trail::setItems() {
+	Item tempitem;
+	tempitem.Clear();
+	tempitem.setName("Doritos Locos Tacos");
+	tempitem.setValue(AGILITY, -5);
+	tempitem.setValue(STRENGTH, 35);
+	tempitem.setValue(HP, -30);
+	tempitem.setCost(150);
+	itemList.push_back(tempitem);
+	itemList.push_back(tempitem);
+	itemList.push_back(tempitem);
+	tempitem.Clear();
+	tempitem.setName("Spaghetti Can");
+	tempitem.setValue(AGILITY, 20);
+	tempitem.setValue(STRENGTH, 20);
+	tempitem.setCost(100);
+	itemList.push_back(tempitem);
+	itemList.push_back(tempitem);
+	itemList.push_back(tempitem);
+}
+
+
 void Trail::swapItems(int c1, int s1, int c2, int s2) {
 	Item temp;
 	temp = party[c1].getItem(s1);
@@ -947,5 +1196,10 @@ void Trail::swapItems(int c1, int s1, int c2, int s2) {
 }
 
 
+void Trail::resetColors() {
+	for (int i = 0; i < menu.numButtons(); ++i) {
+		menu.ChangeColorJanky(i, bColor, hColor);
 
+	}
+}
 

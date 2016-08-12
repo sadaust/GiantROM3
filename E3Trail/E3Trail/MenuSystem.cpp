@@ -124,3 +124,12 @@ void MenuSystem::addButton(void (*func)(),const char* label,frect rect,DWORD fla
 void MenuSystem::ChangeColorJanky(int index, D3DCOLOR color, D3DCOLOR hcolor) {
 	buttons[index].changecolor(color, hcolor);
 }
+
+// more ew
+int MenuSystem::numButtons() {
+	return buttons.size();
+}
+
+
+
+

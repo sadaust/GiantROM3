@@ -28,13 +28,14 @@ private:
 public:
 	Item();
 	~Item();
-	Item(Item &a_item);
+	Item(const Item &a_item);
 	void Clear();
-	int numAtt();
-	std::string getName();
-	AttributeChange getAttChange(int a_index);
-	float getValue(int a_index);
-	Attribute getAttribute(int a_index);
+	int numAtt() const;
+	std::string getName() const;
+	AttributeChange getAttChange(int a_index) const;
+	float getValue(int a_index)const;
+	float getValue(Attribute a_att)const;
+	Attribute getAttribute(int a_index) const;
 	void setName(std::string a_name);
 	void addAttributeChange(AttributeChange a_attchange);
 	void setValue(int a_index, float a_value);
@@ -42,7 +43,7 @@ public:
 	void addValue(int a_index, float a_value);
 	void addValue(Attribute a_att, float a_value);
 
-	int getCost();
+	int getCost() const;
 	void setCost(int a_cost);
 
 

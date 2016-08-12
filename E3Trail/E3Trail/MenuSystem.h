@@ -39,4 +39,6 @@ public:
 
 	// this is gross
 	void ChangeColorJanky(int index, D3DCOLOR color, D3DCOLOR hcolor);
+	// more grossness
+	int numButtons();
 };

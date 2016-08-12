@@ -15,7 +15,7 @@ Item::~Item() {
 }
 
 
-Item::Item(Item &a_item) {
+Item::Item(const Item &a_item) {
 	Clear();
 	name = a_item.getName();
 	for (int i = 0; i < a_item.numAtt(); ++i) {
@@ -25,12 +25,12 @@ Item::Item(Item &a_item) {
 }
 
 
-int Item::numAtt() {
+int Item::numAtt() const {
 	return attributes.size();
 }
 
 
-std::string Item::getName() {
+std::string Item::getName() const {
 	return name;
 }
 
@@ -41,17 +41,29 @@ void Item::Clear() {
 }
 
 
-AttributeChange Item::getAttChange(int a_index) {
+AttributeChange Item::getAttChange(int a_index) const {
 	return attributes[a_index];
 }
 
 
-float Item::getValue(int a_index) {
+float Item::getValue(int a_index) const {
 	return attributes[a_index].value;
 }
 
 
-Attribute Item::getAttribute(int a_index) {
+float Item::getValue(Attribute a_att) const {
+	for (int i = 0; i < attributes.size(); ++i) {
+		if (attributes[i].stat == a_att) {
+			return attributes[i].value;
+		}
+	}
+
+	return 0;
+
+}
+
+
+Attribute Item::getAttribute(int a_index) const {
 	return attributes[a_index].stat;
 }
 
@@ -115,7 +127,7 @@ void Item::addValue(Attribute a_att, float a_value) {
 }
 
 
-int Item::getCost() {
+int Item::getCost() const {
 	return cost;
 }
 

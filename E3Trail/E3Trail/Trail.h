@@ -49,11 +49,13 @@ enum TrailState {
 class Trail {
 private:
 	TrailState tstate;
-	int targetitems[2][2];
+	int targetitems[2][2];  // swap items: 0,0 is char 0. 0,1 is slot 0. 1,0 is char 1. 1,1 is slot 1
+							// shop: 0,0 is shop item. 1,0 is character. 1,1 is slot
 	DWORD bColor;
 	DWORD hColor;
 	DWORD cColor;
 	std::string cityname;
+	std::vector <Item> itemList;
 	Item shopitems[NUMSHOPITEMS];
 
 	void createEvents();
@@ -79,7 +81,7 @@ private:
 	locEvent events[MAXLOCEVENT];
 	int locEventCount;
 	Character party[PARTYSIZE];
-	textStruct partyText[PARTYSIZE][3];
+	textStruct partyText[PARTYSIZE][4];
 	textStruct renstats[NUMRESORCES];
 	textStruct eventText;
 	textStruct cityText;
@@ -103,6 +105,8 @@ public:
 	void setItemButtons();
 	void startEndScreen();
 	void setCityButtons(bool generate);
-	void setShopButtons();
+	void setShopButtons(bool generate);
+	void setItems();
 	void swapItems(int c1,int s1,int c2,int s2);
+	void resetColors();
 };
