@@ -34,6 +34,7 @@
 
 #define NUMCHARACTERS 10
 
+#define BASEEVENTCHANCE 200
 
 
 enum eventType {
@@ -79,7 +80,9 @@ private:
 	
 	
 	void createEvents();
-	void triggerEvent(int eventId);
+	void triggerEvent();
+	//1:this chance to get an event
+	int eventChance;
 	std::vector<TrailEvent> eventList;
 	bool pause;
 	bool running;
@@ -106,7 +109,6 @@ private:
 	textStruct renstats[NUMRESORCES];
 	textStruct eventText;
 	textStruct cityText;
-	
 	spriteStruct eventBackground;
 	float mapScaleX, mapScaleY;
 	spriteStruct map;

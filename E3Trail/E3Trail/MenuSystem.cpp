@@ -52,45 +52,49 @@ void MenuSystem::update() {
 	sy = _mY / (float)_height;
 	if(buttons.size() > 0) {
 		if(Engine::instance()->getAxis("MouseX") != 0 || Engine::instance()->getAxis("MouseY") != 0){
+			selection = -1;
 			for(int i = 0; i < buttons.size(); ++i) {
 				if(buttons[i].mouseHover(sx,sy)) {
 					selection = i;
 					break;
 				}
 			}
-		}
-		if(Engine::instance()->getButton("SelectionUp")) {
-			if(!hold) {
-				--selection;
-				hold = true;
-				//Engine::instance()->playSound(rollover, soundvec, soundvec);
-			}
-		} else if(Engine::instance()->getButton("SelectionDown")) {
-			if(!hold) {
-				++selection;
-				hold = true;
-				//Engine::instance()->playSound(rollover, soundvec, soundvec);
-			}
-		} else if(Engine::instance()->getButton("Accept")) {
-			if(selection < 0) {
-				selection = buttons.size()-1;
-			} else if(selection >= buttons.size()) {
-				selection = 0;
+		} else {
+			if(Engine::instance()->getButton("SelectionUp")) {
+				if(!hold) {
+					--selection;
+					hold = true;
+					//Engine::instance()->playSound(rollover, soundvec, soundvec);
+				}
+				if(selection < 0) {
+					selection = buttons.size()-1;
+				} else if(selection >= buttons.size()) {
+					selection = 0;
+				}
+			} else if(Engine::instance()->getButton("SelectionDown")) {
+				if(!hold) {
+					++selection;
+					hold = true;
+					//Engine::instance()->playSound(rollover, soundvec, soundvec);
+				}
+				if(selection < 0) {
+					selection = buttons.size()-1;
+				} else if(selection >= buttons.size()) {
+					selection = 0;
+				}
 			}
 
+		} 
+		if(Engine::instance()->getButton("Accept")) {
 			if(!hold) {
-				buttons[selection].click();
-				//Engine::instance()->playSound(click, soundvec, soundvec);
 				hold = true;
+				if(selection >= 0 && selection < buttons.size()) {
+					buttons[selection].click();
+					//Engine::instance()->playSound(click, soundvec, soundvec);
+				}
 			}
 		} else {
 			hold = false;
-		}
-
-		if(selection < 0) {
-			selection = buttons.size()-1;
-		} else if(selection >= buttons.size()) {
-			selection = 0;
 		}
 	}
 }

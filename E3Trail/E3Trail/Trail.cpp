@@ -131,10 +131,13 @@ void Trail::createEvents() {
 
 }
 
-void Trail::triggerEvent(int eventId) {
+void Trail::triggerEvent() {
+	int eventId = 0;
 	int targChar = -1;
 	std::vector<std::string> temp;
 	char buffer[256];
+	eventId = rand()%eventList.size();
+	tstate = eventscreen;
 	for (int i = 0; i < eventList[eventId].numEffect(); ++i) {
 		switch (eventList[eventId].getEffect(i).targ) {
 		case TEvent::ranParty:
@@ -220,6 +223,7 @@ void Trail::triggerEvent(int eventId) {
 	temprec.top = 0.8f;
 	temprec.bottom = 0.9f;
 	menu.addButton(closeEvent, "Back", temprec, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+	eventChance = BASEEVENTCHANCE;
 }
 
 Trail::Trail() {
@@ -400,6 +404,7 @@ void Trail::init(bool west) {
 		partychoices[i] = ITEMTARGETNOTCHOSEN;
 
 	tstate = charselect;
+	eventChance = BASEEVENTCHANCE;
 }
 
 int Trail::aliveCount() {
@@ -949,7 +954,13 @@ bool Trail::update() {
 				if (aliveCount() == 0 || distToGo <= 0) {
 					startEndScreen();
 				}
-
+				//if rand()%eventchance == 0 do event
+				if(!(rand()%eventChance)) {
+					triggerEvent();
+				} else {
+					//if no event triggered make them have better odds of happening
+					--eventChance;
+				}
 			}
 		}
 		else if (tstate == itemswapscreen) {
@@ -1650,6 +1661,12 @@ bool Trail::update() {
 					running = false;
 					return false;
 				}
+			}
+		}
+		else if(tstate == eventscreen) {
+			if(Engine::instance()->getMessage("eventDone")) {
+				setTrailButtons();
+				tstate = trail;
 			}
 		}
 
