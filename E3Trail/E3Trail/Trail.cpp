@@ -1050,16 +1050,98 @@ bool Trail::update() {
 				}
 			}
 			if (targetitems[0][0] >= 0) {
-				if (Engine::instance()->getMessage("Item0")) {
+				if (Engine::instance()->getMessage("Item0") && credits >= shopitems[targetitems[0][0]].getCost()) {
 					resetColors();
-					// finish this later
-					// "Not enough credits"
-					// resource -> credits selling
-					// actual transactions
-					// gg
-				}
-			}
+					party[0].receiveItem(0, shopitems[targetitems[0][0]]);
+					
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
 
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+
+				}
+				else if (Engine::instance()->getMessage("Item1") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[0].receiveItem(1, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+				else if (Engine::instance()->getMessage("Item2") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[1].receiveItem(0, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+				else if (Engine::instance()->getMessage("Item3") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[1].receiveItem(1, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+				else if (Engine::instance()->getMessage("Item4") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[2].receiveItem(0, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+				else if (Engine::instance()->getMessage("Item5") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[2].receiveItem(1, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+				else if (Engine::instance()->getMessage("Item6") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[3].receiveItem(0, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+				else if (Engine::instance()->getMessage("Item7") && credits >= shopitems[targetitems[0][0]].getCost()) {
+					resetColors();
+					party[3].receiveItem(1, shopitems[targetitems[0][0]]);
+					credits -= shopitems[targetitems[0][0]].getCost();
+					setShopButtons(false);
+
+					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][0] = ITEMTARGETNOTCHOSEN;
+					targetitems[1][1] = ITEMTARGETNOTCHOSEN;
+				}
+
+			}
 
 
 
