@@ -22,6 +22,7 @@ Game::Game() {
 	cam.cam_look_pos = D3DXVECTOR3(0,0,0);
 	cam.drawDist = 5000;
 	fps = 0;
+	srand(time(0));
 };
 
 Game::~Game() {

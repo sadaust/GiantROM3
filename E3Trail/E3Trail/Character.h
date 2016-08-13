@@ -19,6 +19,7 @@ private:
 	float resclickrate;
 	std::string name;
 	std::string resName;
+	std::string victory;
 	Item items[NUM_ITEMS];
 	spriteStruct statusPic[NUM_STATUS];
 	bool activeitems[NUM_ITEMS];
@@ -33,6 +34,7 @@ public:
 	int getResource();
 	std::string getResName();
 	std::string getName();
+	std::string getVictory();
 	void resIncer();
 	void resClick();
 	void modHp(int mod);

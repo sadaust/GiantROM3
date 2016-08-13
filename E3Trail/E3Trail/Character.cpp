@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include <regex>
 
 
 
@@ -28,6 +29,7 @@ void Character::init(std::string a_name, std::string resourceName) {
 		statusPic[i].rec.top = 0;
 		statusPic[i].rec.left = 0;
 	}
+	victory = "They did a thing!!!";
 	// loading images.
 
 	if (name == "Brad") {
@@ -138,7 +140,7 @@ void Character::init(std::string a_name, std::string resourceName) {
 void Character::Draw(int index) {
 	renInfo tempRen;
 	D3DXMATRIX tempMat;
-	
+
 	D3DXMatrixIdentity(&tempRen.matrix);
 	D3DXMatrixIdentity(&tempMat);
 	D3DXMatrixTranslation(&tempRen.matrix, 0, 0, 1);
@@ -269,6 +271,7 @@ void Character::operator=(Character& in) {
 	resclickrate = in.resclickrate;
 	name = in.name;
 	resName = in.resName;
+	victory = in.victory;
 	for (int i = 0; i < NUM_STATUS; ++i) {
 		statusPic[i] = in.statusPic[i];
 	}
@@ -389,8 +392,35 @@ void Character::receiveItem(int index, Item &a_item) {
 }
 // end of receiveItem
 
-
-
-
-
+std::string Character::getVictory() {
+	std::regex matcher;
+	matcher = "%s";
+	char buffer[256];
+	std::string timeScale[] = {"seconds","minutes","hours","days","weeks","months","years"};
+	std::string locations[] = {"a cave","a swimming pool","an abandond building","a ditch","the GiantBomb office","a dingy basement","the Lang zone"};
+	std::string z;
+	std::vector<std::string> temp;
+	if(hp>0) {
+		return victory;
+	} else {
+		//lose template
+		z = "%s was found %s %s later in %s surrounded by %s";
+		//name
+		temp.push_back(name);
+		//time
+		sprintf(buffer,"%d",2+rand()%29);
+		temp.push_back(buffer);
+		//time scale
+		temp.push_back(timeScale[rand()%7]);
+		//location
+		temp.push_back(locations[rand()%7]);
+		//resource
+		sprintf(buffer,"%.0f %s",resource,resName.c_str());
+		temp.push_back(buffer);
+		for (int i = 0; i < temp.size(); ++i) {
+			z = std::regex_replace(z, matcher, temp[i], std::regex_constants::format_first_only);
+		}
+		return z;
+	}
+}
 

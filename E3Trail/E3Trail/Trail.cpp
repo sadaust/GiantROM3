@@ -93,8 +93,9 @@ void Trail::createEvents() {
 	tempevent.addEventEffect(TEvent::credits, -50);
 	tempevent.addEventEffect(TEvent::Hp, 50);
 	eventList.push_back(tempevent);
-
 	tempevent.reset();
+	//
+
 }
 
 void Trail::triggerEvent(int eventId) {
@@ -646,7 +647,7 @@ void Trail::setShopButtons(bool generate) {
 	rec.right = 1.0f;
 	sprintf(buffer, "%s", party[3].getItemName(1).c_str());
 	menu.addButton(item7, buffer, rec, DT_LEFT | DT_VCENTER, bColor, hColor);
-	
+
 
 
 	rec.left = 0.0f;
@@ -663,17 +664,18 @@ void Trail::startEndScreen() {
 	frect tempRec;
 	char buffer[256];
 	menu.clear();
-	tempRec.left = 0.25f;
-	tempRec.right = 0.75f;
+	speed = 0;
+	tempRec.left = 0.05f;
+	tempRec.right = 0.95f;
 	tempRec.top = 0.8f;
 	tempRec.bottom = 0.9f;
-	menu.addButton(gotoStartScreen, "Return to Main Menu", tempRec, DT_CENTER | DT_VCENTER, 0xFF0000FF, 0xFF00FF00);
+	menu.addButton(closeEvent, "Next", tempRec, DT_CENTER | DT_VCENTER, 0xFF0000FF, 0xFF00FF00);
 	tempRec.bottom = 0.7f;
 	tempRec.top = 0.2f;
 	eventBackground.image = 0;
 	eventText.rect = tempRec;
 	eventText.color = 0xFFFFFFFF;
-	eventText.flags = DT_LEFT | DT_VCENTER;
+	eventText.flags = DT_CENTER | DT_VCENTER;
 	if (aliveCount() > 0) {
 		eventText.text = "At least one person made it to E3";
 	}
@@ -687,7 +689,7 @@ bool Trail::update() {
 
 	if (running) {
 		menu.update();
-		menu.render();
+
 
 
 
@@ -699,17 +701,14 @@ bool Trail::update() {
 			return false;
 		}
 		//incrementor logic
-		if (aliveCount() == 0 || distToGo <= 0) {
-			startEndScreen();
-		}
+
 		if (tstate == trail){
-			
+
 			if (Engine::instance()->getBind("Enter City")) {
 				//swapItems(0, 0, 1, 0);
 				setCityButtons(true);
-				
 			}
-			
+
 
 
 			time += Engine::instance()->dt();
@@ -759,7 +758,11 @@ bool Trail::update() {
 				for (int i = 0; i < PARTYSIZE; ++i) {
 					party[i].resIncer();
 				}
+				if (aliveCount() == 0 || distToGo <= 0) {
+					startEndScreen();
+				}
 			}
+			
 		}
 		else if (tstate == itemswapscreen) {
 			int itemnumber = ITEMTARGETNOTCHOSEN;
@@ -1053,7 +1056,7 @@ bool Trail::update() {
 				if (Engine::instance()->getMessage("Item0") && credits >= shopitems[targetitems[0][0]].getCost()) {
 					resetColors();
 					party[0].receiveItem(0, shopitems[targetitems[0][0]]);
-					
+
 					credits -= shopitems[targetitems[0][0]].getCost();
 					setShopButtons(false);
 
@@ -1146,6 +1149,17 @@ bool Trail::update() {
 
 
 		}
+		else if (tstate == epilogue) {
+			if(Engine::instance()->getMessage("eventDone")) {
+				if(speed < 4) {
+					eventText.text = party[speed].getVictory();
+					++speed;
+				} else {
+					running = false;
+					return false;
+				}
+			}
+		}
 	}
 	return running;
 }
@@ -1233,7 +1247,7 @@ void Trail::render() {
 				party[i].Draw(i);
 			}
 		}
-		else if (tstate == eventscreen) { // actually probably an event
+		else if (tstate == eventscreen ||tstate == epilogue) { // actually probably an event
 			tempRen.type = screenSprite;
 			if (eventBackground.image) {
 				tempRen.asset = &eventBackground;
@@ -1244,6 +1258,7 @@ void Trail::render() {
 			tempRen.asset = &eventText;
 			Engine::instance()->addRender(tempRen);
 		}
+		menu.render();
 	}
 }
 
