@@ -6,6 +6,7 @@
 #define NUM_ITEMS 2
 #define NUM_STATUS 6
 #define STATUS_PIC_SCALE .18f
+#define CHAR_SELECT_SCALE .45f
 
 class Character {
 private:
@@ -26,6 +27,7 @@ private:
 public:
 	void init(std::string a_name, std::string resourceName);
 	void Draw(int index);
+	void DrawSelect(int index); // charselect
 	int getHP();
 	int getMaxHP();
 	int getStrength();

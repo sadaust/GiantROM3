@@ -20,6 +20,38 @@ void clicker3() {
 void itemswap() {
 	Engine::instance()->postMessage("ItemSwap");
 }
+// Char select
+void char0() {
+	Engine::instance()->postMessage("Char0");
+}
+void char1() {
+	Engine::instance()->postMessage("Char1");
+}
+void char2() {
+	Engine::instance()->postMessage("Char2");
+}
+void char3() {
+	Engine::instance()->postMessage("Char3");
+}
+void char4() {
+	Engine::instance()->postMessage("Char4");
+}
+void char5() {
+	Engine::instance()->postMessage("Char5");
+}
+void char6() {
+	Engine::instance()->postMessage("Char6");
+}
+void char7() {
+	Engine::instance()->postMessage("Char7");
+}
+void char8() {
+	Engine::instance()->postMessage("Char8");
+}
+void char9() {
+	Engine::instance()->postMessage("Char9");
+}
+// end of char select
 // Item swap buttons
 void item0() {
 	Engine::instance()->postMessage("Item0");
@@ -93,6 +125,7 @@ void Trail::createEvents() {
 	tempevent.addEventEffect(TEvent::credits, -50);
 	tempevent.addEventEffect(TEvent::Hp, 50);
 	eventList.push_back(tempevent);
+
 	tempevent.reset();
 	//
 
@@ -264,40 +297,47 @@ Trail::Trail() {
 	// end of testing item swapping
 
 	// setting up shop item text rects
-	tempRec.top = 0.15f;
-	tempRec.bottom = 0.6f;
-	tempRec.left = 0.0f;
-	tempRec.right = tempRec.left + 0.2f;
-	partyText[0][3].rect = tempRec;
-	partyText[0][3].color = 0xFFFFFFFF;
-	partyText[0][3].flags = DT_CENTER | DT_BOTTOM;
-	partyText[0][3].text = "ERROR";
+	for (int i = 0; i < NUMSHOPITEMS; ++i) {
+		tempRec.top = 0.1f;
+		tempRec.bottom = 0.6f;
+		tempRec.left = (0.2f*i);
+		tempRec.right = tempRec.left + 0.2f;
+		partyText[i][3].rect = tempRec;
+		partyText[i][3].color = 0xFFFFFFFF;
+		partyText[i][3].flags = DT_CENTER | DT_BOTTOM;
+		partyText[i][3].text = "ERROR";
 
+	}// end of item text rects
+
+	tempRec.top = 0.0f;
+	tempRec.bottom = 0.05f;
 	tempRec.left = 0.2f;
-	tempRec.right = tempRec.left + 0.2f;
-	partyText[1][3].rect = tempRec;
-	partyText[1][3].color = 0xFFFFFFFF;
-	partyText[1][3].flags = DT_CENTER | DT_BOTTOM;
-	partyText[1][3].text = "ERROR";
+	tempRec.right = 0.8f;
+	selectText.rect = tempRec;
+	selectText.color = 0xFFFFFFFF;
+	selectText.flags = DT_CENTER | DT_BOTTOM;
+	selectText.text = "ERROR";
 
-	tempRec.left = 0.4f;
-	tempRec.right = tempRec.left + 0.2f;
-	partyText[2][3].rect = tempRec;
-	partyText[2][3].color = 0xFFFFFFFF;
-	partyText[2][3].flags = DT_CENTER | DT_BOTTOM;
-	partyText[2][3].text = "ERROR";
 
-	tempRec.left = 0.6f;
-	tempRec.right = tempRec.left + 0.2f;
-	partyText[3][3].rect = tempRec;
-	partyText[3][3].color = 0xFFFFFFFF;
-	partyText[3][3].flags = DT_CENTER | DT_BOTTOM;
-	partyText[3][3].text = "ERROR";
-	// end of item text rects
+
 
 }
 
-void Trail::init(bool west, Character& p1, Character& p2, Character& p3, Character& p4) {
+
+void Trail::init(bool west) {
+	allcharacters[0].init("Dan", "Amiibos");
+	allcharacters[1].init("Brad", "Dota hats");
+	allcharacters[2].init("Rorie", "Puppies");
+	allcharacters[3].init("Austin", "Gunpla");
+	allcharacters[4].init("Alex", "Big Rigs");
+	allcharacters[5].init("Drew", "Soviet Monsters");
+	allcharacters[6].init("Jason", "Plushies");
+	allcharacters[7].init("Jeff", "Sneak King Copies");
+	allcharacters[8].init("Patrick", "YT Subscribers");
+	allcharacters[9].init("Vinny", "Dragon Balls");
+	
+	
+	
 	menu.init();
 	pause = false;
 	if (west) {
@@ -343,28 +383,23 @@ void Trail::init(bool west, Character& p1, Character& p2, Character& p3, Charact
 	fuel = 150;
 	speed = 10;
 	distToGo = startDist;
-	party[0] = p1;
-	party[1] = p2;
-	party[2] = p3;
-	party[3] = p4;
+	//party[0] = p1;
+	//party[1] = p2;
+	//party[2] = p3;
+	//party[3] = p4;
 	running = true;
 
-	setTrailButtons();
+	setCharSelectButtons();
 	setItems();
 	for (int i = 0; i < NUMSHOPITEMS; ++i) {
 		shopitems[i].Clear();
+		itemsBought[i] = false;
 	}
 
-	tstate = trail;
-}
+	for (int i = 0; i < PARTYSIZE; ++i)
+		partychoices[i] = ITEMTARGETNOTCHOSEN;
 
-void Trail::init(bool west) {
-	Character temp[PARTYSIZE];
-	temp[0].init("Dan", "Amiibo");
-	temp[1].init("Brad", "Dota hats");
-	temp[2].init("Rorie", "Puppies");
-	temp[3].init("Austin", "Gunpla");
-	init(west, temp[0], temp[1], temp[2], temp[3]);
+	tstate = charselect;
 }
 
 int Trail::aliveCount() {
@@ -375,6 +410,81 @@ int Trail::aliveCount() {
 	return count;
 }
 
+
+void Trail::setCharSelectButtons() {
+	frect rec;
+	char buffer[256];
+	menu.clear();
+
+
+
+	rec.bottom = 0.5f;
+	rec.top = 0.1f;
+	rec.left = 0.0f;
+	rec.right = 0.2f;
+	sprintf(buffer, "%s", allcharacters[0].getName().c_str());
+	menu.addButton(char0, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+	rec.left = 0.2f;
+	rec.right = 0.4f;
+	sprintf(buffer, "%s", allcharacters[1].getName().c_str());
+	menu.addButton(char1, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.left = 0.4f;
+	rec.right = 0.6f;
+	sprintf(buffer, "%s", allcharacters[2].getName().c_str());
+	menu.addButton(char2, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.left = 0.6f;
+	rec.right = 0.8f;
+	sprintf(buffer, "%s", allcharacters[3].getName().c_str());
+	menu.addButton(char3, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.left = 0.8f;
+	rec.right = 1.0f;
+	sprintf(buffer, "%s", allcharacters[4].getName().c_str());
+	menu.addButton(char4, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.bottom = 0.9f;
+	rec.top = 0.5f;
+	rec.left = 0.0f;
+	rec.right = 0.2f;
+	sprintf(buffer, "%s", allcharacters[5].getName().c_str());
+	menu.addButton(char5, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+	rec.left = 0.2f;
+	rec.right = 0.4f;
+	sprintf(buffer, "%s", allcharacters[6].getName().c_str());
+	menu.addButton(char6, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.left = 0.4f;
+	rec.right = 0.6f;
+	sprintf(buffer, "%s", allcharacters[7].getName().c_str());
+	menu.addButton(char7, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.left = 0.6f;
+	rec.right = 0.8f;
+	sprintf(buffer, "%s", allcharacters[8].getName().c_str());
+	menu.addButton(char8, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+	rec.left = 0.8f;
+	rec.right = 1.0f;
+	sprintf(buffer, "%s", allcharacters[9].getName().c_str());
+	menu.addButton(char9, buffer, rec, DT_CENTER | DT_TOP, bColor, hColor);
+
+
+
+
+}
+
+
 void Trail::setTrailButtons() {
 	frect rec;
 	char buffer[256];
@@ -384,25 +494,47 @@ void Trail::setTrailButtons() {
 	rec.top = 0.65f;
 	menu.clear();
 	//party[0] incer
-	rec.left = 0.0f;
-	rec.right = 0.25f;
-	sprintf(buffer, "Produce %s", party[0].getResName().c_str());
-	menu.addButton(clicker0, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
-	//party[1] incer
-	rec.left = 0.25f;
-	rec.right = 0.5f;
-	sprintf(buffer, "Produce %s", party[1].getResName().c_str());
-	menu.addButton(clicker1, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
-	//party[2] incer
-	rec.left = 0.5f;
-	rec.right = 0.75f;
-	sprintf(buffer, "Produce %s", party[2].getResName().c_str());
-	menu.addButton(clicker2, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
-	//party[3] incer
-	rec.left = 0.75f;
-	rec.right = 1.0f;
-	sprintf(buffer, "Produce %s", party[3].getResName().c_str());
-	menu.addButton(clicker3, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	
+	std::string tempstr;
+	for (int i = 0; i < PARTYSIZE; ++i) {
+		rec.left = 0.25f*i;
+		rec.right = rec.left + 0.25f;
+		tempstr = party[i].getName();
+		if (tempstr == "Dan" || tempstr == "Brad") // you buy amiibos and dota hats
+			sprintf(buffer, "Buy %s", party[i].getResName().c_str());
+		else if (tempstr == "Rorie") // you chomp puppies
+			sprintf(buffer, "Chomp %s", party[i].getResName().c_str());
+		else if (tempstr == "Austin") // you build gunpla
+			sprintf(buffer, "Build %s", party[i].getResName().c_str());
+		else if (tempstr == "Alex" || tempstr == "Drew") // you construct big rigs and soviet monsters
+			sprintf(buffer, "Construct %s", party[i].getResName().c_str());
+		else if (tempstr == "Jason") // you sew plushies
+			sprintf(buffer, "Sew %s", party[i].getResName().c_str());
+		else if (tempstr == "Jeff") // you get sneak king copies (would prefer "Get sent" or "Recieve") but that's pretty long
+			sprintf(buffer, "Get %s", party[i].getResName().c_str());
+		else if (tempstr == "Patrick") // you garner youtube subscribers
+			sprintf(buffer, "Garner %s", party[i].getResName().c_str());
+		else if (tempstr == "Vinny") // you find dragon balls
+			sprintf(buffer, "Find %s", party[i].getResName().c_str());
+
+
+
+		if (i == 0)
+			menu.addButton(clicker0, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+		else if (i == 1)
+			menu.addButton(clicker1, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+		else if (i == 2)
+			menu.addButton(clicker2, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+		else if (i == 3)
+			menu.addButton(clicker3, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	}
+
+
+
+
+
+
+
 
 
 	// swap items button
@@ -504,6 +636,10 @@ void Trail::setCityButtons(bool generate) {
 	if (generate) {
 		fuelCost = BASEFUELCOST + (rand() % RANGEFUELCOST);
 		foodCost = BASEFOODCOST + (rand() % RANGEFOODCOST);
+
+		for (int i = 0; i < NUMSHOPITEMS; ++i) {
+			resourceCost[i] = BASETRADECOST + (rand() % RANGETRADECOST);
+		}
 	}
 	pause = true;
 	menu.clear();
@@ -534,6 +670,29 @@ void Trail::setCityButtons(bool generate) {
 	tempRec.bottom = 0.33f;
 	eventText.rect = tempRec;
 
+	tempRec.bottom = 0.7f;
+	tempRec.top = 0.60f;
+	//party[0] incer
+	tempRec.left = 0.0f;
+	tempRec.right = 0.25f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[0], party[0].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker0, buffer, tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	//party[1] incer
+	tempRec.left = 0.25f;
+	tempRec.right = 0.5f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[1], party[1].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker1, buffer, tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	//party[2] incer
+	tempRec.left = 0.5f;
+	tempRec.right = 0.75f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[2], party[2].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker2, buffer, tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	//party[3] incer
+	tempRec.left = 0.75f;
+	tempRec.right = 1.0f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[3], party[3].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker3, buffer, tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
+
 
 
 	tstate = cityscreen;
@@ -545,7 +704,9 @@ void Trail::setShopButtons(bool generate) {
 		for (int i = 0; i < NUMSHOPITEMS; ++i) {
 			shopitems[i].Clear();
 			shopitems[i] = itemList[rand() % itemList.size()];
+			itemsBought[i] = false;
 		}
+
 
 
 	}
@@ -555,33 +716,36 @@ void Trail::setShopButtons(bool generate) {
 	frect rec;
 	menu.clear();
 
-
-
-
-	rec.left = 0.0f;
-	rec.right = rec.left + 0.2f;
 	rec.top = 0.2f;
 	rec.bottom = 0.3f;
-	sprintf(buffer, "%s", shopitems[0].getName().c_str());
-	menu.addButton(shop0, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
 
+	if (!itemsBought[0]) {
+		rec.left = 0.0f;
+		rec.right = rec.left + 0.2f;
+		sprintf(buffer, "%s", shopitems[0].getName().c_str());
+		menu.addButton(shop0, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	}
 
-	rec.left = 0.2f;
-	rec.right = rec.left + 0.2f;
-	sprintf(buffer, "%s", shopitems[1].getName().c_str());
-	menu.addButton(shop1, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	if (!itemsBought[1]) {
+		rec.left = 0.2f;
+		rec.right = rec.left + 0.2f;
+		sprintf(buffer, "%s", shopitems[1].getName().c_str());
+		menu.addButton(shop1, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	}
 
+	if (!itemsBought[2]) {
+		rec.left = 0.4f;
+		rec.right = rec.left + 0.2f;
+		sprintf(buffer, "%s", shopitems[2].getName().c_str());
+		menu.addButton(shop2, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	}
 
-	rec.left = 0.4f;
-	rec.right = rec.left + 0.2f;
-	sprintf(buffer, "%s", shopitems[2].getName().c_str());
-	menu.addButton(shop2, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
-
-
-	rec.left = 0.6f;
-	rec.right = rec.left + 0.2f;
-	sprintf(buffer, "%s", shopitems[3].getName().c_str());
-	menu.addButton(shop3, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	if (!itemsBought[3]) {
+		rec.left = 0.6f;
+		rec.right = rec.left + 0.2f;
+		sprintf(buffer, "%s", shopitems[3].getName().c_str());
+		menu.addButton(shop3, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	}
 
 
 	rec.bottom = 0.78f;
@@ -650,6 +814,29 @@ void Trail::setShopButtons(bool generate) {
 
 
 
+	rec.bottom = 0.7f;
+	rec.top = 0.60f;
+	//party[0] incer
+	rec.left = 0.0f;
+	rec.right = 0.25f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[0], party[0].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker0, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	//party[1] incer
+	rec.left = 0.25f;
+	rec.right = 0.5f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[1], party[1].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker1, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	//party[2] incer
+	rec.left = 0.5f;
+	rec.right = 0.75f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[2], party[2].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker2, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+	//party[3] incer
+	rec.left = 0.75f;
+	rec.right = 1.0f;
+	sprintf(buffer, "Trade %d %s\nfor %d credits", resourceCost[3], party[3].getResName().c_str(), TRADEAMOUNT);
+	menu.addButton(clicker3, buffer, rec, DT_CENTER | DT_VCENTER, bColor, hColor);
+
 	rec.left = 0.0f;
 	rec.right = 0.25f;
 	rec.top = 0.05f;
@@ -667,6 +854,7 @@ void Trail::startEndScreen() {
 	speed = 0;
 	tempRec.left = 0.05f;
 	tempRec.right = 0.95f;
+
 	tempRec.top = 0.8f;
 	tempRec.bottom = 0.9f;
 	menu.addButton(closeEvent, "Next", tempRec, DT_CENTER | DT_VCENTER, 0xFF0000FF, 0xFF00FF00);
@@ -676,6 +864,7 @@ void Trail::startEndScreen() {
 	eventText.rect = tempRec;
 	eventText.color = 0xFFFFFFFF;
 	eventText.flags = DT_CENTER | DT_VCENTER;
+
 	if (aliveCount() > 0) {
 		eventText.text = "At least one person made it to E3";
 	}
@@ -694,19 +883,18 @@ bool Trail::update() {
 
 
 
-
 		//return to main menu
 		if (Engine::instance()->getBind("Back") || Engine::instance()->getMessage("gotoMM")) {
 			running = false;
 			return false;
 		}
-		//incrementor logic
 
 		if (tstate == trail){
 
 			if (Engine::instance()->getBind("Enter City")) {
 				//swapItems(0, 0, 1, 0);
 				setCityButtons(true);
+
 			}
 
 
@@ -761,8 +949,8 @@ bool Trail::update() {
 				if (aliveCount() == 0 || distToGo <= 0) {
 					startEndScreen();
 				}
+
 			}
-			
 		}
 		else if (tstate == itemswapscreen) {
 			int itemnumber = ITEMTARGETNOTCHOSEN;
@@ -995,8 +1183,35 @@ bool Trail::update() {
 				setShopButtons(true);
 
 			}
+
+			if (Engine::instance()->getMessage("Incer0")) {
+				if (party[0].getResource() >= resourceCost[0]) {
+					party[0].modResource(-resourceCost[0]);
+					credits += TRADEAMOUNT;
+				}
+
+			}
+			else if (Engine::instance()->getMessage("Incer1")) {
+				if (party[1].getResource() >= resourceCost[1]) {
+					party[1].modResource(-resourceCost[1]);
+					credits += TRADEAMOUNT;
+				}
+			}
+			else if (Engine::instance()->getMessage("Incer2")) {
+				if (party[2].getResource() >= resourceCost[2]) {
+					party[2].modResource(-resourceCost[2]);
+					credits += TRADEAMOUNT;
+				}
+			}
+			else if (Engine::instance()->getMessage("Incer3")) {
+				if (party[3].getResource() >= resourceCost[3]) {
+					party[3].modResource(-resourceCost[3]);
+					credits += TRADEAMOUNT;
+				}
+			}
 		}
 		else if (tstate == shopscreen) {
+			int shoptemp = 0;
 			if (Engine::instance()->getMessage("buyItems")) {
 				setCityButtons(false);
 				targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1023,9 +1238,12 @@ bool Trail::update() {
 					menu.ChangeColorJanky(1, bColor, hColor);
 				}
 				else {
+					shoptemp = 0;
+					if (itemsBought[0])
+						++shoptemp;
 					targetitems[0][0] = 1;
 					resetColors();
-					menu.ChangeColorJanky(1, cColor, hColor);
+					menu.ChangeColorJanky(1 - shoptemp, cColor, hColor);
 				}
 			}
 			else if (Engine::instance()->getMessage("Shop2")) {
@@ -1035,9 +1253,14 @@ bool Trail::update() {
 					menu.ChangeColorJanky(2, bColor, hColor);
 				}
 				else {
+					shoptemp = 0;
+					for (int i = 0; i < 2; ++i) {
+						if (itemsBought[i])
+							++shoptemp;
+					}
 					targetitems[0][0] = 2;
 					resetColors();
-					menu.ChangeColorJanky(2, cColor, hColor);
+					menu.ChangeColorJanky(2 - shoptemp, cColor, hColor);
 				}
 			}
 			else if (Engine::instance()->getMessage("Shop3")) {
@@ -1047,9 +1270,14 @@ bool Trail::update() {
 					menu.ChangeColorJanky(3, bColor, hColor);
 				}
 				else {
+					shoptemp = 0;
+					for (int i = 0; i < 3; ++i) {
+						if (itemsBought[i])
+							++shoptemp;
+					}
 					targetitems[0][0] = 3;
 					resetColors();
-					menu.ChangeColorJanky(3, cColor, hColor);
+					menu.ChangeColorJanky(3 - shoptemp, cColor, hColor);
 				}
 			}
 			if (targetitems[0][0] >= 0) {
@@ -1058,6 +1286,8 @@ bool Trail::update() {
 					party[0].receiveItem(0, shopitems[targetitems[0][0]]);
 
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
+
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1070,7 +1300,9 @@ bool Trail::update() {
 					resetColors();
 					party[0].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
+
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1081,6 +1313,7 @@ bool Trail::update() {
 					resetColors();
 					party[1].receiveItem(0, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1092,6 +1325,7 @@ bool Trail::update() {
 					resetColors();
 					party[1].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1103,6 +1337,7 @@ bool Trail::update() {
 					resetColors();
 					party[2].receiveItem(0, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1114,6 +1349,7 @@ bool Trail::update() {
 					resetColors();
 					party[2].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1125,6 +1361,7 @@ bool Trail::update() {
 					resetColors();
 					party[3].receiveItem(0, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1136,6 +1373,7 @@ bool Trail::update() {
 					resetColors();
 					party[3].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
+					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(false);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1145,21 +1383,276 @@ bool Trail::update() {
 				}
 
 			}
+			// end of clicking on an item slot with a shop item selected
+			// TO DO: empty slot misclick stuff
+
+			if (Engine::instance()->getMessage("Incer0")) {
+				if (party[0].getResource() >= resourceCost[0]) {
+					party[0].modResource(-resourceCost[0]);
+					credits += TRADEAMOUNT;
+				}
+
+			}
+			else if (Engine::instance()->getMessage("Incer1")) {
+				if (party[1].getResource() >= resourceCost[1]) {
+					party[1].modResource(-resourceCost[1]);
+					credits += TRADEAMOUNT;
+				}
+			}
+			else if (Engine::instance()->getMessage("Incer2")) {
+				if (party[2].getResource() >= resourceCost[2]) {
+					party[2].modResource(-resourceCost[2]);
+					credits += TRADEAMOUNT;
+				}
+			}
+			else if (Engine::instance()->getMessage("Incer3")) {
+				if (party[3].getResource() >= resourceCost[3]) {
+					party[3].modResource(-resourceCost[3]);
+					credits += TRADEAMOUNT;
+				}
+			}
+
+
+
+		}
+		else if (tstate == charselect) {
+			bool temp = false;
+			if (Engine::instance()->getMessage("Char0")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 0) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(0, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) { // if partychoices[i] isn't chosen,
+							partychoices[i] = 0; // choose it
+							menu.ChangeColorJanky(0, cColor, hColor); // recolor the button
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char1")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 1) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(1, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 1;
+							menu.ChangeColorJanky(1, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char2")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 2) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(2, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 2;
+							menu.ChangeColorJanky(2, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char3")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 3) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(3, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 3;
+							menu.ChangeColorJanky(3, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char4")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 4) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(4, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 4;
+							menu.ChangeColorJanky(4, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char5")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 5) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(5, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 5;
+							menu.ChangeColorJanky(5, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char6")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 6) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(6, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 6;
+							menu.ChangeColorJanky(6, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char7")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 7) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(7, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 7;
+							menu.ChangeColorJanky(7, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char8")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 8) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(8, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 8;
+							menu.ChangeColorJanky(8, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+			else if (Engine::instance()->getMessage("Char9")) {
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					if (partychoices[i] == 9) {
+						partychoices[i] = ITEMTARGETNOTCHOSEN;
+						menu.ChangeColorJanky(9, bColor, hColor);
+						temp = true;
+					}
+				}
+				if (!temp) { // if you didn't just reverse one of your choices
+					// temp is still false, so we're going to use it for this for loop
+					for (int i = 0; i < PARTYSIZE && !temp; ++i) {
+						if (partychoices[i] == ITEMTARGETNOTCHOSEN) {
+							partychoices[i] = 9;
+							menu.ChangeColorJanky(9, cColor, hColor);
+							temp = true;
+
+						}
+					}
+				}
+			}
+
+
+			// now we check if all 4 are chosen
+			if (partychoices[0] >= 0 && partychoices[1] >= 0 && partychoices[2] >= 0 && partychoices[3] >= 0) {
+				resetColors();
+				for (int i = 0; i < PARTYSIZE; ++i) {
+					party[i] = allcharacters[partychoices[i]]; // CHOOSE DAT CHARACTER
+
+					partychoices[i] = ITEMTARGETNOTCHOSEN; // reset for next time
+				}
+				setTrailButtons();
+				tstate = trail;
+			}
+
+
+
+
+
+
 
 
 
 		}
 		else if (tstate == epilogue) {
-			if(Engine::instance()->getMessage("eventDone")) {
-				if(speed < 4) {
+			if (Engine::instance()->getMessage("eventDone")) {
+				if (speed < 4) {
 					eventText.text = party[speed].getVictory();
 					++speed;
-				} else {
+				}
+				else {
 					running = false;
 					return false;
 				}
 			}
 		}
+
 	}
 	return running;
 }
@@ -1236,10 +1729,12 @@ void Trail::render() {
 
 			if (tstate == shopscreen) {
 				for (int i = 0; i < NUMSHOPITEMS; ++i) {
-					sprintf(buffer, "Str: %.0f\nAgi: %.0f\nInt: %.0f\nHP: %.0f\n%s prod.: %.0f\n%s / click: %.0f", shopitems[i].getValue(STRENGTH), shopitems[i].getValue(AGILITY), shopitems[i].getValue(INTELLIGENCE), shopitems[i].getValue(HP), party[i].getResName().c_str(), shopitems[i].getValue(RESRATE), party[i].getResName().c_str(), shopitems[i].getValue(RESCLICK));
-					partyText[i][3].text = buffer;
-					tempRen.asset = &partyText[i][3];
-					Engine::instance()->addRender(tempRen);
+					if (!itemsBought[i]) {
+						sprintf(buffer, "Cost: %d\nStr: %.0f\nAgi: %.0f\nInt: %.0f\nHP: %.0f\nRes Prod.: %.0f\nRes/Click: %.0f", shopitems[i].getCost(), shopitems[i].getValue(STRENGTH), shopitems[i].getValue(AGILITY), shopitems[i].getValue(INTELLIGENCE), shopitems[i].getValue(HP), party[i].getResName().c_str(), shopitems[i].getValue(RESRATE), party[i].getResName().c_str(), shopitems[i].getValue(RESCLICK));
+						partyText[i][3].text = buffer;
+						tempRen.asset = &partyText[i][3];
+						Engine::instance()->addRender(tempRen);
+					}
 				}
 			}
 
@@ -1247,7 +1742,17 @@ void Trail::render() {
 				party[i].Draw(i);
 			}
 		}
-		else if (tstate == eventscreen ||tstate == epilogue) { // actually probably an event
+		else if (tstate == charselect) {
+			sprintf(buffer, "Choose your four party members");
+			selectText.text = buffer;
+			tempRen.type = text;
+			tempRen.asset = &selectText;
+			Engine::instance()->addRender(tempRen);
+			for (int i = 0; i < NUMCHARACTERS; ++i) {
+				allcharacters[i].DrawSelect(i);
+			}
+		}
+		else if (tstate == eventscreen || tstate == epilogue) { // actually probably an event
 			tempRen.type = screenSprite;
 			if (eventBackground.image) {
 				tempRen.asset = &eventBackground;

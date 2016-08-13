@@ -7,16 +7,32 @@
 
 
 #define PARTYSIZE 4
+
 #define NUMRESORCES 6
+
 #define MAXLOCEVENT 100
+
 #define SPEEDINCRMULTIPLIER .025 
+
 #define ITEMTARGETNOTCHOSEN -1
+
 #define BASEFUELCOST 10
+
 #define RANGEFUELCOST 41
+
 #define BASEFOODCOST 10
+
 #define RANGEFOODCOST 21
+
+#define BASETRADECOST 1
+
+#define RANGETRADECOST 7
+
+#define TRADEAMOUNT 50
+
 #define NUMSHOPITEMS 4
 
+#define NUMCHARACTERS 10
 
 
 
@@ -57,7 +73,11 @@ private:
 	std::string cityname;
 	std::vector <Item> itemList;
 	Item shopitems[NUMSHOPITEMS];
-
+	bool itemsBought[NUMSHOPITEMS];
+	textStruct selectText;
+	int partychoices[PARTYSIZE];
+	
+	
 	void createEvents();
 	void triggerEvent(int eventId);
 	std::vector<TrailEvent> eventList;
@@ -81,10 +101,12 @@ private:
 	locEvent events[MAXLOCEVENT];
 	int locEventCount;
 	Character party[PARTYSIZE];
+	Character allcharacters[NUMCHARACTERS];
 	textStruct partyText[PARTYSIZE][4];
 	textStruct renstats[NUMRESORCES];
 	textStruct eventText;
 	textStruct cityText;
+	
 	spriteStruct eventBackground;
 	float mapScaleX, mapScaleY;
 	spriteStruct map;
@@ -94,9 +116,9 @@ private:
 	//city store stuff
 	int fuelCost;
 	int foodCost;
+	int resourceCost[PARTYSIZE];
 public:
 	Trail();
-	void init(bool west, Character& p1, Character& p2, Character& p3 , Character& p4);
 	void init(bool west);
 	int aliveCount();
 	bool update();
@@ -106,6 +128,7 @@ public:
 	void startEndScreen();
 	void setCityButtons(bool generate);
 	void setShopButtons(bool generate);
+	void setCharSelectButtons();
 	void setItems();
 	void swapItems(int c1,int s1,int c2,int s2);
 	void resetColors();
