@@ -57,6 +57,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("bradevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Brad would go on to did a thing";
 	}
 	else if (name == "Dan") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("dan000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -82,6 +83,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("danevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Dan would go on to create the cult of Waluigi, a group dedicated to wrestling and Waluigi";
 	}
 	else if (name == "Rorie") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("rorie000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -107,6 +109,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("rorieevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Rorie would go on to do a thing";
 	}
 	else if (name == "Austin") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("austin000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -132,6 +135,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("austinevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Austin would go on to do a thing";
 	}
 	else if (name == "Alex") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("alex000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -157,6 +161,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("alexevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Alex would go on to do a thing";
 	}
 	else if (name == "Drew") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("drew000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -182,6 +187,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("drewevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Drew would go on to do a thing";
 	}
 	else if (name == "Jason") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("jason000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -207,6 +213,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("jasonevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Jason would go on to do a thing";
 	}
 	else if (name == "Jeff") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("jeff000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -232,6 +239,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("jeffevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Jeff went on to create the largest collection of Gal Gun";
 	}
 	else if (name == "Patrick") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("patrick000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -257,6 +265,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("patrickevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Patrick went on to do a thing";
 	}
 	else if (name == "Vinny") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("vinny000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -282,6 +291,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("vinnyevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
+		victory = "Vinny would go on to do a thing";
 	}
 
 

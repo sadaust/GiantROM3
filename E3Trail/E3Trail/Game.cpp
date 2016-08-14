@@ -103,7 +103,7 @@ void Game::buildMenu(bool credits) {
 		temp.top = 0.4;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(noFunc, "For the Giant Rom 3 game jam\non 8/14/2016", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
+		mainMenu.addButton(noFunc, "For the Giant Rom 3 game jam\n8/6/2016-8/14/2016", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
 
 		temp.top = 0.5;
 		temp.bottom = temp.top + 0.2;

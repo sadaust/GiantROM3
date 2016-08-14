@@ -1068,13 +1068,13 @@ void Trail::startEndScreen() {
 	eventBackground.image = 0;
 	eventText.rect = tempRec;
 	eventText.color = 0xFFFFFFFF;
-	eventText.flags = DT_CENTER | DT_VCENTER;
+	eventText.flags = DT_CENTER | DT_VCENTER | DT_WORDBREAK;
 
 	if (aliveCount() > 0) {
-		eventText.text = "At least one person made it to E3";
+		eventText.text = "The Giant Bomb crew use the items they collected to remove the mega coperations control over entertainment";
 	}
 	else {
-		eventText.text = "No one made it to E3";
+		eventText.text = "The Giant Bomb crew got lost on the way to E3";
 	}
 	tstate = epilogue;
 }
@@ -2002,7 +2002,7 @@ void Trail::render() {
 				tempRen.asset = &eventBackground;
 				Engine::instance()->addRender(tempRen);
 			}
-			D3DXMatrixIdentity(&tempRen.matrix);
+			//D3DXMatrixIdentity(&tempRen.matrix);
 			tempRen.type = text;
 			tempRen.asset = &eventText;
 			Engine::instance()->addRender(tempRen);
