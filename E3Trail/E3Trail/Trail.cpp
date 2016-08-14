@@ -184,6 +184,7 @@ void buyItems() {
 
 void Trail::createEvents() {
 	TrailEvent tempevent;
+	eventList.clear();
 	tempevent.reset();
 	//taco bell
 	tempevent.setText("%s found a tacobell and spent %s credits to buy a taco healing them by %s");
@@ -210,35 +211,39 @@ void Trail::triggerEvent() {
 		push = true;
 		switch (eventList[eventId].getEffect(i).targ) {
 		case TEvent::str:
-			if(targChar >= 0 && targChar < 4) {
-				if(party[targChar].getStrength()<eventList[eventId].getEffect(i).value) {
+			if (targChar >= 0 && targChar < 4) {
+				if (party[targChar].getStrength()<eventList[eventId].getEffect(i).value) {
 					good = false;
-				} else {
+				}
+				else {
 					good = true;
 				}
 			}
 			push = false;
 			break;
 		case TEvent::agi:
-			if(targChar >= 0 && targChar < 4) {
-				if(party[targChar].getAgility()<eventList[eventId].getEffect(i).value) {
+			if (targChar >= 0 && targChar < 4) {
+				if (party[targChar].getAgility()<eventList[eventId].getEffect(i).value) {
 					good = false;
-				} else {
+				}
+				else {
 					good = true;
 				}
 			}
 			push = false;
 			break;
 		case TEvent::intel:
-			if(targChar >= 0 && targChar < 4) {
-				if(party[targChar].getIntelligence()<eventList[eventId].getEffect(i).value) {
+			if (targChar >= 0 && targChar < 4) {
+				if (party[targChar].getIntelligence()<eventList[eventId].getEffect(i).value) {
 					good = false;
-				} else {
+				}
+				else {
 					good = true;
 				}
 			}
 			push = false;
 			break;
+
 		case TEvent::ranParty:
 			targChar = rand() % 4;
 			sprintf(buffer, "%s", party[targChar].getName().c_str());
@@ -261,44 +266,46 @@ void Trail::triggerEvent() {
 			break;
 		case TEvent::Hp:
 			if (targChar >= 0) {
-				party[targChar].modHp(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal);
+				party[targChar].modHp(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal);
 
 			}
-			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+
 			break;
 		case TEvent::Res:
 			if (targChar >= 0)
-				party[targChar].modResource(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal);
-			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
+				party[targChar].modResource(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal);
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+
 			break;
 		case TEvent::randResource:
 			switch (rand() % 3) {
 			case 0:
-				credits += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
+				credits += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
 				break;
 			case 1:
-				fuel += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
+				fuel += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
 				break;
 			case 2:
-				food += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
+				food += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
 				break;
 			}
-			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::credits:
-			credits += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
+			credits += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::fuel:
-			fuel += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
+			fuel += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::food:
-			food += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
+			food += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		}
-		if(push)
+		if (push)
 			temp.push_back(buffer);
 	}
 	std::regex matcher;
@@ -739,7 +746,7 @@ void Trail::setCityButtons(bool generate) {
 
 	char buffer[256];
 	frect tempRec;
-
+	
 	if (generate) {
 		fuelCost = BASEFUELCOST + (rand() % RANGEFUELCOST);
 		foodCost = BASEFOODCOST + (rand() % RANGEFOODCOST);
@@ -1866,7 +1873,7 @@ void Trail::render() {
 			if (tstate == shopscreen) {
 				for (int i = 0; i < NUMSHOPITEMS; ++i) {
 					if (!itemsBought[i]) {
-						sprintf(buffer, "Cost: %d\nStr: %.0f\nAgi: %.0f\nInt: %.0f\nHP: %.0f\nRes Prod.: %.0f\nRes/Click: %.0f", shopitems[i].getCost(), shopitems[i].getValue(STRENGTH), shopitems[i].getValue(AGILITY), shopitems[i].getValue(INTELLIGENCE), shopitems[i].getValue(HP), party[i].getResName().c_str(), shopitems[i].getValue(RESRATE), party[i].getResName().c_str(), shopitems[i].getValue(RESCLICK));
+						sprintf(buffer, "Cost: %d\nStr: %.0f\nAgi: %.0f\nInt: %.0f\nHP: %.0f\nRes Prod.: %.2f\nRes/Click: %.0f", shopitems[i].getCost(), shopitems[i].getValue(STRENGTH), shopitems[i].getValue(AGILITY), shopitems[i].getValue(INTELLIGENCE), shopitems[i].getValue(HP), shopitems[i].getValue(RESRATE), shopitems[i].getValue(RESCLICK));
 						partyText[i][3].text = buffer;
 						tempRen.asset = &partyText[i][3];
 						Engine::instance()->addRender(tempRen);
@@ -1914,16 +1921,191 @@ void Trail::setItems() {
 	tempitem.setValue(HP, -30);
 	tempitem.setCost(150);
 	itemList.push_back(tempitem);
-	itemList.push_back(tempitem);
-	itemList.push_back(tempitem);
+	
 	tempitem.Clear();
 	tempitem.setName("Spaghetti Can");
 	tempitem.setValue(AGILITY, 20);
 	tempitem.setValue(STRENGTH, 20);
 	tempitem.setCost(100);
 	itemList.push_back(tempitem);
+	
+	tempitem.Clear();
+	tempitem.setName("Iron Branch");
+	tempitem.setValue(AGILITY, 1);
+	tempitem.setValue(STRENGTH, 1);
+	tempitem.setValue(INTELLIGENCE, 1);
+	tempitem.setCost(50);
 	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Ultimate Orb");
+	tempitem.setValue(AGILITY, 10);
+	tempitem.setValue(STRENGTH, 10);
+	tempitem.setValue(INTELLIGENCE, 10);
+	tempitem.setCost(2100);
 	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Dagon lvl 5");
+	tempitem.setValue(AGILITY, 3);
+	tempitem.setValue(STRENGTH, 3);
+	tempitem.setValue(INTELLIGENCE, 28);
+	tempitem.setCost(7720);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Waluigi Hat");
+	tempitem.setValue(RESRATE, 0.15f);
+	tempitem.setCost(3000);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Master Sword");
+	tempitem.setValue(AGILITY, 10);
+	tempitem.setValue(STRENGTH, 20);
+	tempitem.setValue(RESCLICK, 4);
+	tempitem.setCost(5100);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Ashbringer");
+	tempitem.setValue(STRENGTH, 85);
+	tempitem.setValue(HP, 750);
+	tempitem.setCost(20500);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Doomhammer");
+	tempitem.setValue(AGILITY, 35);
+	tempitem.setValue(HP, 200);
+	tempitem.setCost(15300);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Frostmourne");
+	tempitem.setValue(HP, 850);
+	tempitem.setValue(INTELLIGENCE, 30);
+	tempitem.setValue(AGILITY, 30);
+	tempitem.setValue(STRENGTH, 30);
+	tempitem.setCost(30000);
+	tempitem.setValue(RESCLICK, 15);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Zweihander");
+	tempitem.setValue(RESCLICK, 4);
+	tempitem.setValue(STRENGTH, 15);
+	tempitem.setValue(AGILITY, -5);
+	tempitem.setCost(2050);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("AK-47");
+	tempitem.setValue(RESRATE, 0.2f);
+	tempitem.setCost(2100);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Sneaking Suit");
+	tempitem.setValue(AGILITY, 40);
+	tempitem.setCost(4000);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Tranq Gun");
+	tempitem.setValue(AGILITY, 5);
+	tempitem.setValue(RESCLICK, 2);
+	tempitem.setCost(800);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Guitar Hero Guitar");
+	tempitem.setValue(AGILITY, 15);
+	tempitem.setValue(RESCLICK, 1);
+	tempitem.setCost(1200);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Power Glove");
+	tempitem.setCost(-500);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("N-Gage");
+	tempitem.setValue(RESRATE, 0.1f);
+	tempitem.setValue(RESCLICK, 3);
+	tempitem.setCost(1900);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Oven Mitts");
+	tempitem.setValue(AGILITY, -10);
+	tempitem.setValue(RESCLICK, -1);
+	tempitem.setValue(HP, 150);
+	tempitem.setValue(INTELLIGENCE, 20);
+	tempitem.setCost(1400);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Magic Boots");
+	tempitem.setValue(AGILITY, 20);
+	tempitem.setCost(700);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Tracksuit");
+	tempitem.setValue(AGILITY, 5);
+	tempitem.setValue(STRENGTH, 5);
+	tempitem.setValue(INTELLIGENCE, 5);
+	tempitem.setValue(HP, 100);
+	tempitem.setCost(800);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("American Flag");
+	tempitem.setValue(STRENGTH, 10);
+	tempitem.setValue(RESRATE, 0.15f);
+	tempitem.setCost(1200);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("BFG");
+	tempitem.setValue(RESCLICK, 9);
+	tempitem.setValue(STRENGTH, 60);
+	tempitem.setCost(5550);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Gunblade");
+	tempitem.setValue(AGILITY, 10);
+	tempitem.setValue(STRENGTH, 10);
+	tempitem.setValue(RESCLICK, 1);
+	tempitem.setCost(1900);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Crowbar");
+	tempitem.setValue(RESCLICK, 1);
+	tempitem.setValue(STRENGTH, 20);
+	tempitem.setValue(INTELLIGENCE, 10);
+	tempitem.setCost(2900);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Thornwhip");
+	tempitem.setValue(AGILITY, 10);
+	tempitem.setValue(RESCLICK, 4);
+	tempitem.setCost(2200);
+	itemList.push_back(tempitem);
+
+	tempitem.Clear();
+	tempitem.setName("Metal Gear Rex Statue");
+	tempitem.setValue(RESCLICK, 15);
+	tempitem.setCost(3500);
+	itemList.push_back(tempitem);
+
+
+
 }
 
 

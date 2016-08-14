@@ -38,6 +38,7 @@ std::string Item::getName() const {
 void Item::Clear() {
 	attributes.clear();
 	name = "Empty";
+	cost = 0;
 }
 
 
