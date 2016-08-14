@@ -31,6 +31,8 @@ Game::Game() {
 	cam.drawDist = 5000;
 	fps = 0;
 	srand(time(0));
+	bColor = 0xFF0000FF;
+	hColor = 0xFF00FF00;
 };
 
 Game::~Game() {
@@ -93,25 +95,25 @@ void Game::buildMenu(bool credits) {
 	temp.right = 0.75;
 
 	if (credits) {
-		temp.top = 0.3;
-		temp.bottom = temp.top + 0.1;
+		temp.top = 0.2;
+		temp.bottom = temp.top + 0.2;
 
-		mainMenu.addButton(noFunc, "Created by\nTyler Van Gastel\nand\nJosh Foley", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFFFFFFFF);
+		mainMenu.addButton(noFunc, "Created by\nTyler Van Gastel\nand\nJosh Foley", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
 
 		temp.top = 0.4;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(noFunc, "For the Giant Rom 3 game jam\non 8/14/2016", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFFFFFFFF);
+		mainMenu.addButton(noFunc, "For the Giant Rom 3 game jam\non 8/14/2016", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
 
 		temp.top = 0.5;
 		temp.bottom = temp.top + 0.2;
 
-		mainMenu.addButton(noFunc, "duder images from\nsnakesnakesnake.com\nand\ngoogle images", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFFFFFFFF);
+		mainMenu.addButton(noFunc, "duder images from\nsnakesnakesnake.com\nand\ngoogle images", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
 
 		temp.top = 0.7;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(leaveCredits, "Back to main menu", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+		mainMenu.addButton(leaveCredits, "Back to main menu", temp, DT_CENTER | DT_VCENTER, bColor, hColor );
 	}
 	else {
 		temp.left = 0.25;
@@ -120,22 +122,22 @@ void Game::buildMenu(bool credits) {
 		temp.top = 0.4;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(startWest, "Start: West", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+		mainMenu.addButton(startWest, "Start: West", temp, DT_CENTER | DT_VCENTER, bColor, hColor );
 
 		temp.top = 0.5;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(startEast, "Start: East", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+		mainMenu.addButton(startEast, "Start: East", temp, DT_CENTER | DT_VCENTER, bColor, hColor );
 
 		temp.top = 0.65;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(startCredits, "Credits", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+		mainMenu.addButton(startCredits, "Credits", temp, DT_CENTER | DT_VCENTER, bColor, hColor );
 
 		temp.top = 0.8;
 		temp.bottom = temp.top + 0.1;
 
-		mainMenu.addButton(quitMsg, "Quit", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+		mainMenu.addButton(quitMsg, "Quit", temp, DT_CENTER | DT_VCENTER, bColor, hColor );
 	}
 }
 

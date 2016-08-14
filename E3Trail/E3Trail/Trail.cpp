@@ -199,7 +199,7 @@ void Trail::createEvents() {
 	tempevent.setText("Gary Busey, responding to a hit out on %s, threw a knife through your open rv window, dealing %s damage");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::agi, 9); // testing purposes
-	tempevent.addEventEffect(TEvent::Hp, 20, 50);
+	tempevent.addEventEffect(TEvent::Hp, -20, -50);
 	eventList.push_back(tempevent);
 
 	tempevent.reset();
@@ -213,6 +213,36 @@ void Trail::createEvents() {
 
 	tempevent.reset();
 
+}
+
+void Trail::setNewGameEvent() {
+	menu.clear();
+	char buffer[256];
+	frect tempRec;
+	eventText.flags = DT_LEFT | DT_TOP | DT_WORDBREAK;
+	eventText.rect.left = 0.1f;
+	eventText.rect.right = 0.9f;
+	eventText.rect.top = 0.33f;
+	eventText.rect.bottom = 0.66f;
+	tempRec.top = 0.7f;
+	tempRec.bottom = 0.8f;
+	eventBackground.image = 0;
+	if (credits < NEWGAMECOST) {
+		eventText.text = "A strange man claims to have a machine that will send you back in time, but you don't have enough credits to use it";
+		tempRec.left = 0.33f;
+		tempRec.right = 0.66f;
+		menu.addButton(closeEvent,"Leave",tempRec,DT_CENTER|DT_VCENTER,bColor,hColor);
+	} else {
+		eventText.text = "A strange man claims to have a machine that will send you back in time";
+		sprintf(buffer,"Pay %d Credits to use the machine",NEWGAMECOST);
+		tempRec.left = 0.1f;
+		tempRec.right = 0.4f;
+		menu.addButton(buyItems,buffer,tempRec,DT_CENTER|DT_VCENTER,bColor,hColor);
+		tempRec.left = 0.6f;
+		tempRec.right = 0.9f;
+		menu.addButton(closeEvent,"Leave",tempRec,DT_CENTER|DT_VCENTER,bColor,hColor);
+	}
+	tstate = newGameScreen;
 }
 
 void Trail::triggerEvent() {
@@ -465,7 +495,7 @@ void Trail::init(bool west) {
 	allcharacters[7].init("Jeff", "Sneak King Copies", "Sneak King Copy");
 	allcharacters[8].init("Patrick", "YT Subscribers", "YT Subscriber");
 	allcharacters[9].init("Vinny", "Dragon Balls", "Dragon Ball");
-
+	newTrigger = true;
 
 
 	menu.init();
@@ -1057,20 +1087,21 @@ bool Trail::update() {
 
 
 
-
 		//return to main menu
 		if (Engine::instance()->getBind("Back") || Engine::instance()->getMessage("gotoMM")) {
 			running = false;
 			return false;
 		}
+		
 
 		if (tstate == trail){
-
+			/*
 			if (Engine::instance()->getBind("Enter City")) {
 				//swapItems(0, 0, 1, 0);
 				setCityButtons(true);
 
 			}
+			*/
 
 
 
@@ -1124,8 +1155,11 @@ bool Trail::update() {
 				if (aliveCount() == 0 || distToGo <= 0) {
 					startEndScreen();
 				}
+				if (distToGo <= 10 && newTrigger) {
+					setNewGameEvent();
+				}
 				//if rand()%eventchance == 0 do event
-				if(!(rand()%eventChance)) {
+				else if(!(rand()%eventChance)) {
 					triggerEvent();
 				} else if (!(rand()%cityChance)) {
 					setCityButtons(true);
@@ -1847,6 +1881,18 @@ bool Trail::update() {
 				tstate = trail;
 			}
 		}
+		else if (tstate == newGameScreen) {
+			if(Engine::instance()->getMessage("eventDone")) {
+				newTrigger = false;
+				setTrailButtons();
+				tstate = trail;
+			} else if(Engine::instance()->getMessage("buyItems")) {
+				credits -= NEWGAMECOST;
+				distToGo = startDist;
+				setTrailButtons();
+				tstate = trail;
+			}
+		}
 
 	}
 	return running;
@@ -1950,7 +1996,7 @@ void Trail::render() {
 				allcharacters[i].DrawSelect(i);
 			}
 		}
-		else if (tstate == eventscreen || tstate == epilogue) { // actually probably an event
+		else if (tstate == eventscreen || tstate == epilogue || tstate == newGameScreen) { // actually probably an event
 			tempRen.type = screenSprite;
 			if (eventBackground.image) {
 				tempRen.asset = &eventBackground;

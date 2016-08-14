@@ -38,6 +38,8 @@
 
 #define BASECITYCHANCE 2000
 
+#define NEWGAMECOST 100000
+
 
 enum eventType {
 	city,
@@ -60,8 +62,8 @@ enum TrailState {
 	itemswapscreen,
 	cityscreen,
 	shopscreen,
-	epilogue
-
+	epilogue,
+	newGameScreen
 };
 
 class Trail {
@@ -91,6 +93,7 @@ private:
 	std::vector<TrailEvent> eventList;
 	bool pause;
 	bool running;
+	bool newTrigger;
 	float food;
 	int credits;
 	float fuel;
@@ -136,6 +139,7 @@ public:
 	void setCityButtons(bool generate);
 	void setShopButtons(bool generate);
 	void setCharSelectButtons();
+	void setNewGameEvent();
 	void setItems();
 	void swapItems(int c1,int s1,int c2,int s2);
 	void resetColors();

@@ -11,6 +11,8 @@ private:
 	camera cam;
 	double fps;
 	char buffer[256];
+	DWORD bColor;
+	DWORD hColor;
 	Trail trail;
 public:
 	Game();
