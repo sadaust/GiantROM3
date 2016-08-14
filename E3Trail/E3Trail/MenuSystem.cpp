@@ -2,7 +2,7 @@
 
 MenuSystem::MenuSystem() {
 	hold = false;
-	selection = 0;
+	selection = -1;
 	cursor.image = 0;
 }
 
@@ -28,6 +28,7 @@ void MenuSystem::init() {
 
 
 void MenuSystem::clear() {
+	selection = -1;
 	while(buttons.size())
 		buttons.pop_back();
 }
