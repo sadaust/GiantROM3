@@ -201,11 +201,44 @@ void Trail::triggerEvent() {
 	int eventId = 0;
 	int targChar = -1;
 	std::vector<std::string> temp;
+	bool push;
+	bool good = true;
 	char buffer[256];
 	eventId = rand()%eventList.size();
 	tstate = eventscreen;
 	for (int i = 0; i < eventList[eventId].numEffect(); ++i) {
+		push = true;
 		switch (eventList[eventId].getEffect(i).targ) {
+		case TEvent::str:
+			if(targChar >= 0 && targChar < 4) {
+				if(party[targChar].getStrength()<eventList[eventId].getEffect(i).value) {
+					good = false;
+				} else {
+					good = true;
+				}
+			}
+			push = false;
+			break;
+		case TEvent::agi:
+			if(targChar >= 0 && targChar < 4) {
+				if(party[targChar].getAgility()<eventList[eventId].getEffect(i).value) {
+					good = false;
+				} else {
+					good = true;
+				}
+			}
+			push = false;
+			break;
+		case TEvent::intel:
+			if(targChar >= 0 && targChar < 4) {
+				if(party[targChar].getIntelligence()<eventList[eventId].getEffect(i).value) {
+					good = false;
+				} else {
+					good = true;
+				}
+			}
+			push = false;
+			break;
 		case TEvent::ranParty:
 			targChar = rand() % 4;
 			sprintf(buffer, "%s", party[targChar].getName().c_str());
@@ -227,43 +260,46 @@ void Trail::triggerEvent() {
 			sprintf(buffer, "%s", party[targChar].getName().c_str());
 			break;
 		case TEvent::Hp:
-			if (targChar >= 0)
-				party[targChar].modHp(eventList[eventId].getEffect(i).value);
-			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
+			if (targChar >= 0) {
+				party[targChar].modHp(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal);
+
+			}
+			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::Res:
 			if (targChar >= 0)
-				party[targChar].modResource(eventList[eventId].getEffect(i).value);
-			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
+				party[targChar].modResource(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal);
+			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::randResource:
 			switch (rand() % 3) {
 			case 0:
-				credits += eventList[eventId].getEffect(i).value;
+				credits += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
 				break;
 			case 1:
-				fuel += eventList[eventId].getEffect(i).value;
+				fuel += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
 				break;
 			case 2:
-				food += eventList[eventId].getEffect(i).value;
+				food += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
 				break;
 			}
-			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
+			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::credits:
-			credits += eventList[eventId].getEffect(i).value;
-			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
+			credits += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
+			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::fuel:
-			fuel += eventList[eventId].getEffect(i).value;
-			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
+			fuel += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
+			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::food:
-			food += eventList[eventId].getEffect(i).value;
-			sprintf(buffer, "%d", abs(eventList[eventId].getEffect(i).value));
+			food += good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal;
+			sprintf(buffer, "%d", abs(good?eventList[eventId].getEffect(i).value:eventList[eventId].getEffect(i).failVal));
 			break;
 		}
-		temp.push_back(buffer);
+		if(push)
+			temp.push_back(buffer);
 	}
 	std::regex matcher;
 	matcher = "%s";
@@ -703,7 +739,7 @@ void Trail::setCityButtons(bool generate) {
 
 	char buffer[256];
 	frect tempRec;
-	
+
 	if (generate) {
 		fuelCost = BASEFUELCOST + (rand() % RANGEFUELCOST);
 		foodCost = BASEFOODCOST + (rand() % RANGEFOODCOST);

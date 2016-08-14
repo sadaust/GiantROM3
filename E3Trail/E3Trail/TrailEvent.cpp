@@ -21,6 +21,15 @@ void TrailEvent::addEventEffect(TEvent::target targ, int value) {
 	TEvent::eventTarg temp;
 	temp.targ = targ;
 	temp.value = value;
+	temp.failVal = 0;
+	targs.push_back(temp);
+}
+
+void TrailEvent::addEventEffect(TEvent::target targ, int successValue, int failValue) {
+	TEvent::eventTarg temp;
+	temp.targ = targ;
+	temp.value = successValue;
+	temp.failVal = failValue;
 	targs.push_back(temp);
 }
 

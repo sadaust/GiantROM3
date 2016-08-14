@@ -13,12 +13,16 @@ namespace TEvent{
 		randResource,
 		credits,
 		fuel,
-		food
+		food,
+		str,
+		intel,
+		agi
 	};
 
 	struct eventTarg {
 		target targ;
 		int value;
+		int failVal;
 	};
 };
 
@@ -33,6 +37,7 @@ public:
 	std::string getText() {return eventText;}
 	void addEventEffect(TEvent::eventTarg effect);
 	void addEventEffect(TEvent::target targ, int value);
+	void addEventEffect(TEvent::target targ, int value, int failValue);
 	int numEffect();
 	TEvent::eventTarg getEffect(int id);
 };
