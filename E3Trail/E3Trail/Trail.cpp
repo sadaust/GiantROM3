@@ -378,7 +378,7 @@ void Trail::triggerEvent() {
 	temprec.right = 0.75f;
 	temprec.top = 0.8f;
 	temprec.bottom = 0.9f;
-	menu.addButton(closeEvent, "Back", temprec, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+	menu.addButton(closeEvent, "Back", temprec, DT_CENTER | DT_VCENTER, bColor, hColor);
 	eventChance = BASEEVENTCHANCE;
 }
 
@@ -1062,7 +1062,7 @@ void Trail::startEndScreen() {
 
 	tempRec.top = 0.8f;
 	tempRec.bottom = 0.9f;
-	menu.addButton(closeEvent, "Next", tempRec, DT_CENTER | DT_VCENTER, 0xFF0000FF, 0xFF00FF00);
+	menu.addButton(closeEvent, "Next", tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
 	tempRec.bottom = 0.7f;
 	tempRec.top = 0.2f;
 	eventBackground.image = 0;
