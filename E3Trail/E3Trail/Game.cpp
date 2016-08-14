@@ -11,6 +11,14 @@ void startWest() {
 	Engine::instance()->postMessage("West");
 }
 
+void startCredits() {
+	Engine::instance()->postMessage("Credits");
+}
+
+void leaveCredits() {
+	Engine::instance()->postMessage("LeaveCredits");
+}
+
 void quitMsg() {
 	Engine::instance()->postMessage("Quit");
 }
@@ -42,30 +50,7 @@ void Game::init() {
 	Engine::instance()->setRepeat(0.75);
 
 	//init menu
-	frect temp;
-
-	temp.left = 0.25;
-	temp.right = 0.75;
-
-	temp.top = 0.4;
-	temp.bottom = temp.top + 0.1;
-
-	mainMenu.addButton(startWest,"Start: West",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
-
-	temp.top = 0.5;
-	temp.bottom = temp.top + 0.1;
-
-	mainMenu.addButton(startEast,"Start: East",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
-
-	temp.top = 0.65;
-	temp.bottom = temp.top + 0.1;
-
-	mainMenu.addButton(noFunc,"Options",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
-
-	temp.top = 0.8;
-	temp.bottom = temp.top + 0.1;
-
-	mainMenu.addButton(quitMsg,"Quit",temp,DT_CENTER|DT_VCENTER,0xFFFFFFFF,0xFF0000FF);
+	buildMenu(false);
 };
 
 bool Game::update() {
@@ -74,7 +59,13 @@ bool Game::update() {
 		mainMenu.render();
 		if(Engine::instance()->getMessage("Quit"))
 			return false;
-		if(Engine::instance()->getMessage("East")) {
+		if (Engine::instance()->getMessage("Credits")) {
+			buildMenu(true);
+		}
+		else if (Engine::instance()->getMessage("LeaveCredits")) {
+			buildMenu(false);
+		}
+		else if (Engine::instance()->getMessage("East")) {
 			trail.init(false);
 		} else if(Engine::instance()->getMessage("West")) {
 			trail.init(true);
@@ -90,3 +81,64 @@ bool Game::update() {
 void Game::shutdown() {
 	mainMenu.clear();
 };
+
+
+
+
+
+void Game::buildMenu(bool credits) {
+	frect temp;
+	mainMenu.clear();
+	temp.left = 0.25;
+	temp.right = 0.75;
+
+	if (credits) {
+		temp.top = 0.3;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(noFunc, "Created by\nTyler Van Gastel\nand\nJosh Foley", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFFFFFFFF);
+
+		temp.top = 0.4;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(noFunc, "For the Giant Rom 3 game jam\non 8/14/2016", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFFFFFFFF);
+
+		temp.top = 0.5;
+		temp.bottom = temp.top + 0.2;
+
+		mainMenu.addButton(noFunc, "duder images from\nsnakesnakesnake.com\nand\ngoogle images", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFFFFFFFF);
+
+		temp.top = 0.7;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(leaveCredits, "Back to main menu", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+	}
+	else {
+		temp.left = 0.25;
+		temp.right = 0.75;
+
+		temp.top = 0.4;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(startWest, "Start: West", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+
+		temp.top = 0.5;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(startEast, "Start: East", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+
+		temp.top = 0.65;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(startCredits, "Credits", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+
+		temp.top = 0.8;
+		temp.bottom = temp.top + 0.1;
+
+		mainMenu.addButton(quitMsg, "Quit", temp, DT_CENTER | DT_VCENTER, 0xFFFFFFFF, 0xFF0000FF);
+	}
+}
+
+
+
+

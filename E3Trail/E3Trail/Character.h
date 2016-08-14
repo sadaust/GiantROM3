@@ -20,12 +20,13 @@ private:
 	float resclickrate;
 	std::string name;
 	std::string resName;
+	std::string resNameSingular;
 	std::string victory;
 	Item items[NUM_ITEMS];
 	spriteStruct statusPic[NUM_STATUS];
 	bool activeitems[NUM_ITEMS];
 public:
-	void init(std::string a_name, std::string resourceName);
+	void init(std::string a_name, std::string resourceName, std::string resourceNameSingular);
 	void Draw(int index);
 	void DrawSelect(int index); // charselect
 	int getHP();
@@ -35,6 +36,7 @@ public:
 	int getIntelligence();
 	int getResource();
 	std::string getResName();
+	std::string getResNameSingular();
 	std::string getName();
 	std::string getVictory();
 	void resIncer();

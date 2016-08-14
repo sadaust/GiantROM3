@@ -194,7 +194,24 @@ void Trail::createEvents() {
 	eventList.push_back(tempevent);
 
 	tempevent.reset();
+
 	//
+	tempevent.setText("Gary Busey, responding to a hit out on %s, threw a knife through your open rv window, dealing %s damage");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::agi, 9); // testing purposes
+	tempevent.addEventEffect(TEvent::Hp, 20, 50);
+	eventList.push_back(tempevent);
+
+	tempevent.reset();
+
+	//
+	tempevent.setText("Your cybertire pops, causing %s to have to walk back to the nearest cyberautoshop.\nHe loses %s health from the heat and uses %s credits on the cybertire.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Hp, -5);
+	tempevent.addEventEffect(TEvent::credits, -150);
+	eventList.push_back(tempevent);
+
+	tempevent.reset();
 
 }
 
@@ -432,22 +449,22 @@ Trail::Trail() {
 	selectText.text = "ERROR";
 
 
-
+	
 
 }
 
 
 void Trail::init(bool west) {
-	allcharacters[0].init("Dan", "Amiibos");
-	allcharacters[1].init("Brad", "Dota hats");
-	allcharacters[2].init("Rorie", "Puppies");
-	allcharacters[3].init("Austin", "Gunpla");
-	allcharacters[4].init("Alex", "Big Rigs");
-	allcharacters[5].init("Drew", "Soviet Monsters");
-	allcharacters[6].init("Jason", "Plushies");
-	allcharacters[7].init("Jeff", "Sneak King Copies");
-	allcharacters[8].init("Patrick", "YT Subscribers");
-	allcharacters[9].init("Vinny", "Dragon Balls");
+	allcharacters[0].init("Dan", "Amiibos", "Amiibo");
+	allcharacters[1].init("Brad", "Dota hats", "Dota hat");
+	allcharacters[2].init("Rorie", "Puppies", "Puppy");
+	allcharacters[3].init("Austin", "Gunpla", "Gunpla");
+	allcharacters[4].init("Alex", "Big Rigs", "Big Rig");
+	allcharacters[5].init("Drew", "Soviet Monsters", "Soviet Monster");
+	allcharacters[6].init("Jason", "Plushies", "Plushy");
+	allcharacters[7].init("Jeff", "Sneak King Copies", "Sneak King Copy");
+	allcharacters[8].init("Patrick", "YT Subscribers", "YT Subscriber");
+	allcharacters[9].init("Vinny", "Dragon Balls", "Dragon Ball");
 
 
 
@@ -501,6 +518,7 @@ void Trail::init(bool west) {
 	//party[2] = p3;
 	//party[3] = p4;
 	running = true;
+	haventVisitedShop = true;
 
 	setCharSelectButtons();
 	setItems();
@@ -609,29 +627,51 @@ void Trail::setTrailButtons() {
 	rec.top = 0.65f;
 	menu.clear();
 	//party[0] incer
-
+	float temp = 0;
 	std::string tempstr;
 	for (int i = 0; i < PARTYSIZE; ++i) {
 		rec.left = 0.25f*i;
 		rec.right = rec.left + 0.25f;
 		tempstr = party[i].getName();
-		if (tempstr == "Dan" || tempstr == "Brad") // you buy amiibos and dota hats
-			sprintf(buffer, "Buy %s", party[i].getResName().c_str());
-		else if (tempstr == "Rorie") // you chomp puppies
-			sprintf(buffer, "Chomp %s", party[i].getResName().c_str());
-		else if (tempstr == "Austin") // you build gunpla
-			sprintf(buffer, "Build %s", party[i].getResName().c_str());
-		else if (tempstr == "Alex" || tempstr == "Drew") // you construct big rigs and soviet monsters
-			sprintf(buffer, "Construct %s", party[i].getResName().c_str());
-		else if (tempstr == "Jason") // you sew plushies
-			sprintf(buffer, "Sew %s", party[i].getResName().c_str());
-		else if (tempstr == "Jeff") // you get sneak king copies (would prefer "Get sent" or "Recieve") but that's pretty long
-			sprintf(buffer, "Get %s", party[i].getResName().c_str());
-		else if (tempstr == "Patrick") // you garner youtube subscribers
-			sprintf(buffer, "Garner %s", party[i].getResName().c_str());
-		else if (tempstr == "Vinny") // you find dragon balls
-			sprintf(buffer, "Find %s", party[i].getResName().c_str());
-
+		temp = party[i].getItem(0).getValue(RESCLICK) + party[i].getItem(1).getValue(RESCLICK) + 1.0f;
+		if (temp == 1) {
+			if (tempstr == "Dan") // you buy amiibos and dota hats
+				sprintf(buffer, "Buy an %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Brad") // you chomp puppies
+				sprintf(buffer, "Buy a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Rorie") // you chomp puppies
+				sprintf(buffer, "Chomp a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Austin") // you build gunpla
+				sprintf(buffer, "Build a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Alex" || tempstr == "Drew") // you construct big rigs and soviet monsters
+				sprintf(buffer, "Construct a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Jason") // you sew plushies
+				sprintf(buffer, "Sew a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Jeff") // you get sneak king copies (would prefer "Get sent" or "Recieve") but that's pretty long
+				sprintf(buffer, "Get a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Patrick") // you garner youtube subscribers
+				sprintf(buffer, "Garner a %s", party[i].getResNameSingular().c_str());
+			else if (tempstr == "Vinny") // you find dragon balls
+				sprintf(buffer, "Find a %s", party[i].getResNameSingular().c_str());
+		}
+		else {
+			if (tempstr == "Dan" || tempstr == "Brad") // you buy amiibos and dota hats
+				sprintf(buffer, "Buy %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Rorie") // you chomp puppies
+				sprintf(buffer, "Chomp %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Austin") // you build gunpla
+				sprintf(buffer, "Build %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Alex" || tempstr == "Drew") // you construct big rigs and soviet monsters
+				sprintf(buffer, "Construct %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Jason") // you sew plushies
+				sprintf(buffer, "Sew %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Jeff") // you get sneak king copies (would prefer "Get sent" or "Recieve") but that's pretty long
+				sprintf(buffer, "Get %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Patrick") // you garner youtube subscribers
+				sprintf(buffer, "Garner %.0f %s", temp, party[i].getResName().c_str());
+			else if (tempstr == "Vinny") // you find dragon balls
+				sprintf(buffer, "Find %.0f %s", temp, party[i].getResName().c_str());
+		}
 
 
 		if (i == 0)
@@ -756,6 +796,7 @@ void Trail::setCityButtons(bool generate) {
 		}
 		sprintf(buffer,"Welcome to %s %s, %s",cityPrefix[rand()%NUMCITYPREFIX].c_str(),cityNames[rand()%NUMCITYS].c_str(),stateNames[rand()%NUMSTATES].c_str());
 		cityname = buffer;
+		haventVisitedShop = true;
 	}
 	pause = true;
 	menu.clear();
@@ -821,10 +862,22 @@ void Trail::setCityButtons(bool generate) {
 
 void Trail::setShopButtons(bool generate) {
 	if (generate) {
-
+		int nonrepeat = ITEMTARGETNOTCHOSEN;
+		bool repeat = true;
+		for (int i = 0; i < NUMSHOPITEMS; ++i) {
+			nonrepeatitems[i] = ITEMTARGETNOTCHOSEN;
+		}
 		for (int i = 0; i < NUMSHOPITEMS; ++i) {
 			shopitems[i].Clear();
-			shopitems[i] = itemList[rand() % itemList.size()];
+			repeat = true;
+			while (repeat) {
+				nonrepeat = rand() % itemList.size();
+				if (nonrepeat != nonrepeatitems[0] && nonrepeat != nonrepeatitems[1] && nonrepeat != nonrepeatitems[2] && nonrepeat != nonrepeatitems[3])
+					repeat = false;
+			}
+
+			shopitems[i] = itemList[nonrepeat];
+			nonrepeatitems[i] = nonrepeat;
 			itemsBought[i] = false;
 		}
 
@@ -966,6 +1019,7 @@ void Trail::setShopButtons(bool generate) {
 
 
 	tstate = shopscreen;
+	haventVisitedShop = false;
 }
 
 void Trail::startEndScreen() {
@@ -1304,6 +1358,7 @@ bool Trail::update() {
 			if (Engine::instance()->getMessage("eventDone")) {
 				tstate = trail;
 				setTrailButtons();
+				haventVisitedShop = true;
 			}
 			else if (Engine::instance()->getMessage("buyFuel")) {
 				credits -= fuelCost;
@@ -1314,7 +1369,7 @@ bool Trail::update() {
 				food += 5;
 			}
 			else if (Engine::instance()->getMessage("buyItems")) {
-				setShopButtons(true);
+				setShopButtons(haventVisitedShop);
 
 			}
 
@@ -1422,7 +1477,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1435,7 +1490,7 @@ bool Trail::update() {
 					party[0].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1448,7 +1503,7 @@ bool Trail::update() {
 					party[1].receiveItem(0, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1460,7 +1515,7 @@ bool Trail::update() {
 					party[1].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1472,7 +1527,7 @@ bool Trail::update() {
 					party[2].receiveItem(0, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1484,7 +1539,7 @@ bool Trail::update() {
 					party[2].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1496,7 +1551,7 @@ bool Trail::update() {
 					party[3].receiveItem(0, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1508,7 +1563,7 @@ bool Trail::update() {
 					party[3].receiveItem(1, shopitems[targetitems[0][0]]);
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-					setShopButtons(false);
+					setShopButtons(haventVisitedShop);
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;

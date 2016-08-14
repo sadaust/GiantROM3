@@ -7,7 +7,7 @@
 
 
 
-void Character::init(std::string a_name, std::string resourceName) {
+void Character::init(std::string a_name, std::string resourceName, std::string resourceNameSingular) {
 	maxhp = 100;
 	hp = maxhp;
 	strength = 10; // probably change this for balance. Used for minigames and event thresholds
@@ -18,6 +18,7 @@ void Character::init(std::string a_name, std::string resourceName) {
 	resclickrate = 1;
 	name = a_name;
 	resName = resourceName;
+	resNameSingular = resourceNameSingular;
 	for (int i = 0; i < NUM_ITEMS; ++i) {
 		activeitems[i] = false;
 		items[i].Clear();
@@ -385,6 +386,11 @@ std::string Character::getResName() {
 }
 
 
+std::string Character::getResNameSingular() {
+	return resNameSingular;
+}
+
+
 std::string Character::getName() { 
 	return name; 
 }
@@ -449,6 +455,7 @@ void Character::operator=(Character& in) {
 	resclickrate = in.resclickrate;
 	name = in.name;
 	resName = in.resName;
+	resNameSingular = in.resNameSingular;
 	victory = in.victory;
 	for (int i = 0; i < NUM_STATUS; ++i) {
 		statusPic[i] = in.statusPic[i];

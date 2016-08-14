@@ -24,9 +24,9 @@
 
 #define RANGEFOODCOST 21
 
-#define BASETRADECOST 1
+#define BASETRADECOST 2
 
-#define RANGETRADECOST 7
+#define RANGETRADECOST 8
 
 #define TRADEAMOUNT 50
 
@@ -78,6 +78,8 @@ private:
 	bool itemsBought[NUMSHOPITEMS];
 	textStruct selectText;
 	int partychoices[PARTYSIZE];
+	bool haventVisitedShop;
+	int nonrepeatitems[NUMSHOPITEMS];
 	
 	
 	void createEvents();

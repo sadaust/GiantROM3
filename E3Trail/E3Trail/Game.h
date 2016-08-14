@@ -18,4 +18,6 @@ public:
 	void init();
 	bool update();
 	void shutdown();
+
+	void buildMenu(bool credits);
 };
