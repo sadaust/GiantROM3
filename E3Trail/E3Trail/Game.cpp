@@ -50,9 +50,11 @@ void Game::init() {
 	Engine::instance()->bind(mouse_Yp,mouse_Yn,"MouseY");
 	Engine::instance()->bind(ESC,"Back");
 	Engine::instance()->setRepeat(0.75);
-
+	Engine::instance()->setVolume(0.1f,music);
+	//trail.init(true);
 	//init menu
 	buildMenu(false);
+	
 };
 
 bool Game::update() {

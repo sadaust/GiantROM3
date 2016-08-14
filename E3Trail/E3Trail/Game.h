@@ -4,6 +4,7 @@
 #include "Trail.h"
 
 #define WINDOW_TITLE "E3 Trail"
+//static soundStruct youwin;
 
 class Game {
 private:

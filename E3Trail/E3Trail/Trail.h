@@ -68,6 +68,10 @@ enum TrailState {
 
 class Trail {
 private:
+	soundStruct youwin;
+	soundStruct eventSound;
+	musicStruct playing;
+
 	TrailState tstate;
 	int targetitems[2][2];  // swap items: 0,0 is char 0. 0,1 is slot 0. 1,0 is char 1. 1,1 is slot 1
 							// shop: 0,0 is shop item. 1,0 is character. 1,1 is slot
@@ -93,6 +97,7 @@ private:
 	std::vector<TrailEvent> eventList;
 	bool pause;
 	bool running;
+	bool firstRun;
 	bool newTrigger;
 	float food;
 	int credits;

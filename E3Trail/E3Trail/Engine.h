@@ -82,6 +82,7 @@ public:
 	D3DLIGHT9* getLight(int num);
 	void playSound(soundStruct sound, vector pos, vector vel);
 	void playMusic(musicStruct stream, bool muted);
+	void setVolume(float vol, soundType type);
 	void clearMessages() {mesSys.clear();}
 	bool getMessage(std::string message){return mesSys.getMessage(message);}
 	void postMessage(std::string message){mesSys.post(message);}

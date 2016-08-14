@@ -216,6 +216,7 @@ void Trail::createEvents() {
 }
 
 void Trail::setNewGameEvent() {
+	Engine::instance()->playSound(eventSound,vector(0,0,0),vector(0,0,0));
 	menu.clear();
 	char buffer[256];
 	frect tempRec;
@@ -246,6 +247,7 @@ void Trail::setNewGameEvent() {
 }
 
 void Trail::triggerEvent() {
+	Engine::instance()->playSound(eventSound,vector(0,0,0),vector(0,0,0));
 	int eventId = 0;
 	int targChar = -1;
 	std::vector<std::string> temp;
@@ -383,6 +385,7 @@ void Trail::triggerEvent() {
 }
 
 Trail::Trail() {
+	firstRun = true;
 	targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 	targetitems[0][1] = ITEMTARGETNOTCHOSEN;
 	targetitems[1][0] = ITEMTARGETNOTCHOSEN;
@@ -485,19 +488,26 @@ Trail::Trail() {
 
 
 void Trail::init(bool west) {
-	allcharacters[0].init("Dan", "Amiibos", "Amiibo");
-	allcharacters[1].init("Brad", "Dota hats", "Dota hat");
-	allcharacters[2].init("Rorie", "Puppies", "Puppy");
-	allcharacters[3].init("Austin", "Gunpla", "Gunpla");
-	allcharacters[4].init("Alex", "Big Rigs", "Big Rig");
-	allcharacters[5].init("Drew", "Soviet Monsters", "Soviet Monster");
-	allcharacters[6].init("Jason", "Plushies", "Plushy");
-	allcharacters[7].init("Jeff", "Sneak King Copies", "Sneak King Copy");
-	allcharacters[8].init("Patrick", "YT Subscribers", "YT Subscriber");
-	allcharacters[9].init("Vinny", "Dragon Balls", "Dragon Ball");
+	if(firstRun) {
+		allcharacters[0].init("Dan", "Amiibos", "Amiibo");
+		allcharacters[1].init("Brad", "Dota hats", "Dota hat");
+		allcharacters[2].init("Rorie", "Puppies", "Puppy");
+		allcharacters[3].init("Austin", "Gunpla", "Gunpla");
+		allcharacters[4].init("Alex", "Big Rigs", "Big Rig");
+		allcharacters[5].init("Drew", "Soviet Monsters", "Soviet Monster");
+		allcharacters[6].init("Jason", "Plushies", "Plushy");
+		allcharacters[7].init("Jeff", "Sneak King Copies", "Sneak King Copy");
+		allcharacters[8].init("Patrick", "YT Subscribers", "YT Subscriber");
+		allcharacters[9].init("Vinny", "Dragon Balls", "Dragon Ball");
+		//load audio
+		playing = *(musicStruct*)Engine::instance()->getResource("music.mp3",stream)->resource;
+		youwin = *(soundStruct*)Engine::instance()->getResource("youwin.ogg", audio)->resource;
+		eventSound = *(soundStruct*)Engine::instance()->getResource("event.ogg", audio)->resource;
+		firstRun = false;
+	}
 	newTrigger = true;
 
-
+	Engine::instance()->playMusic(playing,false);
 	menu.init();
 	pause = false;
 	if (west) {
@@ -818,6 +828,7 @@ void Trail::setCityButtons(bool generate) {
 	frect tempRec;
 	
 	if (generate) {
+		Engine::instance()->playSound(eventSound,vector(0,0,0),vector(0,0,0));
 		fuelCost = BASEFUELCOST + (rand() % RANGEFUELCOST);
 		foodCost = BASEFOODCOST + (rand() % RANGEFOODCOST);
 
@@ -1077,6 +1088,7 @@ void Trail::startEndScreen() {
 		eventText.text = "The Giant Bomb crew got lost on the way to E3";
 	}
 	tstate = epilogue;
+	Engine::instance()->playSound(youwin,vector(0,0,0),vector(0,0,0));
 }
 
 bool Trail::update() {
@@ -1090,6 +1102,7 @@ bool Trail::update() {
 		//return to main menu
 		if (Engine::instance()->getBind("Back") || Engine::instance()->getMessage("gotoMM")) {
 			running = false;
+			Engine::instance()->playMusic(playing,true);
 			return false;
 		}
 		
@@ -1871,6 +1884,7 @@ bool Trail::update() {
 				}
 				else {
 					running = false;
+					Engine::instance()->playMusic(playing,true);
 					return false;
 				}
 			}

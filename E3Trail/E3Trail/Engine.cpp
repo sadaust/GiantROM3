@@ -144,6 +144,10 @@ void Engine::playMusic(musicStruct stream, bool muted) {
 	sFrame.playStream(stream,muted);
 }
 
+void Engine::setVolume(float vol, soundType type){
+	sFrame.setVolume(type,vol);
+}
+
 resourceStruct* Engine::getResource(LPCSTR name, resourceType type) {
 	return resMan.getResource(name,type);
 }
