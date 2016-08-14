@@ -2,6 +2,72 @@
 #include <cstring>
 #include <regex>
 
+#define NUMSTATES 50
+std::string stateNames[NUMSTATES] = {"Alabama",
+	"Alaska",
+	"Arizona",
+	"Arkansas",
+	"California",
+	"Colorado",
+	"Connecticut",
+	"Delaware",
+	"Florida",
+	"Georgia",
+	"Hawaii",
+	"Idaho",
+	"Illinois",
+	"Indiana",
+	"Iowa",
+	"Kansas",
+	"Kentucky",
+	"Louisiana",
+	"Maine",
+	"Maryland",
+	"Massachusetts",
+	"Michigan",
+	"Minnesota",
+	"Mississippi",
+	"Missouri",
+	"Montana",
+	"Nebraska",
+	"Nevada",
+	"New Hampshire",
+	"New Jersey",
+	"New Mexico",
+	"New York",
+	"North Carolina",
+	"North Dakota",
+	"Ohio",
+	"Oklahoma",
+	"Oregon",
+	"Pennsylvania",
+	"Rhode Island",
+	"South Carolina",
+	"South Dakota",
+	"Tennessee",
+	"Texas",
+	"Utah",
+	"Vermont",
+	"Virginia",
+	"Washington",
+	"West Virginia",
+	"Wisconsin",
+	"Wyoming"};
+
+#define NUMCITYS 5
+std::string cityNames[NUMCITYS] = {"San Francisco",
+	"Fremont",
+	"Phoenix",
+	"Seattle",
+	"New York"};
+
+#define NUMCITYPREFIX 5
+std::string cityPrefix[NUMCITYPREFIX] = {"Neo",
+	"Derelict",
+	"Abandoned",
+	"Cyber",
+	"Virtual"};
+
 //update rate in seconds
 #define UPDATETIME 0.05f
 
@@ -245,7 +311,7 @@ Trail::Trail() {
 	mapScaleY = 1;
 	frect tempRec;
 	running = false;
-	path.color = D3DXCOLOR(0.0f, 1, 0, 1.0f);
+	path.color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
 	path.width = 5;
 	path.vecCount = 2;
 	path.vec = pathVec;
@@ -339,9 +405,9 @@ void Trail::init(bool west) {
 	allcharacters[7].init("Jeff", "Sneak King Copies");
 	allcharacters[8].init("Patrick", "YT Subscribers");
 	allcharacters[9].init("Vinny", "Dragon Balls");
-	
-	
-	
+
+
+
 	menu.init();
 	pause = false;
 	if (west) {
@@ -349,11 +415,11 @@ void Trail::init(bool west) {
 		map.image = (imageAsset*)(Engine::instance()->getResource("SFMap.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		map.rec.bottom = map.image->texInfo.Height;
 		map.rec.right = map.image->texInfo.Width;
-		start.x = 0 * map.rec.right;
-		start.y = 0 * map.rec.bottom;
+		start.x = 0.2392f * map.rec.right;
+		start.y = 0.6738f * map.rec.bottom;
 		start.z = 0;
-		end.x = 1.0f * map.rec.right;
-		end.y = 1.0f * map.rec.bottom;
+		end.x = 0.6777f * map.rec.right;
+		end.y = 0.8789f * map.rec.bottom;
 		end.z = 0;
 		locEventCount = 10;
 	}
@@ -362,11 +428,11 @@ void Trail::init(bool west) {
 		map.image = (imageAsset*)(Engine::instance()->getResource("NYMap.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		map.rec.bottom = map.image->texInfo.Height;
 		map.rec.right = map.image->texInfo.Width;
-		start.x = 1.0f * map.rec.right;
-		start.y = 1.0f * map.rec.bottom;
+		start.x = 0.8789f * map.rec.right;
+		start.y = 0.3906f * map.rec.bottom;
 		start.z = 0;
-		end.x = 0 * map.rec.right;
-		end.y = 0 * map.rec.bottom;
+		end.x = 0.1123f * map.rec.right;
+		end.y = 0.6445f * map.rec.bottom;
 		end.z = 0;
 		locEventCount = 50;
 	}
@@ -405,6 +471,7 @@ void Trail::init(bool west) {
 
 	tstate = charselect;
 	eventChance = BASEEVENTCHANCE;
+	cityChance = BASECITYCHANCE;
 }
 
 int Trail::aliveCount() {
@@ -499,7 +566,7 @@ void Trail::setTrailButtons() {
 	rec.top = 0.65f;
 	menu.clear();
 	//party[0] incer
-	
+
 	std::string tempstr;
 	for (int i = 0; i < PARTYSIZE; ++i) {
 		rec.left = 0.25f*i;
@@ -636,8 +703,7 @@ void Trail::setCityButtons(bool generate) {
 
 	char buffer[256];
 	frect tempRec;
-	tempRec.left = 0.0f;
-	tempRec.right = 0.25f;
+	
 	if (generate) {
 		fuelCost = BASEFUELCOST + (rand() % RANGEFUELCOST);
 		foodCost = BASEFOODCOST + (rand() % RANGEFOODCOST);
@@ -645,9 +711,24 @@ void Trail::setCityButtons(bool generate) {
 		for (int i = 0; i < NUMSHOPITEMS; ++i) {
 			resourceCost[i] = BASETRADECOST + (rand() % RANGETRADECOST);
 		}
+		sprintf(buffer,"Welcome to %s %s, %s",cityPrefix[rand()%NUMCITYPREFIX].c_str(),cityNames[rand()%NUMCITYS].c_str(),stateNames[rand()%NUMSTATES].c_str());
+		cityname = buffer;
 	}
 	pause = true;
 	menu.clear();
+
+	eventBackground.image = 0;
+	eventText.text = cityname;
+	eventText.color = 0xFFFFFFFF;
+	eventText.flags = DT_CENTER | DT_VCENTER;
+	tempRec.top = 0;
+	tempRec.bottom = 0.2f;
+	tempRec.left = 0.1f;
+	tempRec.right = 0.9f;
+	eventText.rect = tempRec;
+
+	tempRec.left = 0.0f;
+	tempRec.right = 0.25f;
 
 	tempRec.top = 0.05f;
 	tempRec.bottom = 0.1f;
@@ -666,14 +747,6 @@ void Trail::setCityButtons(bool generate) {
 	tempRec.top = 0.5f;
 	tempRec.bottom = 0.55f;
 	menu.addButton(closeEvent, "Leave town", tempRec, DT_CENTER | DT_VCENTER, bColor, hColor);
-
-	eventBackground.image = 0;
-	eventText.text = "Welcome to town";
-	eventText.color = 0xFFFFFFFF;
-	eventText.flags = DT_CENTER | DT_VCENTER;
-	tempRec.top = 0;
-	tempRec.bottom = 0.33f;
-	eventText.rect = tempRec;
 
 	tempRec.bottom = 0.7f;
 	tempRec.top = 0.60f;
@@ -957,9 +1030,16 @@ bool Trail::update() {
 				//if rand()%eventchance == 0 do event
 				if(!(rand()%eventChance)) {
 					triggerEvent();
+				} else if (!(rand()%cityChance)) {
+					setCityButtons(true);
+					cityChance = BASECITYCHANCE;
 				} else {
 					//if no event triggered make them have better odds of happening
 					--eventChance;
+					cityChance -= speed;
+					if(cityChance < 1) {
+						cityChance = 1;
+					}
 				}
 			}
 		}
@@ -1687,7 +1767,10 @@ void Trail::render() {
 		if (tstate == trail || tstate == itemswapscreen || tstate == cityscreen || tstate == shopscreen) {
 			//render the main play screen
 			tempRen.type = text;
-
+			if (tstate == cityscreen) {
+				tempRen.asset = &eventText;
+				Engine::instance()->addRender(tempRen);
+			}
 			if (tstate != itemswapscreen && tstate != shopscreen) { // item names not drawn during item swap screen since buttons replace it
 				for (int i = 0; i < PARTYSIZE; ++i) {
 					sprintf(buffer, "\n%s\n%s", party[i].getItemName(0).c_str(), party[i].getItemName(1).c_str());
@@ -1780,6 +1863,7 @@ void Trail::render() {
 			tempRen.asset = &eventText;
 			Engine::instance()->addRender(tempRen);
 		}
+
 		menu.render();
 	}
 }

@@ -4,7 +4,7 @@
 =latest update 11/13/2015								=
 =Handels the windows interaction for the engine and game= 
 =========================================================*/
-
+#pragma once
 #include <Windows.h>
 #include "Engine.h"
 #include "Game.h"

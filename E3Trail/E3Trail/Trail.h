@@ -36,6 +36,8 @@
 
 #define BASEEVENTCHANCE 200
 
+#define BASECITYCHANCE 2000
+
 
 enum eventType {
 	city,
@@ -62,7 +64,6 @@ enum TrailState {
 
 };
 
-
 class Trail {
 private:
 	TrailState tstate;
@@ -83,6 +84,8 @@ private:
 	void triggerEvent();
 	//1:this chance to get an event
 	int eventChance;
+	//1:this chance to encounter a city
+	int cityChance;
 	std::vector<TrailEvent> eventList;
 	bool pause;
 	bool running;

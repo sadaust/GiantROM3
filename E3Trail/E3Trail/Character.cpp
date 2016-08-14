@@ -404,7 +404,9 @@ void Character::modHp(int mod) {
 	hp += mod; 
 	if (hp < 0) { 
 		hp = 0; 
-	} 
+	} else if (hp > maxhp) {
+		hp = maxhp;
+	}
 }
 
 
@@ -568,12 +570,15 @@ void Character::receiveItem(int index, Item &a_item) {
 }
 // end of receiveItem
 
+#define numTimeScale 7
+#define numLocations 7
+
 std::string Character::getVictory() {
 	std::regex matcher;
 	matcher = "%s";
 	char buffer[256];
-	std::string timeScale[] = {"seconds","minutes","hours","days","weeks","months","years"};
-	std::string locations[] = {"a cave","a swimming pool","an abandond building","a ditch","the GiantBomb office","a dingy basement","the Lang zone"};
+	std::string timeScale[numTimeScale] = {"seconds","minutes","hours","days","weeks","months","years"};
+	std::string locations[numLocations] = {"a cave","a swimming pool","an abandond building","a ditch","the GiantBomb office","a dingy basement","the Lang zone"};
 	std::string z;
 	std::vector<std::string> temp;
 	if(hp>0) {
@@ -587,9 +592,9 @@ std::string Character::getVictory() {
 		sprintf(buffer,"%d",2+rand()%29);
 		temp.push_back(buffer);
 		//time scale
-		temp.push_back(timeScale[rand()%7]);
+		temp.push_back(timeScale[rand()%numTimeScale]);
 		//location
-		temp.push_back(locations[rand()%7]);
+		temp.push_back(locations[rand()%numLocations]);
 		//resource
 		sprintf(buffer,"%.0f %s",resource,resName.c_str());
 		temp.push_back(buffer);
