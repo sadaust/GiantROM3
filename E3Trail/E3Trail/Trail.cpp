@@ -61,12 +61,14 @@ std::string cityNames[NUMCITYS] = {"San Francisco",
 	"Seattle",
 	"New York"};
 
-#define NUMCITYPREFIX 5
+#define NUMCITYPREFIX 7
 std::string cityPrefix[NUMCITYPREFIX] = {"Neo",
 	"Derelict",
 	"Abandoned",
 	"Cyber",
-	"Virtual"};
+	"Virtual",
+	"Mega",
+	"[REDACTED]"};
 
 //update rate in seconds
 #define UPDATETIME 0.05f

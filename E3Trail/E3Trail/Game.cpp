@@ -52,21 +52,43 @@ void Game::init() {
 	Engine::instance()->setRepeat(0.75);
 	Engine::instance()->setVolume(0.1f,music);
 	//trail.init(true);
+	logo.color = 0xFFFFFFFF;
+	logo.rec.top = 0;
+	logo.rec.left = 0;
+	logo.image = (imageAsset*)(Engine::instance()->getResource("logo.png", D3DXCOLOR(0, 0, 0, 0))->resource);
+	logo.rec.bottom = logo.image->texInfo.Height;
+	logo.rec.right = logo.image->texInfo.Width;
+	logo.center = D3DXVECTOR3(logo.rec.right/2, logo.rec.bottom/2, 0);
+	drawLogo = true;
 	//init menu
 	buildMenu(false);
-	
 };
 
 bool Game::update() {
+	renInfo tempRen;
+	D3DXMATRIX tempMat;
 	if(!trail.update()) {
 		mainMenu.update();
 		mainMenu.render();
+		//logo
+		if(drawLogo) {
+			tempRen.asset = &logo;
+			tempRen.type = screenSprite;
+			D3DXMatrixIdentity(&tempRen.matrix);
+			D3DXMatrixIdentity(&tempMat);
+			D3DXMatrixScaling(&tempRen.matrix,0.5,0.5,1);
+			D3DXMatrixTranslation(&tempMat,Engine::instance()->width()/2,Engine::instance()->height()/3,1);
+			D3DXMatrixMultiply(&tempRen.matrix,&tempRen.matrix,&tempMat);
+			Engine::instance()->addRender(tempRen);
+		}
 		if(Engine::instance()->getMessage("Quit"))
 			return false;
 		if (Engine::instance()->getMessage("Credits")) {
+			drawLogo = false;
 			buildMenu(true);
 		}
 		else if (Engine::instance()->getMessage("LeaveCredits")) {
+			drawLogo = true;
 			buildMenu(false);
 		}
 		else if (Engine::instance()->getMessage("East")) {

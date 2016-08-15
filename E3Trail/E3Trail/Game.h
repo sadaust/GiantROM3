@@ -15,6 +15,8 @@ private:
 	DWORD bColor;
 	DWORD hColor;
 	Trail trail;
+	bool drawLogo;
+	spriteStruct logo;
 public:
 	Game();
 	~Game();
