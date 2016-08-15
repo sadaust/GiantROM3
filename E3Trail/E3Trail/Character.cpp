@@ -57,7 +57,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("bradevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Brad would go on to did a thing";
+		victory = "Brad would leave this world and truly go into the Dota, on his 4D Vive. He won every International every year, truly reaching his potential as Mr. Dota.";
 	}
 	else if (name == "Dan") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("dan000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -83,7 +83,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("danevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Dan would go on to create the cult of Waluigi, a group dedicated to wrestling and Waluigi";
+		victory = "Dan would go on to create the wrestling promotion WWWE. Every wrestler in World Wrestling Waluigi Entertainment is an exact clone copy of Waluigi. Wah";
 	}
 	else if (name == "Rorie") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("rorie000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -109,7 +109,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("rorieevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Rorie would go on to do a thing";
+		victory = "Rorie, weeks later, would go on to get chomped by a puppy under a full moon. He began to grow fur while his hands and feet morphed into cute little puppy paws. He is the world's first half-man half-puppy, Mutt Rorie.";
 	}
 	else if (name == "Austin") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("austin000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -135,7 +135,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("austinevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Austin would go on to do a thing";
+		victory = "Austin built gunpla until he was an old man. He used his knowledge of the inner workings of gundam to create a new gundam body for himself, becoming immortal.";
 	}
 	else if (name == "Alex") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("alex000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -161,7 +161,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("alexevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Alex would go on to do a thing";
+		victory = "Alex would go on to be the first big rig trucker to drive around the world in less than 80 minutes.";
 	}
 	else if (name == "Drew") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("drew000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -187,7 +187,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("drewevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Drew would go on to do a thing";
+		victory = "Drew would later hear a number of keywords said to him. This awakened the North Korean agent mindset within himself. He singlehandedly takes down the bleak cyberpunk dystopian government and replaces it with a more glorious version with himself on the cyberthrone.";
 	}
 	else if (name == "Jason") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("jason000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -213,7 +213,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("jasonevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Jason would go on to do a thing";
+		victory = "Jason would go on to win sewing competitions all over the cybercountry. He eventually develops his skills to the point of being able to create life by merely sewing together thread. Him and his creations lived in the mountains, far away from Dan Ryckert and his army of wrestling waluigis.";
 	}
 	else if (name == "Jeff") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("jeff000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -239,7 +239,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("jeffevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Jeff went on to create the largest collection of Gal Gun";
+		victory = "Jeff went on to create the largest collection of Gal Gun. The government requires that he install a Creeper Cam pointed at his face at all times, just in case.";
 	}
 	else if (name == "Patrick") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("patrick000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -265,7 +265,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("patrickevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Patrick went on to do a thing";
+		victory = "Patrick went on to be a young YouTube upstarter, expanding his brand in such avenues as Mario Maker Afternoons and Mario Maker Evenings. Even occasional Mario Maker Nights.";
 	}
 	else if (name == "Vinny") {
 		statusPic[0].image = (imageAsset*)(Engine::instance()->getResource("vinny000.png", D3DXCOLOR(0, 0, 0, 255))->resource);
@@ -291,7 +291,7 @@ void Character::init(std::string a_name, std::string resourceName, std::string r
 		statusPic[5].image = (imageAsset*)(Engine::instance()->getResource("vinnyevil.png", D3DXCOLOR(0, 0, 0, 255))->resource);
 		statusPic[5].rec.bottom = statusPic[5].image->texInfo.Height;
 		statusPic[5].rec.right = statusPic[5].image->texInfo.Width;
-		victory = "Vinny would go on to do a thing";
+		victory = "Vinny would go on to use the seven dragon balls to wish for immortality, so he can protect the earth from all sorts of animes.";
 	}
 
 

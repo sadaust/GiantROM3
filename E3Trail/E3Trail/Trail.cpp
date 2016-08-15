@@ -80,7 +80,8 @@ std::string cityNames[NUMCITYS] = {"San Francisco",
 	"Boston",
 	"Baltimore",
 	"Portland"
-	"City"};
+	"City" };
+
 
 #define NUMCITYPREFIX 7
 std::string cityPrefix[NUMCITYPREFIX] = {"Neo",
@@ -92,7 +93,7 @@ std::string cityPrefix[NUMCITYPREFIX] = {"Neo",
 	"[REDACTED]"};
 
 //update rate in seconds
-#define UPDATETIME 0.05f
+#define UPDATETIME 0.15f
 
 void clicker0() {
 	Engine::instance()->postMessage("Incer0");
@@ -210,7 +211,7 @@ void Trail::createEvents() {
 	eventList.clear();
 	tempevent.reset();
 	//taco bell
-	tempevent.setText("%s found a tacobell and spent %s credits to buy a taco healing them by %s");
+	tempevent.setText("%s found a tacobell and spent %s credits to buy a taco healing them by %s.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::credits, -50);
 	tempevent.addEventEffect(TEvent::Hp, 50);
@@ -219,7 +220,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//
-	tempevent.setText("Gary Busey, responding to a hit out on %s, threw a knife through your open rv window, dealing %s damage");
+	tempevent.setText("Gary Busey, responding to a hit out on %s, threw a knife through your open rv window, dealing %s damage.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::agi, 9); // testing purposes
 	tempevent.addEventEffect(TEvent::Hp, -20, -50);
@@ -237,7 +238,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//vinnyvania
-	tempevent.setText("%s finds a wall chicken hidden in the RV, and they use it to create %s snacks");
+	tempevent.setText("%s finds a wall chicken hidden in the RV, and he uses it to create %s snacks.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::food, 1+rand()%5);
 
@@ -245,7 +246,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//yellow russian
-	tempevent.setText("%s makes a Yellow Russian and tricks %s into drinking it, they get sick and lose %s hp");
+	tempevent.setText("%s makes a Yellow Russian and tricks %s into drinking it, he get sick and lose %s hp.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::Hp, -10);
@@ -254,7 +255,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//fighting game
-	tempevent.setText("%s and %s get in a fight over who is the best at fighting games, after playing the winner throws %s out the window");
+	tempevent.setText("%s and %s get in a fight over who is the best at fighting games. After playing, the winner throws %s out the window.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::Res, -(1+rand()%100));
@@ -263,7 +264,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//Waluigi
-	tempevent.setText("%s has a dream about Waluigi attacking during Mario Party Party, after waking up they remembers where they left %s");
+	tempevent.setText("%s has a nightmare about Waluigi attacking during a friendly game of Mario Party, after waking up they remembers where they left %s.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::Res, 1+rand()%100);
 
@@ -271,14 +272,14 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//box
-	tempevent.setText("You see a cardboard box on the side of the road %s says it's just a box so you move along");
+	tempevent.setText("You see a cardboard box on the side of the road. %s says 'it's just a box' so you move along.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 
 	eventList.push_back(tempevent);
 	tempevent.reset();
 
 	//river
-	tempevent.setText("You see a river of nanobots, %s convinces everyone you can just drive through it, the nanobots eat %s");
+	tempevent.setText("You see a river of nanobots, %s convinces everyone you can just drive through it, the nanobots eat %s.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::randResource, -(1+rand()%100));
 
@@ -286,7 +287,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//cyber deer
-	tempevent.setText("%s tries to feed a cyberdeer by hand. The cyberdear attacks them and they lose %s hp and drop the snack");
+	tempevent.setText("%s tries to feed a cyberdeer by hand. The cyberdeer attacks him and he loses %s hp and drop the snack.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::intel,10);
 	tempevent.addEventEffect(TEvent::Hp, -10, -20);
@@ -295,23 +296,77 @@ void Trail::createEvents() {
 	eventList.push_back(tempevent);
 	tempevent.reset();
 
+
 	//cyberpunk curfew
-	tempevent.setText("The mega corporation's police force catches you breaking cerfew, %s manages to convince them to let you got for %s credits");
+	tempevent.setText("The mega corporation's police force catches you breaking cerfew, %s manages to convince them to let you go for %s credits.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
-	tempevent.addEventEffect(TEvent::intel,20);
-	tempevent.addEventEffect(TEvent::credits,-100,-500);
-	
+	tempevent.addEventEffect(TEvent::intel, 20);
+	tempevent.addEventEffect(TEvent::credits, -100, -500);
+
 	eventList.push_back(tempevent);
 	tempevent.reset();
 
 	//giant jenga
-	tempevent.setText("You pull over to take a break, %s and %s start playing a game of giant janga.\nA crowd gathers to watch them, and you manage to make %s credits from the crowd's donations");
+	tempevent.setText("You pull over to take a break, %s and %s start playing a game of giant janga.\nA crowd gathers to watch them.\nThis provides such a distraction from their miserably bleak cyberpunk dystopian lives.\nYou manage to make %s credits from the crowd's donations.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::ranParty, 0);
-	tempevent.addEventEffect(TEvent::credits, 50+rand()%101);
+	tempevent.addEventEffect(TEvent::credits, 50 + rand() % 101);
 
 	eventList.push_back(tempevent);
 	tempevent.reset();
+
+	//a freak meteor
+	tempevent.setText("A small freak meteor crashes through your window, bonking %s in the head for %s damage.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Hp, -30 - rand()%40);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+
+	//WEED3
+	tempevent.setText("A cybercar cuts you off in the cyberintersection. %s goes to flip the other driver off, but sees that it's actually Zac Efron and Jamie Foxx. They apologize and give you %s snacks. 'We're gonna go find wiz khalifa and make this day go a little slower' says Jamie as they go on their way.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::food, 1 + rand() % 10);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//dysentary
+	tempevent.setText("%s gets dysentary, losing %s hp. How unfortunate.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::credits, -30 - rand() % 25);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//metal gear
+	tempevent.setText("You rear end a metal gear on the cyberfreeway. You attempt to exchange cyberinsurance with it, but it just leaves. Lose %s fuel and %s credits repairing your vehicle.");
+	tempevent.addEventEffect(TEvent::fuel, -5 - rand()+20);
+	tempevent.addEventEffect(TEvent::credits, -50 - rand() % 300);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//sonic 06
+	tempevent.setText("While taking a break at a cybergas station. A shady dealer comes up and offers you a copy of Sonic '06. There are no takers, but %s is particularly disgusted, throwing %s and %s snacks at him as you drive away in haste.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Res, -15);
+	tempevent.addEventEffect(TEvent::food, -5-rand()%15);
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//new day
+	tempevent.setText("The New Day challenges %s, %s, and %s to a tag team match. %s tries to interfere, disqualifying the match and taking %s damage from the unicorn stampede.");
+	tempevent.addEventEffect(TEvent::party3, 0);
+	tempevent.addEventEffect(TEvent::party0, 0);
+	tempevent.addEventEffect(TEvent::party1, 0);
+	tempevent.addEventEffect(TEvent::party2, 0);
+	tempevent.addEventEffect(TEvent::Hp, -50);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
 
 
 }
@@ -608,6 +663,8 @@ void Trail::init(bool west) {
 		playing = *(musicStruct*)Engine::instance()->getResource("Maximalism-UndertheEarth.mp3",stream)->resource;
 		youwin = *(soundStruct*)Engine::instance()->getResource("youwin.ogg", audio)->resource;
 		eventSound = *(soundStruct*)Engine::instance()->getResource("event.wav", audio)->resource;
+		shopSound = *(soundStruct*)Engine::instance()->getResource("handleCoins.ogg", audio)->resource;
+		tradeSound = *(soundStruct*)Engine::instance()->getResource("handleCoins2.ogg", audio)->resource;
 		firstRun = false;
 	}
 	newTrigger = true;
@@ -1529,6 +1586,7 @@ bool Trail::update() {
 				if (party[0].getResource() >= resourceCost[0]) {
 					party[0].modResource(-resourceCost[0]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 
 			}
@@ -1536,18 +1594,21 @@ bool Trail::update() {
 				if (party[1].getResource() >= resourceCost[1]) {
 					party[1].modResource(-resourceCost[1]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 			}
 			else if (Engine::instance()->getMessage("Incer2")) {
 				if (party[2].getResource() >= resourceCost[2]) {
 					party[2].modResource(-resourceCost[2]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 			}
 			else if (Engine::instance()->getMessage("Incer3")) {
 				if (party[3].getResource() >= resourceCost[3]) {
 					party[3].modResource(-resourceCost[3]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 			}
 		}
@@ -1625,11 +1686,10 @@ bool Trail::update() {
 				if (Engine::instance()->getMessage("Item0") && credits >= shopitems[targetitems[0][0]].getCost()) {
 					resetColors();
 					party[0].receiveItem(0, shopitems[targetitems[0][0]]);
-
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
-
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1643,6 +1703,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
@@ -1656,6 +1717,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1668,6 +1730,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1680,6 +1743,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1692,6 +1756,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1704,6 +1769,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1716,6 +1782,7 @@ bool Trail::update() {
 					credits -= shopitems[targetitems[0][0]].getCost();
 					itemsBought[targetitems[0][0]] = true;
 					setShopButtons(haventVisitedShop);
+					Engine::instance()->playSound(shopSound, vector(0, 0, 0), vector(0, 0, 0));
 
 					targetitems[0][0] = ITEMTARGETNOTCHOSEN;
 					targetitems[0][1] = ITEMTARGETNOTCHOSEN;
@@ -1731,6 +1798,7 @@ bool Trail::update() {
 				if (party[0].getResource() >= resourceCost[0]) {
 					party[0].modResource(-resourceCost[0]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 
 			}
@@ -1738,18 +1806,21 @@ bool Trail::update() {
 				if (party[1].getResource() >= resourceCost[1]) {
 					party[1].modResource(-resourceCost[1]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 			}
 			else if (Engine::instance()->getMessage("Incer2")) {
 				if (party[2].getResource() >= resourceCost[2]) {
 					party[2].modResource(-resourceCost[2]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 			}
 			else if (Engine::instance()->getMessage("Incer3")) {
 				if (party[3].getResource() >= resourceCost[3]) {
 					party[3].modResource(-resourceCost[3]);
 					credits += TRADEAMOUNT;
+					Engine::instance()->playSound(tradeSound, vector(0, 0, 0), vector(0, 0, 0));
 				}
 			}
 

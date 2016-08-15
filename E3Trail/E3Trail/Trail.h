@@ -70,6 +70,8 @@ class Trail {
 private:
 	soundStruct youwin;
 	soundStruct eventSound;
+	soundStruct shopSound;
+	soundStruct tradeSound;
 	musicStruct playing;
 
 	TrailState tstate;
