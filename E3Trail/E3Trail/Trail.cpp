@@ -54,12 +54,33 @@ std::string stateNames[NUMSTATES] = {"Alabama",
 	"Wisconsin",
 	"Wyoming"};
 
-#define NUMCITYS 5
+#define NUMCITYS 24
 std::string cityNames[NUMCITYS] = {"San Francisco",
 	"Fremont",
 	"Phoenix",
 	"Seattle",
-	"New York"};
+	"New York",
+	"Chicago",
+	"Houston",
+	"Philadelphia",
+	"San Antonio",
+	"San Diego"
+	"Dallas",
+	"San Jose",
+	"Austin",
+	"Jacksonville",
+	"Indianapolis",
+	"Columbus",
+	"Fort Worth",
+	"Charlotte",
+	"Detroit",
+	"El Paso",
+	"Washington",
+	"Memphis",
+	"Boston",
+	"Baltimore",
+	"Portland"
+	"City"};
 
 #define NUMCITYPREFIX 7
 std::string cityPrefix[NUMCITYPREFIX] = {"Neo",
@@ -273,6 +294,26 @@ void Trail::createEvents() {
 
 	eventList.push_back(tempevent);
 	tempevent.reset();
+
+	//cyberpunk curfew
+	tempevent.setText("The mega corporation's police force catches you breaking cerfew, %s manages to convince them to let you got for %s credits");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::intel,20);
+	tempevent.addEventEffect(TEvent::credits,-100,-500);
+	
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//giant jenga
+	tempevent.setText("You pull over to take a break, %s and %s start playing a game of giant janga.\nA crowd gathers to watch them, and you manage to make %s credits from the crowd's donations");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::credits, 50+rand()%101);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+
 }
 
 void Trail::setNewGameEvent() {
@@ -407,15 +448,15 @@ void Trail::triggerEvent() {
 			break;
 		case TEvent::credits:
 			credits += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d Credits", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::fuel:
 			fuel += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d Fuel", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::food:
 			food += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d Food", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		}
 		if (push)

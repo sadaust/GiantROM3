@@ -8,6 +8,7 @@
 
 class Game {
 private:
+	musicStruct menuMusic;
 	MenuSystem mainMenu;
 	camera cam;
 	double fps;
@@ -16,6 +17,7 @@ private:
 	DWORD hColor;
 	Trail trail;
 	bool drawLogo;
+	bool restartMusic;
 	spriteStruct logo;
 public:
 	Game();

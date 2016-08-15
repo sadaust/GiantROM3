@@ -60,14 +60,21 @@ void Game::init() {
 	logo.rec.right = logo.image->texInfo.Width;
 	logo.center = D3DXVECTOR3(logo.rec.right/2, logo.rec.bottom/2, 0);
 	drawLogo = true;
+	menuMusic = *(musicStruct*)Engine::instance()->getResource("Maximalism-EntertheFuturion.mp3",stream)->resource;
+	Engine::instance()->playMusic(menuMusic,false);
 	//init menu
 	buildMenu(false);
+	restartMusic = false;
 };
 
 bool Game::update() {
 	renInfo tempRen;
 	D3DXMATRIX tempMat;
 	if(!trail.update()) {
+		if(restartMusic) {
+			Engine::instance()->playMusic(menuMusic,false);
+			restartMusic = false;
+		}
 		mainMenu.update();
 		mainMenu.render();
 		//logo
@@ -92,8 +99,12 @@ bool Game::update() {
 			buildMenu(false);
 		}
 		else if (Engine::instance()->getMessage("East")) {
+			Engine::instance()->playMusic(menuMusic,true);
+			restartMusic = true;
 			trail.init(false);
 		} else if(Engine::instance()->getMessage("West")) {
+			Engine::instance()->playMusic(menuMusic,true);
+			restartMusic = true;
 			trail.init(true);
 		}
 	}
@@ -132,7 +143,7 @@ void Game::buildMenu(bool credits) {
 		temp.top = 0.5;
 		temp.bottom = temp.top + 0.2;
 
-		mainMenu.addButton(noFunc, "duder images from\nsnakesnakesnake.com\nand\ngoogle images", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
+		mainMenu.addButton(noFunc, "Music by Maximalism\nDuder images from snakesnakesnake.com\nand google images", temp, DT_CENTER | DT_VCENTER | DT_WORDBREAK, 0xFFFFFFFF, 0xFFFFFFFF );
 
 		temp.top = 0.7;
 		temp.bottom = temp.top + 0.1;
