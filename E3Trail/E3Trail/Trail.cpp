@@ -775,7 +775,7 @@ void Trail::init(bool west) {
 	time = 0;
 	food = 100;
 	credits = 5000;
-	fuel = 150;
+	fuel = 50;
 	speed = 10;
 	distToGo = startDist;
 	//party[0] = p1;
