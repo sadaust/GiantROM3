@@ -191,8 +191,8 @@ void Trail::createEvents() {
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::credits, -50);
 	tempevent.addEventEffect(TEvent::Hp, 50);
+	
 	eventList.push_back(tempevent);
-
 	tempevent.reset();
 
 	//
@@ -200,8 +200,8 @@ void Trail::createEvents() {
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::agi, 9); // testing purposes
 	tempevent.addEventEffect(TEvent::Hp, -20, -50);
+	
 	eventList.push_back(tempevent);
-
 	tempevent.reset();
 
 	//
@@ -209,10 +209,68 @@ void Trail::createEvents() {
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::Hp, -5);
 	tempevent.addEventEffect(TEvent::credits, -150);
+	
 	eventList.push_back(tempevent);
-
 	tempevent.reset();
 
+	//vinnyvania
+	tempevent.setText("%s finds a wall chicken hidden in the RV, and they use it to create %s snacks");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::food, 1+rand()%5);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//yellow russian
+	tempevent.setText("%s makes a Yellow Russian and tricks %s into drinking it, they get sick and lose %s hp");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Hp, -10);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//fighting game
+	tempevent.setText("%s and %s get in a fight over who is the best at fighting games, after playing the winner throws %s out the window");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Res, -(1+rand()%100));
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//Waluigi
+	tempevent.setText("%s has a dream about Waluigi attacking during Mario Party Party, after waking up they remembers where they left %s");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Res, 1+rand()%100);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//box
+	tempevent.setText("You see a cardboard box on the side of the road %s says it's just a box so you move along");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//river
+	tempevent.setText("You see a river of nanobots, %s convinces everyone you can just drive through it, the nanobots eat %s");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::randResource, -(1+rand()%100));
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//cyber deer
+	tempevent.setText("%s tries to feed a cyberdeer by hand. The cyberdear attacks them and they lose %s hp and drop the snack");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::intel,10);
+	tempevent.addEventEffect(TEvent::Hp, -10, -20);
+	tempevent.addEventEffect(TEvent::food, -1);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
 }
 
 void Trail::setNewGameEvent() {
@@ -251,6 +309,7 @@ void Trail::triggerEvent() {
 	int eventId = 0;
 	int targChar = -1;
 	std::vector<std::string> temp;
+	std::string tString;
 	bool push;
 	bool good = true;
 	char buffer[256];
@@ -324,34 +383,37 @@ void Trail::triggerEvent() {
 		case TEvent::Res:
 			if (targChar >= 0)
 				party[targChar].modResource(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal);
-			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d %s", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal),party[targChar].getResName().c_str());
 
 			break;
 		case TEvent::randResource:
 			switch (rand() % 3) {
 			case 0:
 				credits += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
+				tString = "Credits";
 				break;
 			case 1:
 				fuel += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
+				tString = "Fuel";
 				break;
 			case 2:
 				food += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
+				tString = "Food";
 				break;
 			}
-			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d %s", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal),tString.c_str());
 			break;
 		case TEvent::credits:
 			credits += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d Credits", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::fuel:
 			fuel += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d Fuel", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		case TEvent::food:
 			food += good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal;
-			sprintf(buffer, "%d", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
+			sprintf(buffer, "%d Food", abs(good ? eventList[eventId].getEffect(i).value : eventList[eventId].getEffect(i).failVal));
 			break;
 		}
 		if (push)
@@ -371,7 +433,7 @@ void Trail::triggerEvent() {
 	temprec.bottom = 1;
 	eventText.text = z;
 	eventText.color = 0xFFFFFFFF;
-	eventText.flags = DT_CENTER | DT_VCENTER;
+	eventText.flags = DT_CENTER | DT_VCENTER | DT_WORDBREAK;
 	eventText.rect = temprec;
 	eventBackground.image = 0;
 	pause = true;
@@ -500,9 +562,9 @@ void Trail::init(bool west) {
 		allcharacters[8].init("Patrick", "YT Subscribers", "YT Subscriber");
 		allcharacters[9].init("Vinny", "Dragon Balls", "Dragon Ball");
 		//load audio
-		playing = *(musicStruct*)Engine::instance()->getResource("music.mp3",stream)->resource;
+		playing = *(musicStruct*)Engine::instance()->getResource("Maximalism-UndertheEarth.mp3",stream)->resource;
 		youwin = *(soundStruct*)Engine::instance()->getResource("youwin.ogg", audio)->resource;
-		eventSound = *(soundStruct*)Engine::instance()->getResource("event.ogg", audio)->resource;
+		eventSound = *(soundStruct*)Engine::instance()->getResource("event.wav", audio)->resource;
 		firstRun = false;
 	}
 	newTrigger = true;
