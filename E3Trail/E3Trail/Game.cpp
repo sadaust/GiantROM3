@@ -31,8 +31,8 @@ Game::Game() {
 	cam.drawDist = 5000;
 	fps = 0;
 	srand(time(0));
-	bColor = 0xFF0000FF;
-	hColor = 0xFF00FF00;
+	bColor = 0xFFb4f2fb;
+	hColor = 0xFF3744ff;
 };
 
 Game::~Game() {

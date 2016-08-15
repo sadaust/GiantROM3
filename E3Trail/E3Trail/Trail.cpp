@@ -93,7 +93,7 @@ std::string cityPrefix[NUMCITYPREFIX] = {"Neo",
 	"[REDACTED]"};
 
 //update rate in seconds
-#define UPDATETIME 0.15f
+#define UPDATETIME 0.5f
 
 void clicker0() {
 	Engine::instance()->postMessage("Incer0");
@@ -220,7 +220,7 @@ void Trail::createEvents() {
 	tempevent.reset();
 
 	//
-	tempevent.setText("Gary Busey, responding to a hit out on %s, threw a knife through your open rv window, dealing %s damage.");
+	tempevent.setText("Gary Busey, responding to a hit out on %s, threw a knife through your open RV window, dealing %s damage.");
 	tempevent.addEventEffect(TEvent::ranParty, 0);
 	tempevent.addEventEffect(TEvent::agi, 9); // testing purposes
 	tempevent.addEventEffect(TEvent::Hp, -20, -50);
@@ -367,8 +367,71 @@ void Trail::createEvents() {
 	eventList.push_back(tempevent);
 	tempevent.reset();
 
+	//RKO out of no where
+	tempevent.setText("%s gets RKO'd out of no where for %s damage. Randy runs off and does snake things.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Hp, -50);
 
+	eventList.push_back(tempevent);
+	tempevent.reset();
 
+	//
+	tempevent.setText("%s decides to make a grocery haul video. They bring back %s snacks and an 85 hour energy healing them by %s.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::food,1+rand()%20);
+	tempevent.addEventEffect(TEvent::Hp, 85);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//pokemon go
+	tempevent.setText("%s encounters a zubat in Pokemon Go 2: A non-virtual real world Pokemon Game. It takes %s snacks and uses Poison Fang on him, dealing %s damage.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::food,-(1+rand()%20));
+	tempevent.addEventEffect(TEvent::Hp, -10);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//no man's sky
+	tempevent.setText("%s plays No Man's Sky 6, and finds %s while exploring.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Res, rand()%200);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//dark cloud 2
+	tempevent.setText("While the gang is taking a break, a stranger wearing pajamas walks up, mumbling 'You know, Dark Cloud 2 is probably the greatest game ever. It's got fishing, and golf, and city building, and dungeons, and....' He goes on with the list as he walks off. %s is left on the hood of your RV. You hear a whisper: 'p l a y d a r k c l o u d 2'");
+	tempevent.addEventEffect(TEvent::randResource, 1+rand()%200);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//metal gear
+	tempevent.setText("%s opens a cabinet. A man comes running out of the cabinet shouting 'METAL GEAR!!' and dives out of the window. %s was found inside the cabinet.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Res, 1+rand()%200);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//robots
+	tempevent.setText("A group of robots attack the RV. %s is injured in the attack and loses %s hp.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Hp, -10);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
+
+	//
+	tempevent.setText("%s is arrested. %s uses a pile of %s as a distraction to free him.");
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::ranParty, 0);
+	tempevent.addEventEffect(TEvent::Res,2+rand()%99);
+
+	eventList.push_back(tempevent);
+	tempevent.reset();
 }
 
 void Trail::setNewGameEvent() {
@@ -550,8 +613,8 @@ Trail::Trail() {
 	targetitems[0][1] = ITEMTARGETNOTCHOSEN;
 	targetitems[1][0] = ITEMTARGETNOTCHOSEN;
 	targetitems[1][1] = ITEMTARGETNOTCHOSEN;
-	bColor = 0xFF0000FF;
-	hColor = 0xFF00FF00;
+	bColor = 0xFFb4f2fb;
+	hColor = 0xFF3744ff;
 	cColor = 0xFFFF0000;
 
 
