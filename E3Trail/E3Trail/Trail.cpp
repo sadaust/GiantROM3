@@ -342,7 +342,7 @@ void Trail::createEvents() {
 
 	//metal gear
 	tempevent.setText("You rear end a metal gear on the cyberfreeway. You attempt to exchange cyberinsurance with it, but it just leaves. Lose %s fuel and %s credits repairing your vehicle.");
-	tempevent.addEventEffect(TEvent::fuel, -5 - rand()+20);
+	tempevent.addEventEffect(TEvent::fuel, -5 - rand()%20);
 	tempevent.addEventEffect(TEvent::credits, -50 - rand() % 300);
 
 	eventList.push_back(tempevent);
